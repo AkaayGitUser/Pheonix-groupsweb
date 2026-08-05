@@ -174,7 +174,7 @@ export default function Header() {
                         <motion.div
                             layout
                             variants={contentVariants}
-                            className="pl-125 pr-16 mt-6 max-w-7xl mx-auto"
+                            className="pl-122 pr-16  max-w-7xl mx-auto"
                         >
 
                             {/* BUSINESS */}
