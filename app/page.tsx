@@ -19,13 +19,9 @@ export default function Home() {
       <section className="w-full">
         <InteractiveMap />
       </section>
-
-      {/* <section>
-        
-          
+      <section>
           <footer />
-        
-      </section> */}
+      </section>
     </main>
   );
 }
