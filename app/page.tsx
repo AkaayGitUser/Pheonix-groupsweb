@@ -1,8 +1,9 @@
-import Image from "next/image";
+import InnovationSection from "./components/innovationsection/page";
 
 export default function Home() {
   return (
     <main>
-    </main >
+      <InnovationSection />
+    </main>
   );
 }
