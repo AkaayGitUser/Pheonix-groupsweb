@@ -90,7 +90,7 @@ export default function Header() {
                 {/* Navigation + Mega Menu */}
                 <div className="relative">
                     <nav className="hidden lg:flex items-center gap-12 text-white">
-                        <button className="border-b border-b-transparent hover:border-[#085CB5] pb-2"
+                        <button className="border-b border-b-transparent hover:border-white pb-2"
                             onMouseEnter={() => {
 
                                 setOpenMenu(null);
@@ -106,14 +106,14 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "business"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 Business
                             </button>
                         </div>
-                        <button className="border-b border-b-transparent hover:border-[#085CB5] pb-2"
+                        <button className="border-b border-b-transparent hover:border-white pb-2"
                             onMouseEnter={() => {
 
                                 setOpenMenu(null);
@@ -129,8 +129,8 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "community"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 Community
@@ -146,8 +146,8 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "about"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 About Us
