@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
 export default function Header() {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
+    const [mobileMenu, setMobileMenu] = useState(false);
     const menuVariants: Variants = {
         closed: {
             height: 0,
@@ -155,9 +157,60 @@ export default function Header() {
                         </button>
 
                     </nav>
-
+                    {/* Mobile Menu Button */}
+                    <div className="items-end">
+                        <button
+                            onClick={() => setMobileMenu(!mobileMenu)}
+                            className="lg:hidden text-white "
+                        >
+                            {mobileMenu ? (
+                                <X size={32} />
+                            ) : (
+                                <Menu size={32} />
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>{/* Mega Menu */}
+            <AnimatePresence>
+                {mobileMenu && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.3 }}
+                        className="lg:hidden bg-black/90 backdrop-blur-md"
+                    >
+                        <div className="flex flex-col px-6 py-6 text-white">
+
+                            <button className="py-4 border-b border-[#058C]/20 text-left">
+                                Newsroom
+                            </button>
+
+                            <button className="py-4 border-b border-white/20 text-left">
+                                Business
+                            </button>
+
+                            <button className="py-4 border-b border-white/20 text-left">
+                                Careers
+                            </button>
+
+                            <button className="py-4 border-b border-white/20 text-left">
+                                Community
+                            </button>
+
+                            <button className="py-4 border-b border-white/20 text-left">
+                                About Us
+                            </button>
+
+                            <button className="mt-6 bg-[#085CB5] py-3">
+                                Explore More
+                            </button>
+
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <AnimatePresence mode="wait">
                 {openMenu && (
                     <motion.div
