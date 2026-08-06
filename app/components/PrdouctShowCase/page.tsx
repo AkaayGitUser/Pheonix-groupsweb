@@ -11,7 +11,7 @@ const products = [
         heading: "Where Culture Meets ",
         heading1: "Celebration",
         description:
-            "Phoenix Arena is a vibrant destination where business, culture, entertainment, and community come together. Designed with world-class infrastructure, it hosts extraordinary experiences that leave a lasting impression.",
+            "Phoenix Arena is a vibrant destination where business, culture, entertainment and community come together. Designed with world class infrastructure, it hosts extraordinary experiences that leave a lasting impression.",
         image: "/images/arena.png",
     },
     {
@@ -20,7 +20,7 @@ const products = [
         heading: "Our Signature Developments",
         heading1: "",
         description:
-            "Phoenix Constructions develops premium residential and commercial spaces that combine thoughtful design, superior craftsmanship, and lasting value. Every development is carefully planned to meet the evolving needs of modern living and business, delivering spaces that are both functional and inspiring.",
+            "Phoenix Constructions develops premium residential and commercial spaces that combine thoughtful design, superior craftsmanship and lasting value. Every development is carefully planned to meet the evolving needs of modern living and business, delivering spaces that are both functional and inspiring.",
         image: "/images/construction.png",
     },
     {
@@ -29,7 +29,7 @@ const products = [
         heading: "Transforming Lives ",
         heading1: "Through Action",
         description:
-            "Phoenix Foundation leads initiatives that strengthen communities through social responsibility, environmental stewardship, and public infrastructure development. Guided by a vision of inclusive progress, we work to create opportunities that improve quality of life and contribute to the long-term well-being of society.",
+            "Phoenix Foundation leads initiatives that strengthen communities through social responsibility, environmental stewardship and public infrastructure development. Guided by a vision of inclusive progress, we work to create opportunities that improve quality of life and contribute to the long term well being of society.",
         image: "/images/foundation.png",
     },
 
@@ -39,7 +39,7 @@ const products = [
         heading: "Mobility Solutions for ",
         heading1: "Every Journey",
         description:
-            "Phoenix Motors is an authorized Hero MotoCorp dealership offering motorcycles and scooters, backed by expert sales, genuine spare parts, and certified service. We deliver trusted mobility solutions with quality and professionalism.",
+            "Phoenix Motors is an authorized Hero MotoCorp dealership offering motorcycles and scooters, backed by expert sales, genuine spare parts and certified service. We deliver trusted mobility solutions with quality and professionalism.",
         image: "/images/motor.png",
     },
     {
@@ -48,7 +48,7 @@ const products = [
         heading: "A Place of Peace &",
         heading1: "Remembrance",
         description:
-            "Vaikunta Mahaprasthanam offers a peaceful, thoughtfully designed environment where families can bid farewell to their loved ones with comfort, respect, and compassion. Combining modern facilities with serene surroundings, it reflects Phoenix Group’s commitment to serving communities with care and humanity.",
+            "Vaikunta Mahaprasthanam offers a peaceful, thoughtfully designed environment where families can bid farewell to their loved ones with comfort, respect and compassion. Combining modern facilities with serene surroundings, it reflects Phoenix Group’s commitment to serving communities with care and humanity.",
         image: "/images/vaikunta.png",
     },
 ];

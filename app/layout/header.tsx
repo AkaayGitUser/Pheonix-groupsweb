@@ -60,14 +60,14 @@ export default function Header() {
                 ease: "easeInOut",
             }}
             className={`
-    absolute
-    top-0
-    left-0
-    w-full
-    z-1000
-    transition-all
-    duration-500
-    ${openMenu
+                        absolute
+                        top-0
+                        left-0
+                        w-full
+                        z-1000
+                        transition-all
+                        duration-500
+                        ${openMenu
                     ? "bg-black/75 backdrop-blur-md"
                     : "bg-transparent"
                 }
@@ -280,7 +280,7 @@ export default function Header() {
                             {openMenu === "about" && (
                                 <div className="pb-6">
                                     <div className="border-b border-[#085CB5] pb-2">
-                                        <h2 className="text-xl">The Phenoix Group</h2>
+                                        <h2 className="text-xl">The Pheonix Group</h2>
                                     </div>
 
                                     <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
@@ -291,13 +291,13 @@ export default function Header() {
 
                                         <div className="flex flex-col gap-2 items-start font-light text-sm ">
                                             <button className=" hover:text-amber-300">
-                                                Phenoix
+                                                Pheonix
                                             </button>
                                             <button className=" hover:text-amber-300">
                                                 Values and Purpose
                                             </button>
                                             <button className=" hover:text-amber-300">
-                                                Phenoix Code of Conduct
+                                                Pheonix Code of Conduct
                                             </button>
                                         </div>
 
