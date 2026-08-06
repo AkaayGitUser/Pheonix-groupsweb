@@ -183,7 +183,7 @@ export default function Header() {
                             duration: 0.45,
                             ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="fixed inset-0 z-9999 bg-black/95 backdrop-blur-md lg:hidden"
+                        className="fixed inset-0 z-9999 bg-black/95 backdrop-blur-md lg:hidden text-white"
                     >
                         {/* Header */}
                         <div className="flex items-center justify-between h-20 px-6 border-b border-white/10">
@@ -201,7 +201,7 @@ export default function Header() {
                         </div>
 
                         {/* Menu */}
-                        <div className="pt-3 overflow-y-auto h-[calc(100vh-80px)]">
+                        <div className="pt-3 overflow-y-auto h-[calc(100vh-80px)] text-white">
 
                             <button className="w-full px-8 py-4 text-left text-white  ">
                                 Newsroom
@@ -496,7 +496,7 @@ export default function Header() {
                         initial="closed"
                         animate="open"
                         exit="closed"
-                        className="overflow-hidden w-full"
+                        className="overflow-hidden w-full text-white"
                         onMouseLeave={() => setOpenMenu(null)}
                     >
 

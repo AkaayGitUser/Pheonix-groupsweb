@@ -9,7 +9,7 @@ import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0d3b7a] flex flex-col justify-between">
+    <main className="min-h-screen bg-white flex flex-col justify-between">
       <Header />
       <Hero />
       <ProductShowcase />
