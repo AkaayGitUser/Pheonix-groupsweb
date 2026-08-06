@@ -49,7 +49,7 @@ const products = [
         heading1: "Remembrance",
         description:
             "Vaikunta Mahaprasthanam offers a peaceful, thoughtfully designed environment where families can bid farewell to their loved ones with comfort, respect and compassion. Combining modern facilities with serene surroundings, it reflects Phoenix Group’s commitment to serving communities with care and humanity.",
-        image: "/images/vaikunta.png",
+        image: "/images/Vaikunta1.png",
     },
 ];
 
