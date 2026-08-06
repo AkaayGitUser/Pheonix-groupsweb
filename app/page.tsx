@@ -3,7 +3,7 @@ import InnovationSection from "./components/innovationsection/page";
 import InteractiveMap from "./components/InteractiveMap";
 
 import React from "react";
-import footer from "./layout/footer";
+import Footer from "./layout/footer";
 import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
@@ -19,9 +19,7 @@ export default function Home() {
       <section className="w-full">
         <InteractiveMap />
       </section>
-      <section>
-          <footer />
-      </section>
+      <Footer />
     </main>
   );
 }

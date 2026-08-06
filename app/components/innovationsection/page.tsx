@@ -5,19 +5,19 @@ const cards = [
     title: "Purpose",
     description:
       "Every initiative begins with understanding the people and communities it will serve.",
-    image: "/images/purpose.png",
+    image: "/images/Purpose.png",
   },
   {
     title: "Collaboration",
     description:
       "Working alongside governments, institutions, experts and local communities to achieve lasting outcomes.",
-    image: "/images/collabration.png",
+    image: "/images/Collabration.png",
   },
   {
     title: "Legacy",
     description:
       "Creating infrastructure and experiences that continue delivering value for decades to come.",
-    image: "/images/legacy.png",
+    image: "/images/Legacy.png",
   },
 ];
 

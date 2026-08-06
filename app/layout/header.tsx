@@ -3,10 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
 export default function Header() {
     const [openMenu, setOpenMenu] = useState<string | null>(null);
+    const [mobileMenu, setMobileMenu] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState<string | null>(null);
     const menuVariants: Variants = {
         closed: {
             height: 0,
@@ -60,14 +63,14 @@ export default function Header() {
                 ease: "easeInOut",
             }}
             className={`
-    absolute
-    top-0
-    left-0
-    w-full
-    z-1000
-    transition-all
-    duration-500
-    ${openMenu
+                        absolute
+                        top-0
+                        left-0
+                        w-full
+                        z-1000
+                        transition-all
+                        duration-500
+                        ${openMenu
                     ? "bg-black/75 backdrop-blur-md"
                     : "bg-transparent"
                 }
@@ -87,7 +90,7 @@ export default function Header() {
                 {/* Navigation + Mega Menu */}
                 <div className="relative">
                     <nav className="hidden lg:flex items-center gap-12 text-white">
-                        <button className="border-b border-b-transparent hover:border-[#085CB5] pb-2"
+                        <button className="border-b border-b-transparent hover:border-white pb-2"
                             onMouseEnter={() => {
 
                                 setOpenMenu(null);
@@ -103,14 +106,14 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "business"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 Business
                             </button>
                         </div>
-                        <button className="border-b border-b-transparent hover:border-[#085CB5] pb-2"
+                        <button className="border-b border-b-transparent hover:border-white pb-2"
                             onMouseEnter={() => {
 
                                 setOpenMenu(null);
@@ -126,8 +129,8 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "community"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 Community
@@ -143,8 +146,8 @@ export default function Header() {
                         >
                             <button
                                 className={`pb-2 transition ${openMenu === "about"
-                                    ? "border-b border-[#085CB5]"
-                                    : "border-b border-transparent hover:border-[#085CB5]"
+                                    ? "border-b border-white"
+                                    : "border-b border-transparent hover:border-white"
                                     }`}
                             >
                                 About Us
@@ -155,9 +158,335 @@ export default function Header() {
                         </button>
 
                     </nav>
-
+                    {/* Mobile Menu Button */}
+                    <div className="items-end">
+                        <button
+                            onClick={() => setMobileMenu(true)}
+                            className="lg:hidden text-white "
+                        >
+                            {mobileMenu ? (
+                                <X size={32} />
+                            ) : (
+                                <Menu size={32} />
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>{/* Mega Menu */}
+            <AnimatePresence>
+                {mobileMenu && (
+                    <motion.div
+                        initial={{ x: "100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "100%" }}
+                        transition={{
+                            duration: 0.45,
+                            ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="fixed inset-0 z-9999 bg-black/95 backdrop-blur-md lg:hidden"
+                    >
+                        {/* Header */}
+                        <div className="flex items-center justify-between h-20 px-6 border-b border-white/10">
+
+                            <Image
+                                src="/images/Logo.png"
+                                alt="Phoenix"
+                                width={130}
+                                height={40}
+                            />
+
+                            <button onClick={() => setMobileMenu(false)}>
+                                <X className="text-white" size={30} />
+                            </button>
+                        </div>
+
+                        {/* Menu */}
+                        <div className="pt-3 overflow-y-auto h-[calc(100vh-80px)]">
+
+                            <button className="w-full px-8 py-4 text-left text-white  ">
+                                Newsroom
+                            </button>
+                            <div className=" ">
+
+                                <button
+                                    onClick={() =>
+                                        setMobileOpen(
+                                            mobileOpen === "business" ? null : "business"
+                                        )
+                                    }
+                                    className="w-full flex justify-between items-center px-8 py-4 text-white"
+                                >
+                                    <span
+                                        className={
+                                            mobileOpen === "business"
+                                                ? "text-[#085CB5]"
+                                                : ""
+                                        }
+                                    >
+                                        Business
+                                    </span>
+
+                                    <span>
+                                        {mobileOpen === "business" ? "⌄" : "›"}
+                                    </span>
+
+                                </button>
+                                {/* {Business Mobile} */}
+                                <AnimatePresence>
+                                    {mobileOpen === "business" && (
+
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: .35 }}
+                                            className="overflow-hidden px-8 pb-6 text-white"
+                                        >
+
+                                            <h2 className="text-2xl">
+                                                Business Overview
+                                            </h2>
+
+                                            <button className="font-semibold mt-2">
+                                                Learn More
+                                            </button>
+
+                                            <h2 className="text-2xl mt-8">
+                                                Our Brands
+                                            </h2>
+
+                                            <button className="font-semibold mt-2">
+                                                Browse Our Brands
+                                            </button>
+
+                                            <h2 className="text-2xl mt-8 mb-4">
+                                                Business Verticals
+                                            </h2>
+
+                                            <div className="flex flex-col gap-2 items-start text-white/80">
+
+                                                <button>Technology</button>
+
+                                                <button>Steel</button>
+
+                                                <button>Automotive</button>
+
+                                                <button>Consumer & Retail</button>
+
+                                                <button>Infrastructure</button>
+
+                                                <button>Financial Services</button>
+
+                                                <button>Aerospace & Defence</button>
+
+                                                <button>Tourism & Travel</button>
+
+                                                <button>Telecom & Media</button>
+
+                                                <button>Trading & Investments</button>
+
+                                            </div>
+
+                                        </motion.div>
+
+                                    )}
+                                </AnimatePresence>
+                                <button className="w-full px-8 py-4 text-left text-white  ">
+                                    Careers
+                                </button>
+                                {/* {Community Mobile} */}
+                                <div className=" ">
+
+                                    <button
+                                        onClick={() =>
+                                            setMobileOpen(
+                                                mobileOpen === "community"
+                                                    ? null
+                                                    : "community"
+                                            )
+                                        }
+                                        className="w-full flex justify-between items-center px-8 py-4 text-white"
+                                    >
+                                        <span
+                                            className={
+                                                mobileOpen === "community"
+                                                    ? "text-[#085CB5]"
+                                                    : ""
+                                            }
+                                        >
+                                            Community
+                                        </span>
+
+                                        <span>
+                                            {mobileOpen === "community" ? "⌄" : "›"}
+                                        </span>
+
+                                    </button>
+
+                                    <AnimatePresence>
+
+                                        {mobileOpen === "community" && (
+
+                                            <motion.div
+                                                initial={{ height: 0 }}
+                                                animate={{ height: "auto" }}
+                                                exit={{ height: 0 }}
+                                                className="overflow-hidden px-8 pb-6 text-white"
+                                            >
+
+                                                <h2 className="text-2xl">
+                                                    Overview
+                                                </h2>
+
+                                                <button className="font-semibold mt-2">
+                                                    Areas of Work
+                                                </button>
+
+                                                <div className="flex flex-col gap-2 mt-5 items-start text-white/80">
+
+                                                    <button>Health</button>
+
+                                                    <button>Education</button>
+
+                                                    <button>Empowerment</button>
+
+                                                    <button>Environment</button>
+
+                                                </div>
+
+                                            </motion.div>
+
+                                        )}
+
+                                    </AnimatePresence>
+                                    {/* {About Us} */}
+                                    <div className=" ">
+
+                                        <button
+                                            onClick={() =>
+                                                setMobileOpen(
+                                                    mobileOpen === "about" ? null : "about"
+                                                )
+                                            }
+                                            className="w-full flex items-center justify-between px-8 py-4 text-white"
+                                        >
+                                            <span
+                                                className={
+                                                    mobileOpen === "about"
+                                                        ? "text-[#085CB5]"
+                                                        : ""
+                                                }
+                                            >
+                                                About Us
+                                            </span>
+
+                                            <span className="text-xl">
+                                                {mobileOpen === "about" ? "⌄" : "›"}
+                                            </span>
+                                        </button>
+
+                                        <AnimatePresence>
+                                            {mobileOpen === "about" && (
+
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    transition={{ duration: 0.35 }}
+                                                    className="overflow-hidden px-8 pb-6 text-white"
+                                                >
+
+                                                    <h2 className="text-2xl mb-2">
+                                                        The Phoenix Group
+                                                    </h2>
+
+                                                    <button className="font-semibold mb-6">
+                                                        About the Phoenix Group
+                                                    </button>
+
+                                                    <div className="flex flex-col gap-2 items-start text-white/80">
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Phoenix
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Values and Purpose
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Phoenix Code of Conduct
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Heritage
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Leadership
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Sponsorships
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Sustainability
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Innovation
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Books
+                                                        </button>
+
+                                                    </div>
+
+                                                    <h2 className="text-2xl mt-10 mb-2">
+                                                        Investors
+                                                    </h2>
+
+                                                    <button className="font-semibold mb-5">
+                                                        Investor Section
+                                                    </button>
+
+                                                    <div className="flex flex-col gap-2 items-start text-white/80">
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Companies
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Stock Data
+                                                        </button>
+
+                                                        <button className="text-left hover:text-[#085CB5]">
+                                                            Business Verticals
+                                                        </button>
+
+                                                    </div>
+
+                                                </motion.div>
+
+                                            )}
+                                        </AnimatePresence>
+
+                                    </div>
+
+
+
+                                    <button className="w-full px-8 py-4 text-left text-white  ">
+                                        Contact Us
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <AnimatePresence mode="wait">
                 {openMenu && (
                     <motion.div
@@ -280,7 +609,7 @@ export default function Header() {
                             {openMenu === "about" && (
                                 <div className="pb-6">
                                     <div className="border-b border-[#085CB5] pb-2">
-                                        <h2 className="text-xl">The Phenoix Group</h2>
+                                        <h2 className="text-xl">The Pheonix Group</h2>
                                     </div>
 
                                     <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
@@ -291,13 +620,13 @@ export default function Header() {
 
                                         <div className="flex flex-col gap-2 items-start font-light text-sm ">
                                             <button className=" hover:text-amber-300">
-                                                Phenoix
+                                                Pheonix
                                             </button>
                                             <button className=" hover:text-amber-300">
                                                 Values and Purpose
                                             </button>
                                             <button className=" hover:text-amber-300">
-                                                Phenoix Code of Conduct
+                                                Pheonix Code of Conduct
                                             </button>
                                         </div>
 
