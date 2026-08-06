@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { FaFacebookSquare, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaFacebookSquare,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
  
 export default function FooterPage() {
   return (
@@ -12,16 +16,12 @@ export default function FooterPage() {
         <div className="footerContent">
           {/* Phoenix Logo */}
           <div className="logoSection">
-            <Image
-              src="/LOGOP.png"
+            <img
+              src= "LOGOP.png"
               alt="Phoenix Logo"
-              width={320}
-              height={145}
+              width={280}
+              height={125}
               className="logoImage"
-              style={{
-                width: "300px",
-                height: "auto",
-              }}
               priority
             />
           </div>
@@ -31,9 +31,7 @@ export default function FooterPage() {
             <h2>Quick Links</h2>
  
             <nav className="quickLinks">
-              <Link href="/phoenix-arena">
-                Phoenix Arena
-              </Link>
+              <Link href="/phoenix-arena">Phoenix Arena</Link>
  
               <Link href="/phoenix-foundation">
                 Phoenix Foundation
@@ -43,9 +41,7 @@ export default function FooterPage() {
                 Phoenix Construction
               </Link>
  
-              <Link href="/phoenix-motors">
-                Phoenix Motors
-              </Link>
+              <Link href="/phoenix-motors">Phoenix Motors</Link>
  
               <Link href="/vaikunta-mahaprasthana">
                 Vaikunta Mahaprasthana
@@ -58,10 +54,7 @@ export default function FooterPage() {
             <h2>Address</h2>
  
             <div className="addressItem">
-              <MapPin
-                size={15}
-                strokeWidth={1.6}
-              />
+              <MapPin size={14} strokeWidth={1.5} />
  
               <p>
                 Nagarjuna Residency Driveway,
@@ -75,10 +68,7 @@ export default function FooterPage() {
             </div>
  
             <div className="addressItem">
-              <MapPin
-                size={15}
-                strokeWidth={1.6}
-              />
+              <MapPin size={14} strokeWidth={1.5} />
  
               <p>
                 Plot No. 1335, Road No. 45 Jubilee
@@ -138,54 +128,55 @@ export default function FooterPage() {
         .footer {
           width: 100%;
           margin-top: auto;
-          background: #09558f;
+          background: #084d8d;
           color: #ffffff;
           font-family: Arial, Helvetica, sans-serif;
         }
  
         .footerContent {
           width: 100%;
-          min-height: 314px;
+          min-height: 318px;
           display: grid;
-          grid-template-columns: 32% 18% 26% 24%;
-          padding: 56px 6.3% 50px;
+          grid-template-columns: 33% 18% 26% 23%;
+          align-items: start;
+          padding: 55px 6.3% 52px;
         }
  
-        /* Phoenix Logo */
+        /* Logo */
  
         .logoSection {
-          min-height: 202px;
+          min-height: 205px;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: flex-start;
-          padding-right: 45px;
-          overflow: hidden;
+          padding-top: 2px;
+          padding-right: 38px;
         }
  
         .logoImage {
           display: block;
-          width: 300px;
-          height: auto;
+          width: 280px;
+          height: 125px;
           max-width: 100%;
           object-fit: contain;
           object-position: left center;
         }
  
-        /* Footer Columns */
+        /* Columns */
  
         .footerColumn {
-          min-height: 202px;
+          min-height: 196px;
           padding-left: 34px;
-          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          border-left: 1px solid rgba(255, 255, 255, 0.09);
         }
  
         .footerColumn h2 {
-          margin: 0 0 23px;
+          margin: 0 0 25px;
           color: #ffffff;
           font-size: 21px;
           font-weight: 400;
           line-height: 1;
-          letter-spacing: 0.2px;
+          letter-spacing: 0.1px;
         }
  
         /* Quick Links */
@@ -194,14 +185,14 @@ export default function FooterPage() {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          gap: 17px;
+          gap: 18px;
         }
  
         .quickLinks :global(a) {
-          color: rgba(255, 255, 255, 0.9);
+          color: rgba(255, 255, 255, 0.88);
           font-size: 14px;
           font-weight: 400;
-          line-height: 1.1;
+          line-height: 1;
           text-decoration: none;
           transition:
             color 0.2s ease,
@@ -216,15 +207,15 @@ export default function FooterPage() {
         /* Address */
  
         .addressColumn {
-          padding-left: 57px;
+          padding-left: 58px;
         }
  
         .addressItem {
           display: flex;
           align-items: flex-start;
           gap: 7px;
-          margin-bottom: 24px;
-          color: rgba(255, 255, 255, 0.86);
+          margin-bottom: 25px;
+          color: rgba(255, 255, 255, 0.82);
         }
  
         .addressItem :global(svg) {
@@ -236,21 +227,21 @@ export default function FooterPage() {
           margin: 0;
           font-size: 13.5px;
           font-weight: 400;
-          line-height: 1.23;
-          letter-spacing: 0.1px;
+          line-height: 1.22;
+          letter-spacing: 0.05px;
         }
  
-        /* Social Media */
+        /* Social */
  
         .socialColumn {
-          padding-left: 54px;
+          padding-left: 57px;
         }
  
         .socialIcons {
           display: flex;
           align-items: center;
           gap: 14px;
-          margin-top: 35px;
+          margin-top: 37px;
         }
  
         .socialIcons a {
@@ -272,28 +263,24 @@ export default function FooterPage() {
         /* Copyright */
  
         .copyright {
-          min-height: 72px;
+          min-height: 76px;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 15px;
-          border-top: 1px solid rgba(255, 255, 255, 0.12);
-          color: rgba(255, 255, 255, 0.78);
+          border-top: 1px solid rgba(255, 255, 255, 0.11);
+          color: rgba(255, 255, 255, 0.76);
           font-size: 9px;
           font-weight: 400;
           text-align: center;
         }
  
-        /* Large Screens */
+        /* Large screens */
  
         @media (min-width: 1500px) {
           .footerContent {
             max-width: 1500px;
             margin: 0 auto;
-          }
- 
-          .logoImage {
-            width: 320px;
           }
         }
  
@@ -302,8 +289,8 @@ export default function FooterPage() {
         @media (max-width: 1100px) {
           .footerContent {
             grid-template-columns: repeat(2, 1fr);
-            gap: 45px 0;
-            padding: 55px 45px;
+            gap: 44px 0;
+            padding: 52px 44px;
           }
  
           .logoSection {
@@ -311,11 +298,12 @@ export default function FooterPage() {
           }
  
           .logoImage {
-            width: 280px;
+            width: 260px;
+            height: auto;
           }
  
           .footerColumn {
-            padding-left: 35px;
+            padding-left: 34px;
           }
  
           .addressColumn {
@@ -324,31 +312,30 @@ export default function FooterPage() {
           }
         }
  
-        /* Small Tablet */
+        /* Mobile */
  
         @media (max-width: 768px) {
           .footerContent {
             grid-template-columns: 1fr;
             gap: 32px;
-            padding: 45px 30px;
+            padding: 42px 28px;
           }
  
           .logoSection {
             min-height: auto;
-            justify-content: flex-start;
             padding: 0 0 15px;
           }
  
           .logoImage {
-            width: 280px;
-            max-width: 100%;
+            width: 260px;
+            height: auto;
           }
  
           .footerColumn,
           .addressColumn,
           .socialColumn {
             min-height: auto;
-            padding: 28px 0 0;
+            padding: 27px 0 0;
             border-left: none;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
           }
@@ -358,15 +345,13 @@ export default function FooterPage() {
           }
         }
  
-        /* Mobile */
- 
         @media (max-width: 480px) {
           .footerContent {
-            padding: 40px 22px;
+            padding: 38px 22px;
           }
  
           .logoImage {
-            width: 240px;
+            width: 230px;
           }
  
           .footerColumn h2 {
@@ -380,7 +365,7 @@ export default function FooterPage() {
  
           .copyright {
             min-height: 65px;
-            padding: 15px 10px;
+            padding: 14px 10px;
           }
         }
       `}</style>
