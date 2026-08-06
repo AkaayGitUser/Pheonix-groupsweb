@@ -11,7 +11,7 @@ const products = [
         heading: "Where Culture Meets ",
         heading1: "Celebration",
         description:
-            "Phoenix Arena is a vibrant destination where business, culture, entertainment and community come together. Designed with world class infrastructure, it hosts extraordinary experiences that leave a lasting impression.",
+            "Phoenix Arena is a premier destination where business, culture, entertainment and community converge. Designed with world class infrastructure and exceptional versatility, it hosts conferences, exhibitions, performances, celebrations and large scale events that inspire meaningful connections and unforgettable experiences.",
         image: "/images/arena.png",
     },
     {
@@ -20,7 +20,7 @@ const products = [
         heading: "Our Signature Developments",
         heading1: "",
         description:
-            "Phoenix Constructions develops premium residential and commercial spaces that combine thoughtful design, superior craftsmanship and lasting value. Every development is carefully planned to meet the evolving needs of modern living and business, delivering spaces that are both functional and inspiring.",
+            "Phoenix Constructions creates premium residential, commercial and integrated developments that blend thoughtful design, superior craftsmanship and enduring value. Every project is carefully planned to enrich modern lifestyles and businesses, delivering spaces that are functional, sustainable and built to stand the test of time.",
         image: "/images/construction.png",
     },
     {
@@ -29,7 +29,7 @@ const products = [
         heading: "Transforming Lives ",
         heading1: "Through Action",
         description:
-            "Phoenix Foundation leads initiatives that strengthen communities through social responsibility, environmental stewardship and public infrastructure development. Guided by a vision of inclusive progress, we work to create opportunities that improve quality of life and contribute to the long term well being of society.",
+            "Phoenix Foundation drives meaningful initiatives that empower communities through social responsibility, environmental stewardship, healthcare, education and public infrastructure development. Guided by a vision of inclusive and sustainable progress, we are committed to creating opportunities that improve lives and contribute to a stronger, more resilient society.",
         image: "/images/foundation.png",
     },
 
@@ -39,7 +39,7 @@ const products = [
         heading: "Mobility Solutions for ",
         heading1: "Every Journey",
         description:
-            "Phoenix Motors is an authorized Hero MotoCorp dealership offering motorcycles and scooters, backed by expert sales, genuine spare parts and certified service. We deliver trusted mobility solutions with quality and professionalism.",
+            "Phoenix Motors is an authorized Hero MotoCorp dealership offering a complete range of motorcycles and scooters, supported by expert sales guidance, genuine spare parts and certified after sales service. With a customer first approach, we deliver reliable mobility solutions backed by quality, transparency and professional excellence.",
         image: "/images/motor.png",
     },
     {
@@ -48,7 +48,7 @@ const products = [
         heading: "A Place of Peace &",
         heading1: "Remembrance",
         description:
-            "Vaikunta Mahaprasthanam offers a peaceful, thoughtfully designed environment where families can bid farewell to their loved ones with comfort, respect and compassion. Combining modern facilities with serene surroundings, it reflects Phoenix Group’s commitment to serving communities with care and humanity.",
+            "Vaikunta Mahaprasthanam provides a serene and thoughtfully designed environment where families can bid farewell to their loved ones with dignity, comfort and compassion. Combining modern facilities with peaceful surroundings, it reflects Phoenix Group's enduring commitment to serving communities with care, respect and humanity during life's most difficult moments.",
         image: "/images/Vaikunta1.png",
     },
 ];
@@ -101,110 +101,186 @@ export default function ProductShowcase() {
                         </motion.div>
 
                         {/* Small Vertical Box */}
-                        <div className={`h-6 ${activeIndex === i && i%2==0 ? "w-1.25 border border-white" : "w-1 border border-[#085CB5]"} rounded-full `} />
+                        <div className={`h-6 ${activeIndex === i && i % 2 == 0 ? "w-1.25 border border-white" : "w-1 border border-[#085CB5]"} rounded-full `} />
                     </div>
                 ))}
             </motion.div>
             {products.map((item, index) => {
                 const reverse = index % 2 !== 0;
+                const isDesktopReverse = reverse;
 
                 return (
                     <motion.section
                         key={item.id}
                         onViewportEnter={() => setActiveIndex(index)}
                         viewport={{ amount: 0.5 }}
-                        className="grid grid-cols-1 lg:grid-cols-2 h-screen"
+                        className="grid grid-cols-1 lg:grid-cols-2 min-h-screen lg:h-screen"
                     >
                         {/* Right */}
-                        {reverse ? (
+                        {isDesktopReverse ? (
                             <>
                                 {/* Content */}
                                 <div
-                                    className="flex items-center justify-center px-16 lg:px-20 bg-linear-to-br from-[#1F5DA0] via-[#15508A] to-[#07315D]"
-                                >
-                                    <div className="max-w-xl">
-                                        <h2 className="text-white text-2xl  mb-8">
+                                    className={`
+                                                bg-linear-to-br
+                                                from-[#1F5DA0]
+                                                via-[#15508A]
+                                                to-[#07315D]
+                                                flex
+                                                items-center
+                                                justify-center
+                                                px-8
+                                                py-12
+                                                lg:px-20
+                                                ${reverse ? "lg:order-1" : "lg:order-2"} order-2
+                                            `}                                >
+
+                                    <div className="max-w-xl text-gray-900">
+
+                                        <h2 className="text-white text-3xl lg:text-2xl mb-6">
                                             {item.title}
                                         </h2>
 
-                                        <p className="text-white/90 text-md">
+                                        <p className="text-white/90 ">
                                             {item.description}
                                         </p>
 
-                                        <button className="mt-8 border border-white text-white px-6 py-2 text-md hover:bg-white hover:text-[#0B4C8B] duration-300">
+                                        <button
+                                            className="
+                                                        mt-8
+                                                        border
+                                                        border-white
+                                                        text-white
+
+                                                        w-full
+                                                        sm:w-auto
+
+                                                        px-8
+                                                        py-3
+
+                                                        hover:bg-white
+                                                        hover:text-[#07315D]
+                                                        duration-300
+                                                    "
+                                        >
                                             Click to know more →
                                         </button>
+
                                     </div>
+
                                 </div>
 
                                 {/* Image */}
-                                <div className="relative flex flex-col items-center bg-white py-10 text-gray-800">
-                                    <div className="w-110 mb-8">
-                                        <h1 className=" text-3xl  text-end">
+                                <div className={`bg-white py-10 lg:py-10 text-gray-900 ${reverse ? "lg:order-2" : "lg:order-1"} order-1`}>
+
+                                    <div className="w-full lg:w-90 xl:w-110 mx-auto mb-8 px-6">
+
+                                        <h1 className="text-3xl lg:text-3xl text-center lg:text-end">
                                             {item.heading}
                                         </h1>
+
                                         {item.heading1 && (
-                                            <h2 className="text-3xl  text-end">
+                                            <h2 className="text-3xl lg:text-3xl text-center lg:text-end">
                                                 {item.heading1}
                                             </h2>
                                         )}
+
                                     </div>
 
-                                    <div className="relative w-[80%] h-[80%]">
+                                    <div className="relative w-[90%] h-[280px] sm:h-[380px] md:h-[500px] lg:w-[80%] lg:h-[80%] mx-auto">
+
                                         <Image
                                             src={item.image}
                                             alt={item.title}
                                             fill
                                             className="object-cover"
                                         />
+
                                     </div>
+
                                 </div>
                             </>
                         ) : (
                             <>
                                 {/* Image First */}
 
-                                <div className="relative flex flex-col items-center justify-center bg-white py-10 text-gray-800">
-                                    <div className="w-90 mb-8">
-                                        <h1 className=" text-3xl  text-end">
+                                <div className={`g-white py-10 lg:py-10 text-gray-900 ${reverse ? "lg:order-2" : "lg:order-1"} order-1 `}>
+
+                                    <div className="w-full lg:w-90 xl:w-110 mx-auto mb-8 px-6">
+
+                                        <h1 className="text-3xl lg:text-3xl text-center lg:text-end">
                                             {item.heading}
                                         </h1>
+
                                         {item.heading1 && (
-                                            <h2 className="text-3xl  text-end">
+                                            <h2 className="text-3xl lg:text-3xl text-center lg:text-end">
                                                 {item.heading1}
                                             </h2>
                                         )}
+
                                     </div>
-                                    <div className="relative w-[80%] h-[80%]">
+
+                                    <div className="relative w-[90%] h-[280px] sm:h-[380px] md:h-[500px] lg:w-[80%] lg:h-[80%] mx-auto">
+
                                         <Image
                                             src={item.image}
                                             alt={item.title}
                                             fill
                                             className="object-cover"
                                         />
-                                    </div>
 
+                                    </div>
 
                                 </div>
 
                                 {/* Content */}
 
                                 <div
-                                    className="flex items-center justify-center px-16 lg:px-20  bg-linear-to-br from-[#1F5DA0] via-[#15508A] to-[#07315D]"
+                                    className={`
+                                                bg-linear-to-br
+                                                from-[#1F5DA0]
+                                                via-[#15508A]
+                                                to-[#07315D]
+                                                flex
+                                                items-center
+                                                justify-center
+                                                px-8
+                                                py-12
+                                                lg:px-20
+                                                ${reverse ? "lg:order-1" : "lg:order-2"} order-2
+                                            `}
                                 >
-                                    <div className="max-w-xl">
-                                        <h2 className="text-white text-2xl font-medium mb-10">
+
+                                    <div className="max-w-xl text-gray-900">
+
+                                        <h2 className="text-white text-3xl lg:text-2xl mb-6">
                                             {item.title}
                                         </h2>
 
-                                        <p className="text-white/90 text-md">
+                                        <p className="text-white/90  ">
                                             {item.description}
                                         </p>
 
-                                        <button className="mt-8 border border-white text-white px-6 py-2 text-md hover:bg-white hover:text-[#0B4C8B] duration-300">
+                                        <button
+                                            className="
+                                                        mt-8
+                                                        border
+                                                        border-white
+                                                        text-white
+                                                        w-full
+                                                        sm:w-auto
+                                                        px-8
+                                                        py-3
+                                                        hover:bg-white
+                                                        hover:text-[#07315D]
+                                                        duration-300
+                                                    "
+                                        >
                                             Click to know more →
                                         </button>
+
                                     </div>
+
                                 </div>
                             </>
                         )}
