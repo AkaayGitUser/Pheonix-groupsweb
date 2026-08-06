@@ -21,7 +21,7 @@ export default function Header() {
         open: {
             height: "auto",
             transition: {
-                duration: 0.5,
+                duration: 0.4,
                 ease: [0.22, 1, 0.36, 1],
                 when: "beforeChildren",
                 delayChildren: 0.2,
@@ -88,7 +88,7 @@ export default function Header() {
                 </Link>
 
                 {/* Navigation + Mega Menu */}
-                <div className="relative">
+                <div className="relative pt-8">
                     <nav className="hidden lg:flex items-center gap-12 text-white">
                         <button className="border-b border-b-transparent hover:border-white pb-2"
                             onMouseEnter={() => {
