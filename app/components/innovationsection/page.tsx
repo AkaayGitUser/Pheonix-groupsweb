@@ -23,9 +23,12 @@ const cards = [
 
 export default function InnovationSection() {
   return (
-    <section className="w-full bg-white py-6 px-6 sm:px-12 md:px-16 lg:px-24" style={{font:"Archivo"}}>
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-bold text-center mb-14 text-gray-900">
+    <section className="w-full bg-white py-8 px-4 sm:px-8 md:px-12 lg:px-16" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif" }}>
+      <div className="max-w-[1550px] mx-auto">
+        <h2
+          className="text-3xl md:text-4xl lg:text-[40px] font-semibold text-center mb-8 text-black tracking-tight"
+          style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif" }}
+        >
           Leading Through Innovation
         </h2>
 
@@ -34,60 +37,62 @@ export default function InnovationSection() {
             /* Outer Card Container (Fixed position, sharp rectangle) */
             <div
               key={index}
-              className="group relative h-[500px] w-full overflow-hidden rounded-none cursor-pointer"
+              className="group relative h-[500px] w-full overflow-hidden isolate rounded-none cursor-pointer"
+              style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif" }}
             >
-              {/* Image (Zooms inside fixed bounds on hover) */}
+              {/* Image */}
               <Image
                 src={card.image}
                 alt={card.title}
                 fill
-                className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
-              {/* Default Dark Gradient at Bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-700 group-hover:opacity-0 pointer-events-none" />
-
-              {/* Blue Overlay (#0079F3 at 60% opacity expands from bottom up) */}
+              {/* Blue Overlay (#0079F3 with opacity expands from bottom up on hover) */}
               <div
                 className="
                   absolute
+                  inset-x-0
                   bottom-0
-                  left-0
-                  w-full
                   h-0
-                  group-hover:h-[180px]
+                  group-hover:h-[125px]
                   transition-all
-                  duration-700
+                  duration-500
                   ease-in-out
-                  bg-[#0079F3]/60
+                  bg-[#0079F3]/45
                   z-20
                   pointer-events-none
+                  overflow-hidden
                 "
               />
 
-              {/* Text Area (Medium font sizing) */}
+              {/* Text Area */}
               <div
                 className="
                   absolute
+                  inset-x-0
                   bottom-0
-                  left-0
-                  w-full
-                  h-[180px]
+                  h-[125px]
                   z-30
                   flex
                   flex-col
                   justify-center
                   items-center
                   text-center
-                  px-6
+                  px-5
                   pointer-events-none
                 "
               >
-                <h3 className="text-white text-2xl font-semibold mb-2">
+                <h3 className="text-white text-[20px] font-semibold mb-1">
                   {card.title}
                 </h3>
 
-                <p className="text-white text-[15px] leading-relaxed max-w-[280px]">
+                <p
+                  className="text-white text-[12px] font-semibold leading-snug max-w-[300px]"
+                  style={{
+                    textShadow: "0 2px 6px rgba(0,0,0,0.6)",
+                  }}
+                >
                   {card.description}
                 </p>
               </div>

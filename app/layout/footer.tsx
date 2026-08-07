@@ -126,7 +126,7 @@ export default function FooterPage() {
 
         .footer {
           width: 100%;
-          margin-top: 40px; /* Added spacing between map section and footer */
+          margin-top: 10px;
           background: #084d8d;
           color: #ffffff;
           font-family: Arial, Helvetica, sans-serif;
