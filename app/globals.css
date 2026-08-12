@@ -47,7 +47,7 @@ body {
 }
 
 .hero-image-zoom{
-  animation: heroZoom 5s ease-in-out;
+  animation: heroZoom 5s ease-in;
 }
 @keyframes heroZoom {
   0%,20%{
