@@ -11,7 +11,7 @@ export default function TimelinesHero() {
       {/* Background Graphic - With Light Black Tint for Legibility */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="/images/ourjrny.png"
+          src="/images/journey.png"
           alt="Our Journey Background"
           fill
           priority

@@ -10,7 +10,7 @@ import ProductShowcase from "./components/PrdouctShowCase/page";
 import Brand from "./components/brand/page";
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white flex flex-col justify-between">
+    <main className="min-h-screen bg-white flex flex-col justify-between overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <Header />
       <Hero />
       <ProductShowcase />
