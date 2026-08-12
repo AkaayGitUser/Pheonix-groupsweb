@@ -68,7 +68,7 @@ export default function Careers() {
     return (
         <section
             id="careers"
-            className="relative w-full bg-[#f5f5f5] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
+            className="relative w-full bg-[#f5f5f5] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
             style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif" }}
         >
             <div className="max-w-[1550px] mx-auto relative pt-12">
