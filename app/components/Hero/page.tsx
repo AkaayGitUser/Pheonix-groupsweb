@@ -1,47 +1,214 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
+
+
+const heroSlides = [
+  {
+    image: "/images/Hero/Arena.png",
+    alt: "Arena",
+    title: "Arena",
+    heading: "Phoenix Arena",
+    description:
+      "Phoenix Arena is a world-class destination where business, culture, entertainment and community come together.",
+  },
+  {
+    image: "/images/Hero/Constructions.png",
+    alt: "Construction",
+    title: "Constructions",
+    heading: "Phoenix Construction",
+    description:
+      "Crafting spaces for modern living and lasting value.",
+  },
+  {
+    image: "/images/Hero/Foundation.png",
+    alt: "Foundation",
+    title: "Foundation",
+    heading: "Phoenix Foundation",
+    description:
+      "Nurturing little minds, building brighter tomorrows.",
+  },
+  {
+    image: "/images/Hero/Mahaprastnam.png",
+    alt: "Mahaprastnam",
+    title: "Mahaprasthanam",
+    heading: "Phoenix Mahaprasthanam",
+    description:
+      "Honoring lives with peace, dignity and compassion.",
+  },
+  {
+    image: "/images/Hero/Motors.png",
+    alt: "Motors",
+    title: "Motors",
+    heading: "Phoenix Motors",
+    description:
+      "Ride with confidence. Ride with Phoenix Motors.",
+  },
+];
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [hoverSlide, setHoverSlide] = useState<number | null>(null);
+  const [progressKey, setProgressKey] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+      setProgressKey((prev) => (prev + 1))
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+  const handleSlideChange = (index: number) => {
+    setCurrentSlide(index);
+    setProgressKey((prev) => prev + 1);
+  };
   return (
-    <section className="relative w-full min-h-162.5 lg:max-h-1000 z-10 overflow-hidden">
-      {/* Background Image */}
-      <Image
-        src="/images/hero.png"
-        alt="Phoenix Group"
-        fill
-        priority
-        className="object-cover  sm:object-[80%_center] lg:object-[75%_center] "
-      />
+    <section className="relative w-full min-h-150 lg:max-h-1000 z-10 overflow-hidden">
+
+      {/* Background Images */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="flex h-full transition-transform duration-1000 ease-in-out"
+          style={{
+            transform: `translateX(-${currentSlide * 100}%)`,
+          }}
+        >
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.image}
+              className="relative min-w-full h-full shrink-0"
+            >
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                className={`object-cover sm:object-[80%_center] lg:object-[75%_center] ${index === currentSlide ? "hero-image-zoom" : ""
+                  }`} />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-black/70 to-black/0" />
 
+      {/* Dotted Overlay */}
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(0,0,0,0.8) 1px, transparent 1px)",
+          backgroundSize: "5px 5px",
+        }}
+      />
       {/* Hero Content */}
-      <div className="absolute inset-0 flex items-center justify-start pt-10 sm:pt-12 md:pt-14 lg:pt-16">
-        <div className="w-full max-w-screen-2xl mx-auto px-6 sm:px-8 md:px-12 lg:px-15.5">
+      <div className="absolute inset-0 z-20 flex items-center mb-30">
+        <div className="w-full px-4 sm:px-3.75 md:px-7.75 lg:px-15.5">
+          <div className="max-w-150 text-white">
 
-          <div className="max-w-full sm:max-w-130 md:max-w-155 lg:max-w-125 text-white">
-
-            {/* Desktop text size unchanged */}
-            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-4xl font-light leading-tight lg:leading-none text-start lg:text-left">
-              Phoenix Group
-            </h1>
-
-            <p className="mt-5 text-sm sm:text-base md:text-[14px] lg:text-md text-start lg:text-left">
-              Empowering Businesses, Enriching Lives  with a strong presence across multiple sectors, our group companies combine expertise, innovation and collaboration to shape a better future for customers and communities.
-            </p>
-
-            <div className="flex justify-center lg:justify-start">
-              <button className="mt-8 lg:mt-12 bg-[#0A5FB8] px-10 sm:px-16 md:px-20 lg:px-29 py-3 lg:py-2 text-base lg:text-lg w-full sm:w-auto">
-                Enquire now
-              </button>
+            {/* Small Label */}
+            <div className="inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl">
+              <span className="text-xs sm:text-base italic">
+                Phoenix Stories
+              </span>
             </div>
 
-          </div>
+            {/* Heading */}
+            <h1
+             key={currentSlide}
+             className="typing-text text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+             style={{
+                  "--characters": heroSlides[currentSlide].heading.length,
+                } as React.CSSProperties}>
+              {heroSlides[currentSlide].heading}
+            </h1>
 
+            {/* Description + Blue Line */}
+            <div className="mx-13 max-w-150 flex items-start gap-3">
+              <div className="w-0.5 h-15 bg-blue-500 shrink-0"></div>
+              <p
+                key={currentSlide}
+                className="typing-text text-sm sm:text-md lg:text-lg"
+                style={{
+                  "--characters": heroSlides[currentSlide].description.length,
+                } as React.CSSProperties}
+              >
+                {heroSlides[currentSlide].description}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      {/* Progress Bars */}
+      <div className="absolute sm:bottom-15  sm:left-130 -translate-x-1/2 w-[70%] sm:max-w-300 z-30">
+        <div className="flex gap-6">
+
+          {heroSlides.map((slide, index) => {
+            const isHovered = hoverSlide === index;
+
+            return (
+              <div
+                key={slide.image}
+                className="relative flex-1 h-40 flex items-end cursor-pointer pointer-events-auto"
+                onMouseEnter={() => setHoverSlide(index)}
+                onMouseLeave={() => setHoverSlide(null)}
+              >
+
+                {/* Hover Preview */}
+                <div
+                  className={`
+                        absolute bottom-4.5 left-6 -translate-x-1/2
+                        w-[30%]
+                        transition-all duration-300
+                        pointer-events-auto
+              ${isHovered
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-3"
+                    }
+            `}
+                >
+                  {/* Title */}
+                  <div className="text-white text-lg font-medium mb-2">
+                    {slide.title}
+                  </div>
+
+                  {/* Thumbnail */}
+                  <div className="relative  w-46 h-30 object-cover cursor-pointer"
+                    onClick={() => handleSlideChange(index)}>
+                    <Image
+                      src={slide.image}
+                      alt={slide.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                {/* Progress Bar */}
+                <button
+                  type="button"
+                  onClick={() => handleSlideChange(index)}
+                  className="relative block min-w-45 w-full h-0.75 overflow-hidden bg-white/40"
+                >
+
+                  {/* Current */}
+                  {index === currentSlide && (
+                    <span className="hero-progress absolute left-0 top-0 h-full bg-blue-500" />
+                  )}
+
+                  {/* Hover */}
+                  {isHovered && index !== currentSlide && (
+                    <span className="absolute inset-0 bg-blue-500/70" />
+                  )}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
     </section>
   );
 }
