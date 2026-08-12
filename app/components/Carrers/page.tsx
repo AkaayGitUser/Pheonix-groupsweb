@@ -68,13 +68,12 @@ export default function Careers() {
     return (
         <section
             id="careers"
-            className="relative w-full bg-[#f5f5f5] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
-            style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif" }}
+            className="relative w-full bg-[#f5f5f5] dark:bg-[#121212] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
         >
             <div className="max-w-[1550px] mx-auto relative pt-12">
                 {/* Floating Careers Header Box */}
-                <div className="absolute top-0 -left-2 sm:-left-4 md:-left-6 lg:-left-8 z-20 bg-white/40 backdrop-blur-md px-8 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-white/20 rounded-none">
-                    <h2 className="text-2xl font-medium tracking-tight text-[#3e3e3e] font-sans">
+                <div className="absolute top-0 -left-2 sm:-left-4 md:-left-6 lg:-left-8 z-20 bg-white/40 dark:bg-black/40 backdrop-blur-md px-8 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-white/20 dark:border-white/10 rounded-none">
+                    <h2 className="text-2xl font-medium tracking-tight text-[#3e3e3e] dark:text-white font-sans">
                         Careers
                     </h2>
                 </div>
@@ -83,19 +82,20 @@ export default function Careers() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
 
                     {/* Card 1: Beware of Job Scams (Spans 1 column, 2 rows on desktop) */}
-                    <div className="lg:col-span-1 lg:row-span-2 bg-white hover:bg-[#EAEFF5] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300">
+                    <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
                         <div>
                             {/* Wooden Image Container */}
-                            <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] overflow-hidden">
+                            <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] overflow-hidden">
                                 <Image
                                     src="/images/carrers.png"
                                     alt="Scams disclaimer wood and crumbs backdrop"
                                     fill
+                                    unoptimized
                                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-102"
                                     priority
                                 />
                                 {/* Triangular cut-out arrow pointing upward */}
-                                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white z-10" />
+                                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white dark:border-b-[#1E2022] z-10" />
                             </div>
 
                             {/* Card Content */}
@@ -103,13 +103,13 @@ export default function Careers() {
                                 <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-14">
                                     Careers
                                 </p>
-                                <h3 className="text-xl font-medium text-gray-900 mb-8 font-sans tracking-tight">
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-8 font-sans tracking-tight">
                                     Beware of Job Scams
                                 </h3>
 
                                 {/* Quote details block */}
                                 <div className="border-l-[3px] border-[#D4AF37] pl-5 py-0.5 ml-2">
-                                    <p className="text-[15px] text-gray-600 leading-relaxed font-sans font-medium">
+                                    <p className="text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed font-sans font-medium">
                                         We do not charge/accept any amount <br />
                                         or security deposit from job seekers. <br />
                                         Read disclaimer.
@@ -134,14 +134,15 @@ export default function Careers() {
                         </div>
                     </div>
 
-                    {/* Card 2: Early Career Tata Employee? (Spans 2 columns on desktop) */}
+                    {/* Card 2: Early Career Phoenix Employee? (Spans 2 columns on desktop) */}
                     <div className="lg:col-span-2 relative min-h-[350px] sm:min-h-[380px] bg-gradient-to-br from-[#126870] to-[#0A294A] shadow-md overflow-hidden border border-gray-100 flex flex-col justify-center px-8 md:px-12 py-10 group">
                         {/* Background Mountain Path Illustration */}
                         <Image
                             src="/images/carrers-img.png"
                             alt="Mountain peak pathway illustration"
                             fill
-                            className="object-cover object-right-bottom mix-blend-lighten pointer-events-none transition-transform duration-700 ease-out group-hover:scale-101"
+                            unoptimized
+                            className="object-cover object-right-top mix-blend-lighten pointer-events-none transition-transform duration-700 ease-out group-hover:scale-101"
                         />
                         {/* Dark gradient overlay for text readability */}
                         <div className="absolute inset-0 bg-gradient-to-r from-[#000]/30 to-transparent pointer-events-none" />
@@ -152,17 +153,46 @@ export default function Careers() {
                         </span>
 
                         {/* Central Dark Blue Message Box */}
-                        <div className="relative z-10 bg-[#12455F]/90 p-6 w-[360px] h-[180px] flex flex-col justify-center shadow-2xl border border-white/5">
-                            <h4 className="text-xl font-bold text-white mb-3 leading-tight tracking-tight font-sans">
+                        <div
+                            className="relative z-10 flex flex-col justify-center shadow-2xl"
+                            style={{
+                                width: "320px",
+                                height: "150px",
+                                backgroundColor: "rgba(4, 58, 91, 0.8)",
+                                marginLeft: "0px",
+                                paddingLeft: "20px",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                            }}
+                        >
+                            <h3
+                                style={{
+                                    color: "#ffffff",
+                                    fontSize: "24px",
+                                    lineHeight: "1.2",
+                                    fontWeight: "normal",
+                                    marginTop: "-10px",
+                                    marginBottom: "10px",
+                                    paddingTop: "25px",
+                                    paddingLeft: "38px",
+                                }}
+                            >
                                 Early Career Phoenix Employee?
-                            </h4>
+                            </h3>
 
                             {/* Vertical line and details next to it */}
-                            <div className="border-l border-white/30 pl-4 space-y-0.5">
-                                <p className="italic text-[13px] text-white font-sans font-medium">
+                            <div
+                                style={{
+                                    fontSize: "12px",
+                                    color: "#ffffff",
+                                    marginLeft: "58px",
+                                    paddingLeft: "20px",
+                                    borderLeft: "1.5px solid #ffffff",
+                                }}
+                            >
+                                <p style={{ fontStyle: "italic", margin: 0, paddingBottom: "2px", whiteSpace: "nowrap" }}>
                                     Make #TheBestMoveForward.
                                 </p>
-                                <p className="text-[11px] text-white/60 font-sans">
+                                <p style={{ fontStyle: "italic", margin: 0, whiteSpace: "nowrap" }}>
                                     Registrations for 2026 are closed.
                                 </p>
                             </div>
@@ -177,9 +207,9 @@ export default function Careers() {
                     </div>
 
                     {/* Card 3: In Numbers (Bottom Middle) */}
-                    <div className="lg:col-span-1 bg-white hover:bg-[#EAEFF5] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 hover:shadow-lg transition-all duration-300 relative justify-center">
+                    <div className="lg:col-span-1 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center">
                         <div>
-                            <p className="text-xs font-semibold text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
+                            <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
                                 In Numbers
                             </p>
 
@@ -199,7 +229,7 @@ export default function Careers() {
                                 <p className="text-4xl sm:text-[44px] font-regular text-[#0079F3] leading-none mb-3 font-sans tracking-tight">
                                     {statsData[0].number}
                                 </p>
-                                <p className="text-base font-medium text-gray-700 font-sans leading-snug whitespace-pre-line">
+                                <p className="text-base font-medium text-gray-700 dark:text-gray-300 font-sans leading-snug whitespace-pre-line">
                                     {statsData[0].text}
                                 </p>
                             </div>

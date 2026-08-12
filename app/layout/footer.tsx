@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { MapPin } from "lucide-react";
 import {
   FaFacebookSquare,
@@ -29,23 +28,13 @@ export default function FooterPage() {
           <div className="footerColumn quickLinksColumn">
             <h2>Quick Links</h2>
 
-            <nav className="quickLinks">
-              <Link href="/phoenix-arena">Phoenix Arena</Link>
-
-              <Link href="/phoenix-foundation">
-                Phoenix Foundation
-              </Link>
-
-              <Link href="/phoenix-construction">
-                Phoenix Construction
-              </Link>
-
-              <Link href="/phoenix-motors">Phoenix Motors</Link>
-
-              <Link href="/vaikunta-mahaprasthana">
-                Vaikunta Mahaprasthana
-              </Link>
-            </nav>
+            <div className="quickLinks">
+              <span className="quickLinkText">Phoenix Arena</span>
+              <span className="quickLinkText">Phoenix Foundation</span>
+              <span className="quickLinkText">Phoenix Construction</span>
+              <span className="quickLinkText">Phoenix Motors</span>
+              <span className="quickLinkText">Vaikunta Mahaprasthana</span>
+            </div>
           </div>
 
           {/* Address */}
@@ -84,32 +73,17 @@ export default function FooterPage() {
             <h2>Follow US :</h2>
 
             <div className="socialIcons">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open Facebook in a new tab"
-              >
+              <span className="socialIconStatic">
                 <FaFacebookSquare size={20} />
-              </a>
+              </span>
 
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open Instagram in a new tab"
-              >
+              <span className="socialIconStatic">
                 <FaInstagram size={20} />
-              </a>
+              </span>
 
-              <a
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open LinkedIn in a new tab"
-              >
+              <span className="socialIconStatic">
                 <FaLinkedin size={20} />
-              </a>
+              </span>
             </div>
           </div>
         </div>
@@ -129,7 +103,6 @@ export default function FooterPage() {
           margin-top: 10px;
           background: #084d8d;
           color: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
         }
 
         .footerContent {
@@ -187,20 +160,11 @@ export default function FooterPage() {
           gap: 18px;
         }
 
-        .quickLinks :global(a) {
+        .quickLinkText {
           color: rgba(255, 255, 255, 0.88);
           font-size: 14px;
           font-weight: 400;
           line-height: 1;
-          text-decoration: none;
-          transition:
-            color 0.2s ease,
-            transform 0.2s ease;
-        }
-
-        .quickLinks :global(a:hover) {
-          color: #ffffff;
-          transform: translateX(3px);
         }
 
         /* Address */
@@ -243,20 +207,11 @@ export default function FooterPage() {
           margin-top: 37px;
         }
 
-        .socialIcons a {
+        .socialIconStatic {
           display: inline-flex;
           align-items: center;
           justify-content: center;
           color: #ffffff;
-          text-decoration: none;
-          transition:
-            opacity 0.2s ease,
-            transform 0.2s ease;
-        }
-
-        .socialIcons a:hover {
-          opacity: 0.75;
-          transform: translateY(-2px);
         }
 
         /* Copyright */
@@ -394,7 +349,7 @@ export default function FooterPage() {
             gap: 8px;
           }
 
-          .quickLinks :global(a) {
+          .quickLinkText {
             font-size: 11px;
             line-height: 1.2;
           }
@@ -420,7 +375,7 @@ export default function FooterPage() {
             margin-bottom: 8px;
           }
 
-          .quickLinks :global(a) {
+          .quickLinkText {
             font-size: 10.5px;
           }
 

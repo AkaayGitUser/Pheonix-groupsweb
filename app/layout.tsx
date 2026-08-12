@@ -22,6 +22,7 @@ const archivo = Archivo({
 });
 
 const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
   weight: ["300", "400", "700", "900"],
 });
@@ -39,8 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} ${lato.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <ThemeProvider>
