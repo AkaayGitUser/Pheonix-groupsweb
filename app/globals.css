@@ -48,7 +48,7 @@ body {
 }
 
 .hero-image-zoom{
-  animation: heroZoom 10s ease-in;
+  animation: heroZoom 10s ease-in-out;
 }
 @keyframes heroZoom {
   0%,20%{
@@ -60,20 +60,116 @@ body {
   }
 }
 
-.typing-text {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  animation: typing 10s steps(var(--characters), end) 1;
+.typing-char {
+  display: inline-block;
+  opacity: 0;
+  animation: typeLetter 0.05s linear forwards;
 }
-
-@keyframes typing {
+@keyframes typeLetter {
   from {
-    width: 0;
+    opacity: 0;
   }
 
   to {
-    width: calc(var(--characters) * 1ch);
+    opacity: 1;
+  }
+}
+.typing-description {
+  white-space: normal;
+}
+
+.typing-description .typing-char {
+  display: inline;
+}
+
+.trans-stories{
+  animation: trans-stories 0.8s ease-in forwards;;
+}
+
+@keyframes trans-stories {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.trans-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: trans-up 0.5s ease-out 2.5s forwards;
+}
+
+@keyframes trans-up {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-chevron {
+  width: 28px;
+  height: 28px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  margin-top: -16px;
+  opacity: 0;
+  animation: chevronDown 3.2s ease-out infinite;
+}
+
+.scroll-chevron-1 {
+  animation-delay: 0s;
+}
+
+.scroll-chevron-2 {
+  animation-delay: 0.8s;
+}
+
+.scroll-chevron-3 {
+  animation-delay: 1.6s;
+}
+
+.scroll-chevron-4 {
+  animation-delay: 2.4s;
+}
+
+@keyframes chevronDown {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-5px, -5px);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  35% {
+    opacity: 1;
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+
+  40% {
+    opacity: 0.3;
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  60% {
+    opacity: 0;
+    transform: rotate(45deg) translate(9px, 9px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(9px, 9px);
   }
 }
