@@ -1,6 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { Lato } from "next/font/google";
+import { useTheme } from "@/app/context/ThemeContext";
+
+/* =========================================================
+   LATO FONT
+========================================================= */
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  display: "swap",
+});
 
 /* =========================================================
    HERO NEWS DATA
@@ -10,30 +22,17 @@ const heroNewsItems = [
   {
     id: 1,
     category: "PRESS RELEASE",
-    title:
-      "Winner of CSR Initiative of the year - Real Estate Firm",
+    title: "Winner of CSR Initiative of the year - Real Estate Firm",
     description:
       "Celebrating our commitment to meaningful change and stronger communities.",
-    image:
-      "/images/news.png",
+    image: "/images/news.png",
   },
-//   {
-//     id: 2,
-//     category: "PRESS RELEASE",
-//     title: "Tata Electronics and ASML Announce Strategic Partnership",
-//     description:
-//       "To advance semiconductor manufacturing ecosystem in India.",
-//     image:
-//       "https://images.unsplash.com/photo-1518770660439-4636190af475?q=90&w=1600&auto=format&fit=crop",
-//   },
   {
     id: 3,
     category: "INNOVATION",
     title: "Winner of CSR Leader of the year – Real Estate Sector",
-    description:
-      "Leading with purpose. Creating lasting impact.",
-    image:
-      "/images/news-img.png",
+    description: "Leading with purpose. Creating lasting impact.",
+    image: "/images/news-img.png",
   },
 ];
 
@@ -63,8 +62,7 @@ const companyNewsItems = [
   {
     id: 4,
     title: "Phoenix Construction",
-    description:
-      "Building spaces that inspire, endure and belong.",
+    description: "Building spaces that inspire, endure and belong.",
   },
   {
     id: 5,
@@ -81,38 +79,31 @@ const companyNewsItems = [
 const factsItems = [
   {
     id: 1,
-    text:
-      "Phoenix Group has been steadily building a robust portfolio of projects in Hyderabad over the last 20 years.",
+    text: "Phoenix Group has been steadily building a robust portfolio of projects in Hyderabad over the last 20 years.",
   },
   {
     id: 2,
-    text:
-      "Phoenix Arena, launched in association with TSIIC, is a vibrant platform that celebrates art and creativity.",
+    text: "Phoenix Arena, launched in association with TSIIC, is a vibrant platform that celebrates art and creativity.",
   },
   {
     id: 3,
-    text:
-      "Phoenix Foundation restored Sabarimala’s sacred Dwajasthambham with a new gold-plated teakwood flag post, inaugurated on 25 June 2017.",
+    text: "Phoenix Foundation restored Sabarimala’s sacred Dwajasthambham with a new gold-plated teakwood flag post, inaugurated on 25 June 2017.",
   },
   {
     id: 4,
-    text:
-      "Phoenix Foundation relocated 1,000 ancient banyan trees to create a thriving eco-forest in Moinabad.",
+    text: "Phoenix Foundation relocated 1,000 ancient banyan trees to create a thriving eco-forest in Moinabad.",
   },
   {
     id: 5,
-    text:
-      "Phoenix Foundation partners with Sankara Eye Hospital to provide free eye care for underprivileged communities.",
+    text: "Phoenix Foundation partners with Sankara Eye Hospital to provide free eye care for underprivileged communities.",
   },
   {
     id: 6,
-    text:
-      "Vaikuntha Mahaprasthanam transformed crematoria into eco-friendly spaces offering dignity, comfort and care.",
+    text: "Vaikuntha Mahaprasthanam transformed crematoria into eco-friendly spaces offering dignity, comfort and care.",
   },
   {
     id: 7,
-    text:
-      "Phoenix Foundation provided free, clean drinking water through 30+ camps across the city.",
+    text: "Phoenix Foundation provided free, clean drinking water through 30+ camps across the city.",
   },
 ];
 
@@ -121,15 +112,25 @@ const factsItems = [
 ========================================================= */
 
 export default function ProductShowcase() {
+  /* =========================================================
+     THEME
+  ========================================================= */
+
+  const { theme } = useTheme();
+
+  const isDark = theme === "dark";
+
+  /* =========================================================
+     SLIDER STATES
+  ========================================================= */
+
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const [currentCompany, setCurrentCompany] = useState(0);
-
   const [currentFact, setCurrentFact] = useState(0);
 
-  /* =======================================================
+  /* =========================================================
      HERO AUTO SLIDER
-  ======================================================= */
+  ========================================================= */
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -139,150 +140,254 @@ export default function ProductShowcase() {
     return () => clearInterval(interval);
   }, []);
 
+  /* =========================================================
+     ACTIVE CONTENT
+  ========================================================= */
+
   const activeHero = heroNewsItems[currentSlide];
 
   const activeCompany = companyNewsItems[currentCompany];
 
   const activeFact = factsItems[currentFact];
 
-  /* =======================================================
-     COMPANY NEWS REFRESH
-  ======================================================= */
+  /* =========================================================
+     COMPANY REFRESH
+  ========================================================= */
 
   const handleCompanyRefresh = () => {
     setCurrentCompany((prev) => (prev + 1) % companyNewsItems.length);
   };
 
-  /* =======================================================
-     FACTS REFRESH
-  ======================================================= */
+  /* =========================================================
+     FACT REFRESH
+  ========================================================= */
 
   const handleFactRefresh = () => {
     setCurrentFact((prev) => (prev + 1) % factsItems.length);
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white py-12 sm:py-14 lg:py-[70px]">
-      <div className="relative mx-auto w-full max-w-[1140px] px-4 sm:px-6 lg:px-0">
-        {/* ===================================================
-            TITLE
-        =================================================== */}
+    <section
+      className={`
+        ${lato.className}
+
+        relative
+        w-full
+        max-w-full
+        overflow-x-hidden
+
+        transition-colors
+        duration-500
+
+        ${isDark ? "bg-white" : "bg-[#eeeeee]"}
+
+        py-10
+        sm:py-12
+        md:py-14
+        lg:py-16
+        xl:py-[70px]
+      `}
+    >
+      {/* =====================================================
+          MAIN CONTAINER
+      ===================================================== */}
+
+      <div
+        className="
+          relative
+          mx-auto
+
+          w-full
+          min-w-0
+          max-w-[1140px]
+
+          px-4
+          sm:px-5
+          md:px-6
+          lg:px-8
+          xl:px-0
+        "
+      >
+        {/* =====================================================
+            IN THE NEWS TITLE
+        ===================================================== */}
 
         <div
-          className="
+          className={`
             absolute
-            left-4
-            top-[-28px]
             z-30
-            bg-[#353535]/95
-            px-5
+
+            left-4
+            top-[-24px]
+
+            px-4
             py-3
 
-            sm:left-6
-            sm:top-[-30px]
+            shadow-[0_3px_12px_rgba(0,0,0,0.16)]
 
-            lg:left-[-20px]
-            lg:top-[-30px]
-          "
+            transition-colors
+            duration-500
+
+            sm:left-5
+            sm:top-[-27px]
+            sm:px-5
+
+            md:left-6
+
+            lg:left-8
+
+            xl:left-[-20px]
+            xl:top-[-30px]
+
+            ${isDark ? "bg-[#353535]/95" : "bg-white/95"}
+          `}
         >
-          <h2 className="whitespace-nowrap text-[20px] font-semibold leading-none text-white sm:text-[22px]">
+          <h2
+            className={`
+              whitespace-nowrap
+
+              text-[18px]
+              font-bold
+              leading-none
+
+              transition-colors
+              duration-500
+
+              sm:text-[20px]
+              md:text-[21px]
+              lg:text-[22px]
+
+              ${isDark ? "text-white" : "text-[#454545]"}
+            `}
+          >
             In the News
           </h2>
         </div>
 
-        {/* ===================================================
+        {/* =====================================================
             TOP SECTION
-        =================================================== */}
+        ===================================================== */}
 
         <div
           className="
             grid
+            w-full
+            min-w-0
+
             grid-cols-1
             gap-5
 
-            lg:grid-cols-[minmax(0,750px)_360px]
-            lg:gap-[30px]
+            lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]
+
+            xl:grid-cols-[minmax(0,750px)_360px]
+            xl:gap-[30px]
           "
         >
-          {/* =================================================
-              HERO CARD
-          ================================================= */}
+          {/* =====================================================
+              HERO NEWS CARD
+          ===================================================== */}
 
           <div
             className="
               grid
+
               w-full
+              min-w-0
+
               grid-cols-1
-              overflow-visible
 
-              md:grid-cols-[52%_48%]
+              overflow-hidden
 
-              lg:h-[362px]
-              lg:grid-cols-[390px_360px]
+              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
+
+              md:grid-cols-2
+
+              xl:h-[362px]
+              xl:grid-cols-[390px_minmax(0,360px)]
             "
           >
-            {/* IMAGE */}
+            {/* =================================================
+                HERO IMAGE
+            ================================================= */}
 
             <div
               className="
                 relative
-                h-[300px]
+
+                h-[240px]
+
                 w-full
+                min-w-0
+
                 overflow-hidden
                 bg-black
 
-                sm:h-[360px]
+                min-[380px]:h-[270px]
 
-                md:h-[380px]
+                sm:h-[320px]
 
-                lg:h-[362px]
+                md:h-full
+                md:min-h-[360px]
+
+                xl:h-[362px]
+                xl:min-h-0
               "
             >
               {heroNewsItems.map((item, index) => (
-  <img
-    key={item.id}
-    src={item.image}
-    alt={item.title}
-    className={`
-      absolute
-      inset-0
-      h-full
-      w-full
-      transition-opacity
-      duration-700
-      ease-in-out
+                <img
+                  key={item.id}
+                  src={item.image}
+                  alt={item.title}
+                  className={`
+                    absolute
+                    inset-0
 
-      ${
-        item.image === "/images/news-img.png"
-          ? "object-contain object-center"
-          : "object-cover object-center"
-      }
+                    h-full
+                    w-full
 
-      ${
-        index === currentSlide
-          ? "opacity-100"
-          : "pointer-events-none opacity-0"
-      }
-    `}
-  />
-))}
+                    transition-opacity
+                    duration-700
+                    ease-in-out
+
+                    ${
+                      item.image === "/images/news-img.png"
+                        ? "object-contain object-center"
+                        : "object-cover object-center"
+                    }
+
+                    ${
+                      index === currentSlide
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0"
+                    }
+                  `}
+                />
+              ))}
 
               {/* IMAGE OVERLAY */}
 
-              <div className="absolute inset-0 bg-black/[0.03]" />
+              <div className="absolute inset-0 bg-black/[0.02]" />
 
-              {/* SLIDER DOTS */}
+              {/* =================================================
+                  SLIDER DOTS
+              ================================================= */}
 
               <div
                 className="
                   absolute
-                  bottom-[25px]
+
+                  bottom-5
                   left-1/2
                   z-20
+
                   flex
+
                   -translate-x-1/2
+
                   items-center
-                  gap-[12px]
+                  gap-3
+
+                  sm:bottom-6
                 "
               >
                 {heroNewsItems.map((_, index) => (
@@ -294,6 +399,9 @@ export default function ProductShowcase() {
                     className={`
                       h-[6px]
                       w-[6px]
+
+                      shrink-0
+
                       transition-all
                       duration-300
 
@@ -309,42 +417,60 @@ export default function ProductShowcase() {
             </div>
 
             {/* =================================================
-                HERO DARK CONTENT
+                HERO CONTENT
             ================================================= */}
 
             <div
-              className="
+              className={`
                 relative
+
                 flex
-                min-h-[330px]
                 w-full
+                min-w-0
+
+                min-h-[280px]
+
                 flex-col
-                justify-between
-                bg-[#353535]
 
-                px-7
-                py-8
+                px-5
+                py-7
 
-                sm:px-9
-                sm:py-10
+                transition-colors
+                duration-500
 
-                md:h-[380px]
-                md:min-h-0
+                sm:min-h-[310px]
+                sm:px-7
+                sm:py-8
 
-                lg:h-[362px]
-                lg:px-[40px]
-                lg:py-[42px]
-              "
+                md:min-h-[360px]
+                md:px-8
+                md:py-9
+
+                lg:px-7
+
+                xl:h-[362px]
+                xl:min-h-0
+                xl:px-[40px]
+                xl:py-[42px]
+
+                ${isDark ? "bg-[#353535]" : "bg-white"}
+              `}
             >
-              {/* TRIANGLE */}
+              {/* =================================================
+                  TRIANGLE
+              ================================================= */}
 
               <div
-                className="
+                className={`
                   absolute
+
                   -left-[15px]
                   top-[25px]
+
                   z-20
+
                   hidden
+
                   h-0
                   w-0
 
@@ -353,145 +479,257 @@ export default function ProductShowcase() {
                   border-t-[15px]
 
                   border-b-transparent
-                  border-r-[#353535]
                   border-t-transparent
 
                   md:block
-                "
+
+                  ${
+                    isDark
+                      ? "border-r-[#353535]"
+                      : "border-r-white"
+                  }
+                `}
               />
 
-              <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.02em] text-[#00aeef]">
-                  {/* {activeHero.category} */}
+              {/* =================================================
+                  HERO TEXT
+              ================================================= */}
+
+              <div className="min-w-0">
+                {/* CATEGORY */}
+
+                <p
+                  className="
+                    text-[10px]
+                    font-normal
+                    uppercase
+                    tracking-[0.02em]
+
+                    text-[#0089cf]
+
+                    sm:text-[11px]
+                  "
+                >
+                  {activeHero.category}
                 </p>
 
+                {/* TITLE */}
+
                 <h3
-                  className="
-                    mt-10
-                    max-w-[290px]
-                    text-[19px]
-                    font-semibold
-                    leading-[1.2]
-                    text-white
+                  className={`
+                    mt-8
 
-                    sm:mt-12
-                    sm:text-[20px]
+                    max-w-[320px]
 
-                    lg:mt-[60px]
-                  "
+                    break-words
+
+                    text-[18px]
+                    font-bold
+                    leading-[1.25]
+
+                    transition-colors
+                    duration-500
+
+                    sm:mt-10
+                    sm:text-[19px]
+
+                    md:text-[20px]
+
+                    xl:mt-[58px]
+
+                    ${isDark ? "text-white" : "text-[#4a4a4a]"}
+                  `}
                 >
                   {activeHero.title}
                 </h3>
 
-                <div className="mt-[22px] flex items-stretch">
-                  <div className="mr-[14px] w-[2px] shrink-0 bg-[#FFD000]" />
+                {/* DESCRIPTION */}
+
+                <div
+                  className="
+                    mt-5
+
+                    flex
+                    min-w-0
+                    items-stretch
+
+                    sm:mt-[22px]
+                  "
+                >
+                  {/* YELLOW LINE */}
+
+                  <div
+                    className="
+                      mr-3
+
+                      w-[2px]
+
+                      shrink-0
+
+                      bg-[#f5a000]
+
+                      sm:mr-[14px]
+                    "
+                  />
 
                   <p
-                    className="
-                      max-w-[260px]
+                    className={`
+                      min-w-0
+
+                      max-w-[280px]
+
+                      break-words
+
                       text-[12px]
-                      leading-[1.8]
-                      text-[#eeeeee]
+                      font-normal
+                      leading-[1.7]
+
+                      transition-colors
+                      duration-500
 
                       sm:text-[13px]
-                    "
+                      sm:leading-[1.8]
+
+                      ${
+                        isDark
+                          ? "text-[#eeeeee]"
+                          : "text-[#555555]"
+                      }
+                    `}
                   >
                     {activeHero.description}
                   </p>
                 </div>
               </div>
 
-              {/* ARROW */}
-
-              <div className="mt-6 flex justify-end">
-                <button
-                  type="button"
-                  aria-label="Read news"
-                  className="group flex h-[30px] w-[30px] items-center justify-center"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="h-[25px] w-[25px] transition-transform duration-300 group-hover:translate-x-1"
-                  >
-                    <path
-                      d="M4 12H19"
-                      stroke="white"
-                      strokeWidth="1.3"
-                    />
-
-                    <path
-                      d="M14 7L19 12L14 17"
-                      stroke="white"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
+              {/* HERO ARROW REMOVED */}
             </div>
           </div>
 
-          {/* =================================================
-              COMPANY NEWS CARD
-          ================================================= */}
+          {/* =====================================================
+              COMPANY NEWS
+          ===================================================== */}
 
           <div
-            className="
+            className={`
               flex
-              min-h-[340px]
+
               w-full
+              min-w-0
+
+              min-h-[300px]
+
               flex-col
               justify-between
+
               overflow-hidden
-              bg-[#078AB8]
 
-              px-6
-              py-8
+              px-5
+              py-7
 
-              sm:min-h-[360px]
-              sm:px-8
-              sm:py-10
+              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
 
-              md:px-9
+              transition-colors
+              duration-500
 
-              lg:h-[362px]
-              lg:min-h-0
-              lg:px-[40px]
-              lg:py-[42px]
-            "
+              sm:min-h-[330px]
+              sm:px-7
+              sm:py-8
+
+              md:px-8
+              md:py-9
+
+              lg:min-h-full
+              lg:px-7
+
+              xl:h-[362px]
+              xl:min-h-0
+              xl:px-[40px]
+              xl:py-[42px]
+
+              ${
+                isDark
+                  ? "bg-[#078AB8]"
+                  : "bg-[#0B86BE]"
+              }
+            `}
           >
-            <div key={currentCompany}>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.02em] text-white">
+            <div key={currentCompany} className="min-w-0">
+              {/* LABEL */}
+
+              <p
+                className="
+                  text-[10px]
+                  font-normal
+                  uppercase
+                  tracking-[0.02em]
+                  text-white
+
+                  sm:text-[11px]
+                "
+              >
                 COMPANY NEWS
               </p>
 
+              {/* TITLE */}
+
               <h3
                 className="
-                  mt-6
+                  mt-5
+
                   break-words
-                  text-[20px]
-                  font-semibold
-                  leading-[1.2]
+
+                  text-[18px]
+                  font-bold
+                  leading-[1.25]
                   text-white
 
-                  sm:text-[21px]
+                  sm:mt-6
+                  sm:text-[20px]
                 "
               >
                 {activeCompany.title}
               </h3>
 
-              <div className="mt-6 flex items-stretch">
-                <div className="mr-[14px] w-[2px] shrink-0 bg-[#FFD400]" />
+              {/* DESCRIPTION */}
+
+              <div
+                className="
+                  mt-5
+
+                  flex
+                  min-w-0
+                  items-stretch
+
+                  sm:mt-6
+                "
+              >
+                <div
+                  className="
+                    mr-3
+                    w-[2px]
+                    shrink-0
+
+                    bg-[#ffb400]
+
+                    sm:mr-[14px]
+                  "
+                />
 
                 <p
                   className="
-                    max-w-[270px]
+                    min-w-0
+                    max-w-[290px]
+
                     break-words
-                    text-[13px]
-                    leading-[1.8]
+
+                    text-[12px]
+                    font-normal
+                    leading-[1.7]
                     text-white
+
+                    sm:text-[13px]
+                    sm:leading-[1.8]
 
                     lg:max-w-[250px]
                   "
@@ -501,125 +739,114 @@ export default function ProductShowcase() {
               </div>
             </div>
 
-            {/* COMPANY REFRESH */}
+            {/* REFRESH */}
 
-            <div className="mt-8 flex justify-center">
-              <button
-                type="button"
-                onClick={handleCompanyRefresh}
-                aria-label="Show next company"
-                className="
-                  group
-                  flex
-                  h-[44px]
-                  w-[44px]
-                  items-center
-                  justify-center
-                  rounded-full
-                  transition-all
-                  duration-300
-
-                  hover:bg-white/10
-                "
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="
-                    h-[30px]
-                    w-[30px]
-                    transition-transform
-                    duration-500
-
-                    group-active:rotate-180
-                  "
-                >
-                  <path
-                    d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-                  <path
-                    d="M21 3v5h-5"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+            <RefreshButton
+              onClick={handleCompanyRefresh}
+              label="Show next company"
+            />
           </div>
         </div>
 
-        {/* ===================================================
+        {/* =====================================================
             BOTTOM SECTION
-        =================================================== */}
+        ===================================================== */}
 
         <div
           className="
             mt-5
+
             grid
+
+            w-full
+            min-w-0
+
             grid-cols-1
             gap-5
 
-            md:grid-cols-[minmax(260px,360px)_minmax(0,1fr)]
+            md:grid-cols-[minmax(250px,360px)_minmax(0,1fr)]
 
-            lg:mt-[30px]
-            lg:grid-cols-[360px_750px]
-            lg:gap-[30px]
+            xl:mt-[30px]
+            xl:grid-cols-[360px_minmax(0,750px)]
+            xl:gap-[30px]
           "
         >
-          {/* =================================================
-              FACTS / DID YOU KNOW
-          ================================================= */}
+          {/* =====================================================
+              FACTS CARD
+          ===================================================== */}
 
           <div
-            className="
+            className={`
               flex
-              min-h-[340px]
+
               w-full
+              min-w-0
+
+              min-h-[300px]
+
               flex-col
               justify-between
+
               overflow-hidden
-              bg-[#003D4D]
 
-              px-6
-              py-8
+              px-5
+              py-7
 
-              sm:min-h-[360px]
-              sm:px-8
-              sm:py-10
+              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
 
-              md:px-9
+              transition-colors
+              duration-500
 
-              lg:h-[362px]
-              lg:min-h-0
-              lg:px-[40px]
-              lg:py-[42px]
-            "
+              sm:min-h-[330px]
+              sm:px-7
+              sm:py-8
+
+              md:min-h-[360px]
+              md:px-8
+              md:py-9
+
+              xl:h-[362px]
+              xl:min-h-0
+              xl:px-[40px]
+              xl:py-[42px]
+
+              ${
+                isDark
+                  ? "bg-[#003D4D]"
+                  : "bg-[#5F80AE]"
+              }
+            `}
           >
-            <div key={currentFact}>
-              {/* FACTS LABEL */}
+            <div key={currentFact} className="min-w-0">
+              {/* LABEL */}
 
-              <p className="text-[10px] font-semibold uppercase tracking-[0.02em] text-white">
+              <p
+                className="
+                  text-[10px]
+                  font-normal
+                  uppercase
+                  tracking-[0.02em]
+                  text-white
+
+                  sm:text-[11px]
+                "
+              >
                 FACTS
               </p>
 
-              {/* HEADING */}
+              {/* TITLE */}
 
               <h3
                 className="
-                  mt-6
-                  text-[20px]
-                  font-semibold
-                  leading-[1.2]
+                  mt-5
+
+                  text-[18px]
+                  font-bold
+                  leading-[1.25]
                   text-white
 
-                  sm:text-[21px]
+                  sm:mt-6
+                  sm:text-[20px]
                 "
               >
                 Did you know
@@ -627,117 +854,125 @@ export default function ProductShowcase() {
 
               {/* FACT CONTENT */}
 
-              <div className="mt-6 flex items-stretch">
-                {/* YELLOW LINE */}
+              <div
+                className="
+                  mt-5
 
-                <div className="mr-[14px] w-[2px] shrink-0 bg-[#FFD100]" />
-<div className="min-w-0">
-  <p
-    className="
-      max-w-[245px]
-      break-words
-      text-[12px]
-      leading-[1.8]
-      text-white
+                  flex
+                  min-w-0
+                  items-stretch
 
-      sm:text-[13px]
-    "
-  >
-    {activeFact.text}
-  </p>
-</div>
+                  sm:mt-6
+                "
+              >
+                <div
+                  className="
+                    mr-3
+
+                    w-[2px]
+
+                    shrink-0
+
+                    bg-[#ffb000]
+
+                    sm:mr-[14px]
+                  "
+                />
+
+                <div className="min-w-0">
+                  <p
+                    className="
+                      min-w-0
+
+                      max-w-[270px]
+
+                      break-words
+
+                      text-[12px]
+                      font-normal
+                      leading-[1.7]
+                      text-white
+
+                      sm:text-[13px]
+                      sm:leading-[1.8]
+                    "
+                  >
+                    {activeFact.text}
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* =================================================
-                FACT REFRESH BUTTON
-            ================================================= */}
+            {/* REFRESH */}
 
-            <div className="mt-6 flex justify-center">
-              <button
-                type="button"
-                onClick={handleFactRefresh}
-                aria-label="Show next fact"
-                className="
-                  group
-                  flex
-                  h-[44px]
-                  w-[44px]
-                  items-center
-                  justify-center
-                  rounded-full
-                  transition-all
-                  duration-300
-
-                  hover:bg-white/10
-                "
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="
-                    h-[29px]
-                    w-[29px]
-                    transition-transform
-                    duration-500
-
-                    group-active:rotate-180
-                  "
-                >
-                  <path
-                    d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-
-                  <path
-                    d="M21 3v5h-5"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+            <RefreshButton
+              onClick={handleFactRefresh}
+              label="Show next fact"
+            />
           </div>
 
-          {/* =================================================
-              INSTAGRAM GRADIENT CARD
-          ================================================= */}
+          {/* =====================================================
+              INSTAGRAM CARD
+          ===================================================== */}
 
           <div
-            className="
+            className={`
               relative
-              min-h-[340px]
+
               w-full
+              min-w-0
+
+              min-h-[300px]
+
               overflow-hidden
 
               bg-gradient-to-r
+
               from-[#ff7900]
-              via-[#eb456e]
-              to-[#40233c]
+              via-[#ef4c68]
 
-              px-6
-              py-8
+              px-5
+              py-7
 
-              sm:px-8
-              sm:py-10
+              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
 
-              lg:h-[362px]
-              lg:min-h-0
-              lg:px-[40px]
-              lg:py-[42px]
-            "
+              transition-all
+              duration-500
+
+              sm:min-h-[330px]
+              sm:px-7
+              sm:py-8
+
+              md:min-h-[360px]
+              md:px-8
+              md:py-9
+
+              xl:h-[362px]
+              xl:min-h-0
+              xl:px-[40px]
+              xl:py-[42px]
+
+              ${
+                isDark
+                  ? "to-[#40233c]"
+                  : "to-[#dfbdd8]"
+              }
+            `}
           >
-            {/* INSTAGRAM ICON */}
+            {/* =================================================
+                INSTAGRAM ICON
+            ================================================= */}
 
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              className="h-[24px] w-[24px]"
+              className="
+                h-[22px]
+                w-[22px]
+
+                sm:h-[24px]
+                sm:w-[24px]
+              "
             >
               <rect
                 x="3"
@@ -757,23 +992,59 @@ export default function ProductShowcase() {
                 strokeWidth="1.4"
               />
 
-              <circle cx="17.5" cy="6.5" r="1" fill="white" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="white"
+              />
             </svg>
 
-            {/* CONTENT */}
+            {/* =================================================
+                INSTAGRAM CONTENT
+            ================================================= */}
 
-            <div className="mt-10 flex items-stretch sm:mt-[42px]">
-              <div className="mr-[14px] w-[1px] shrink-0 bg-white" />
+            <div
+              className="
+                mt-8
 
-              <div className="max-w-[440px]">
+                flex
+
+                min-w-0
+
+                items-stretch
+
+                sm:mt-10
+
+                xl:mt-[42px]
+              "
+            >
+              <div
+                className="
+                  mr-3
+
+                  w-[1px]
+
+                  shrink-0
+
+                  bg-white
+
+                  sm:mr-[14px]
+                "
+              />
+
+              <div className="min-w-0 max-w-[470px]">
                 <p
                   className="
+                    break-words
+
                     text-[12px]
-                    font-medium
-                    leading-[1.9]
+                    font-normal
+                    leading-[1.7]
                     text-white
 
                     sm:text-[13px]
+                    sm:leading-[1.8]
                   "
                 >
                   Building experiences that bring people together.
@@ -785,32 +1056,54 @@ export default function ProductShowcase() {
                   #Phoenix #Community #Experiences
                 </p>
 
-                <p className="mt-2 text-[11px] italic text-white">
+                <p
+                  className="
+                    mt-2
+
+                    text-[11px]
+                    font-normal
+                    italic
+                    text-white
+                  "
+                >
                   Explore Phoenix
                 </p>
               </div>
             </div>
 
-            {/* EXTERNAL LINK */}
+            {/* =================================================
+                EXTERNAL LINK ICON
+            ================================================= */}
 
             <button
               type="button"
               aria-label="Open post"
               className="
                 absolute
-                bottom-6
-                right-6
+
+                bottom-5
+                right-5
+
                 transition-transform
                 duration-300
 
                 hover:-translate-y-1
                 hover:translate-x-1
+
+                sm:bottom-6
+                sm:right-6
               "
             >
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-[22px] w-[22px]"
+                className="
+                  h-[20px]
+                  w-[20px]
+
+                  sm:h-[22px]
+                  sm:w-[22px]
+                "
               >
                 <path
                   d="M14 4H20V10"
@@ -840,5 +1133,89 @@ export default function ProductShowcase() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* =========================================================
+   REUSABLE REFRESH BUTTON
+========================================================= */
+
+function RefreshButton({
+  onClick,
+  label,
+}: {
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <div
+      className="
+        mt-6
+        flex
+        justify-center
+      "
+    >
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={label}
+        className="
+          group
+
+          flex
+
+          h-[42px]
+          w-[42px]
+
+          shrink-0
+
+          items-center
+          justify-center
+
+          rounded-full
+
+          transition-all
+          duration-300
+
+          hover:bg-white/10
+
+          sm:h-[44px]
+          sm:w-[44px]
+        "
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          className="
+            h-[27px]
+            w-[27px]
+
+            transition-transform
+            duration-500
+
+            group-active:rotate-180
+
+            sm:h-[29px]
+            sm:w-[29px]
+          "
+        >
+          <path
+            d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          <path
+            d="M21 3v5h-5"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
   );
 }
