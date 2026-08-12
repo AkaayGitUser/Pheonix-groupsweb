@@ -65,7 +65,7 @@ export default function Hero() {
     setProgressKey((prev) => prev + 1);
   };
   return (
-    <section className="relative w-full min-h-150 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
+    <section className="relative w-full min-h-145 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
 
       {/* Background Images */}
       <div className="absolute inset-0 overflow-hidden">
@@ -105,7 +105,7 @@ export default function Hero() {
         }}
       />
       {/* Hero Content */}
-      <div className="absolute inset-0 z-20 flex items-center mb-30">
+      <div className="absolute inset-0 z-20 flex items-center mb-20 sm:mb-15">
         <div className="w-full px-4 sm:px-3.75 md:px-7.75 lg:px-15.5">
           <div className="max-w-150 text-white">
 
@@ -154,84 +154,96 @@ export default function Hero() {
             z-30
           "
         >
-          <div className="flex gap-6 max-sm:gap-2">
+          <div>
+            <div className="flex gap-6 max-sm:gap-2">
 
-            {heroSlides.map((slide, index) => {
-              const isHovered = hoverSlide === index;
+              {heroSlides.map((slide, index) => {
+                const isHovered = hoverSlide === index;
 
-              return (
-                <div
-                  key={slide.image}
-                  className="
+                return (
+                  <div
+                    key={slide.image}
+                    className="
                   relative flex-1 h-40 flex items-end cursor-pointer pointer-events-auto
                   max-sm:h-10
                   "
-                  onMouseEnter={() => setHoverSlide(index)}
-                  onMouseLeave={() => setHoverSlide(null)}
-                >
+                    onMouseEnter={() => setHoverSlide(index)}
+                    onMouseLeave={() => setHoverSlide(null)}
+                  >
 
-                  {/* Hover Preview */}
-                  <div
-                    className={`
+                    {/* Hover Preview */}
+                    <div
+                      className={`
                       absolute bottom-4.5 left-6 -translate-x-1/2
                       w-[30%]
                       transition-all duration-300
                       pointer-events-auto
                       max-sm:hidden
                       ${isHovered
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-3"
-                      }
-            `}
-                  >
-                    {/* Title */}
-                    <div className="text-white text-lg font-medium mb-2">
-                      {slide.title}
-                    </div>
-
-                    {/* Thumbnail */}
-                    <div
-                      className="relative w-46 h-30 object-cover cursor-pointer"
-                      onClick={() => handleSlideChange(index)}
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-3"
+                        }
+                    `}
                     >
-                      <Image
-                        src={slide.image}
-                        alt={slide.alt}
-                        fill
-                        className="object-cover"
-                      />
+                      {/* Title */}
+                      <div className="text-white text-lg font-medium mb-2">
+                        {slide.title}
+                      </div>
+
+                      {/* Thumbnail */}
+                      <div
+                        className="relative w-46 h-30 object-cover cursor-pointer"
+                        onClick={() => handleSlideChange(index)}
+                      >
+                        <Image
+                          src={slide.image}
+                          alt={slide.alt}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Progress Bar */}
-                  <button
-                    type="button"
-                    onClick={() => handleSlideChange(index)}
-                    className={`
-                    relative block min-w-45 w-full h-0.75
-                    overflow-hidden
-                    ${index===currentSlide ? "bg-white":"bg-white/40"}
-                    max-sm:min-w-0
-                    max-sm:h-0.5
+                    {/* Progress Bar */}
+                    <button
+                      type="button"
+                      onClick={() => handleSlideChange(index)}
+                      className={`
+                      relative block min-w-45 w-full h-0.75
+                      overflow-hidden
+                      ${index === currentSlide ? "bg-white" : "bg-white/40"}
+                      max-sm:min-w-0
+                      max-sm:h-0.5
                   `}
-                  >
+                    >
 
-                    {/* Current */}
-                    {index === currentSlide && (
-                      <span
-                        key={progressKey}
-                        className="hero-progress absolute left-0 top-0 h-full bg-blue-500"
-                      />
-                    )}
+                      {/* Current */}
+                      {index === currentSlide && (
+                        <span
+                          key={progressKey}
+                          className="hero-progress absolute left-0 top-0 h-full bg-blue-500"
+                        />
+                      )}
 
-                    {/* Hover */}
-                    {isHovered && index !== currentSlide && (
-                      <span className="absolute inset-0 bg-blue-500/70 max-sm:hidden" />
-                    )}
-                  </button>
-                </div>
-              );
-            })}
+                      {/* Hover */}
+                      {isHovered && index !== currentSlide && (
+                        <span className="absolute inset-0 bg-blue-500/70 max-sm:hidden" />
+                      )}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            {/* Slide Number - BELOW PROGRESS BARS */}
+            <div className="mt-3 flex justify-start items-end-safe">
+              <div className="text-white text-md">
+                <span className="mr-2">||</span>
+                <span>
+                  {String(currentSlide + 1)}/
+                  {String(heroSlides.length)}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
