@@ -27,7 +27,7 @@ const slides = [
   },
   {
     id: 4,
-    image: "/images/motors-img.png",
+    image: "/images/motors-bg.png",
     title: "Phoenix Motors",
     label: "Mobility",
   },
