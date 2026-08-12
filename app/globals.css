@@ -122,7 +122,7 @@ body {
   border-right: 3px solid white;
   border-bottom: 3px solid white;
   transform: rotate(45deg);
-  margin-top: -16px;
+  margin-top: -10px;
   opacity: 0;
   animation: chevronDown 3.2s ease-out infinite;
 }
