@@ -162,7 +162,7 @@ export default function ProductShowcase() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#202020] py-12 sm:py-14 lg:py-[70px]">
+    <section className="relative w-full overflow-hidden bg-white py-12 sm:py-14 lg:py-[70px]">
       <div className="relative mx-auto w-full max-w-[1140px] px-4 sm:px-6 lg:px-0">
         {/* ===================================================
             TITLE
