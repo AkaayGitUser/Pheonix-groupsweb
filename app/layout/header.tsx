@@ -92,7 +92,6 @@ export default function Header() {
     >
       <div
         className="max-w-7xl mx-auto h-16 sm:h-20 md:h-24 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10"
-        style={{ font: "Archivo" }}
       >
         {/* Logo */}
         <Link href="/">
