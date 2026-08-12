@@ -85,7 +85,7 @@ export default function Careers() {
                     <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
                         <div>
                             {/* Wooden Image Container */}
-                            <div className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[400px] overflow-hidden">
+                            <div className="relative w-full aspect-[1286/1223] overflow-hidden">
                                 <Image
                                     src="/images/carrers.png"
                                     alt="Scams disclaimer wood and crumbs backdrop"
