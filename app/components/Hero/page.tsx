@@ -107,12 +107,12 @@ export default function Hero() {
       {/* Hero Content */}
       <div className="absolute inset-0 z-20 flex items-center mb-30">
         <div className="w-full px-4 sm:px-3.75 md:px-7.75 lg:px-15.5">
-          <div className="trans-up max-w-150 text-white">
+          <div className="max-w-150 text-white">
 
             {/* Small Label */}
             <div
               key={currentSlide}
-              className=" inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl"
+              className="trans-up inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl"
             >
               <span className="text-xs sm:text-base italic">
                 Phoenix Stories
@@ -122,15 +122,15 @@ export default function Hero() {
             {/* Heading */}
             <h1
               key={`heading-${currentSlide}`}
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+              className="trans-up text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
             >
               {heroSlides[currentSlide].heading}
             </h1>
 
             {/* Description + Blue Line */}
-            <div className="mx-13 max-w-105 flex items-start gap-3"
+            <div className="trans-up mx-13 max-w-105 flex items-start gap-3"
               key={`line-${currentSlide}`}>
-              <div className="w-0.5 min-h-15 bg-blue-500 shrink-0"></div>
+              <div className=" w-0.5 min-h-15 bg-blue-500 shrink-0"></div>
 
               <p
                 key={`description-${currentSlide}`}
