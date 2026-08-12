@@ -1,6 +1,5 @@
 import InnovationSection from "./components/innovationsection/page";
 // import InteractiveMap from '/components/innovationsection/InteractiveMap';
-import InteractiveMap from "./components/InteractiveMap";
 import Careers from "./components/Carrers/page";
 
 import React from "react";
@@ -21,8 +20,9 @@ export default function Home() {
       <section className="w-full">
         {/* <InteractiveMap /> */}
       </section>
-      <Brand />
+    
       <Careers />
+      <Brand />
       <Footer />
     </main>
   );

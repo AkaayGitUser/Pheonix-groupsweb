@@ -11,35 +11,31 @@ const slides = [
     image: "/images/arena-img.png",
     title: "Phoenix Arena",
     label: "Our Brands",
-    description: "Where moments, experiences and communities come together.",
   },
   {
     id: 2,
     image: "/images/foundation-img.png",
     title: "Phoenix Foundation",
     label: "Community",
-    description: "Building stronger communities. Creating brighter futures.",
+
   },
   {
     id: 3,
     image: "/images/infra-img.png",
     title: "Phoenix Infra",
     label: "Infrastructure",
-    description: "Building spaces that inspire, endure and belong.",
   },
   {
     id: 4,
     image: "/images/motors-img.png",
     title: "Phoenix Motors",
     label: "Mobility",
-    description: "Trusted mobility solutions with quality, reliability and professionalism.",
   },
   {
     id: 5,
     image: "/images/mahaprastanam-img.png",
     title: "Vaikunta Mahaprasthanam",
     label: "Community",
-    description: "Peaceful surroundings. Compassionate care. Dignified farewells.",
   },
 ];
 
@@ -111,7 +107,7 @@ export default function TimelinesHero() {
           alt={activeSlide.title}
           fill
           priority
-          quality={100}
+          unoptimized
           className="object-cover object-center transition-opacity duration-700 ease-in-out"
         />
       </div>
@@ -131,11 +127,10 @@ export default function TimelinesHero() {
       <div className="pointer-events-none absolute inset-x-0 z-20 bottom-[90px] min-[480px]:bottom-[105px] sm:bottom-[120px] md:bottom-[140px] lg:bottom-[155px] xl:bottom-[160px]">
         <div className="mx-auto w-full max-w-[1180px] px-4 min-[480px]:px-5 sm:px-6 md:px-8 lg:px-10 xl:px-0">
           <div
-            className={`pointer-events-auto max-w-[500px] transition-all ease-out ${
-              contentVisible
+            className={`pointer-events-auto max-w-[500px] transition-all ease-out ${contentVisible
                 ? "translate-y-0 opacity-100 duration-[1000ms]"
                 : "translate-y-[25px] opacity-0 duration-150"
-            }`}
+              }`}
           >
             {/* LABEL */}
             <span className="inline-flex items-center bg-[#073B56] px-[9px] py-[5px] text-[9px] font-medium italic text-white min-[480px]:text-[10px] sm:px-3 sm:py-[7px] sm:text-[11px] md:text-[12px]">
@@ -178,9 +173,9 @@ export default function TimelinesHero() {
             </div>
 
             {/* DESCRIPTION */}
-            <p className="mt-2 max-w-[420px] text-[10px] leading-[1.65] text-white min-[480px]:text-[11px] sm:mt-3 sm:text-[12px] md:text-[13px] lg:text-[14px]">
+            {/* <p className="mt-2 max-w-[420px] text-[10px] leading-[1.65] text-white min-[480px]:text-[11px] sm:mt-3 sm:text-[12px] md:text-[13px] lg:text-[14px]">
               {activeSlide.description}
-            </p>
+            </p> */}
 
             {/* VIEW ALL BUTTON */}
             <button
@@ -205,11 +200,10 @@ export default function TimelinesHero() {
             disabled={isSliding}
             onClick={() => goToSlide(index)}
             aria-label={`Go to ${slide.title}`}
-            className={`w-[2px] transition-all duration-500 ${
-              targetIndex === index
+            className={`w-[2px] transition-all duration-500 ${targetIndex === index
                 ? "h-[38px] bg-[#F6A51C] md:h-[42px]"
                 : "h-[22px] bg-white/80 md:h-[28px]"
-            }`}
+              }`}
           />
         ))}
       </div>
@@ -245,43 +239,63 @@ export default function TimelinesHero() {
 
           {/* THUMBNAIL SCROLLER */}
           <div className="flex min-w-0 items-center gap-[5px] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[480px]:gap-[6px] sm:gap-2 md:gap-3">
-            {slides.map((slide, index) => (
-              <button
-                key={slide.id}
-                type="button"
-                disabled={isSliding}
-                onClick={() => goToSlide(index)}
-                aria-label={`Show ${slide.title}`}
-                className={`group relative h-[48px] w-[68px] shrink-0 overflow-hidden border transition-all duration-500 disabled:cursor-default min-[430px]:h-[52px] min-[430px]:w-[78px] min-[480px]:h-[55px] min-[480px]:w-[88px] sm:h-[62px] sm:w-[105px] md:h-[72px] md:w-[130px] lg:h-[84px] lg:w-[165px] xl:h-[88px] xl:w-[170px] ${
-                  targetIndex === index ? "border-white" : "border-transparent"
-                }`}
-              >
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  fill
-                  quality={90}
-                  sizes="(max-width:430px) 68px, (max-width:480px) 78px, (max-width:640px) 88px, (max-width:768px) 105px, (max-width:1024px) 130px, 170px"
-                  className="object-cover object-center brightness-[1.12] saturate-[1.08] transition-transform duration-700 group-hover:scale-105"
-                />
-
+            {slides.map((slide, index) => {
+              const isActive = targetIndex === index;
+              return (
                 <div
-                  className={`absolute inset-0 transition-colors duration-500 ${
-                    targetIndex === index
-                      ? "bg-black/15"
-                      : "bg-transparent group-hover:bg-black/10"
-                  }`}
-                />
+                  key={slide.id}
+                  className="relative group shrink-0 pt-2 pb-2"
+                >
+                  {/* Upward pointing indicator tip */}
+                  <div
+                    className={`absolute top-[3px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 
+                      bg-[#4A5568] rotate-45 transition-all duration-300 pointer-events-none z-10
+                      border-l border-t
+                      ${isActive
+                        ? "opacity-100 scale-100 border-white"
+                        : "opacity-0 scale-50 border-transparent group-hover:opacity-100 group-hover:scale-100 group-hover:border-white/50"
+                      }
+                    `}
+                  />
 
-                {targetIndex === index && (
-                  <div className="absolute inset-0 flex items-center justify-center px-1 sm:px-2">
-                    <span className="text-center text-[7px] font-medium leading-[1.15] text-white drop-shadow-lg min-[480px]:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[12px]">
-                      {slide.title}
-                    </span>
-                  </div>
-                )}
-              </button>
-            ))}
+                  <button
+                    type="button"
+                    disabled={isSliding}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Show ${slide.title}`}
+                    className={`relative h-[48px] w-[68px] shrink-0 overflow-hidden border transition-all duration-500 disabled:cursor-default min-[430px]:h-[52px] min-[430px]:w-[78px] min-[480px]:h-[55px] min-[480px]:w-[88px] sm:h-[62px] sm:w-[105px] md:h-[72px] md:w-[130px] lg:h-[84px] lg:w-[165px] xl:h-[88px] xl:w-[170px] ${isActive ? "border-white" : "border-transparent group-hover:border-white/50"
+                      }`}
+                  >
+                    <Image
+                      src={slide.image}
+                      alt={slide.title}
+                      fill
+                      quality={90}
+                      sizes="(max-width:430px) 68px, (max-width:480px) 78px, (max-width:640px) 88px, (max-width:768px) 105px, (max-width:1024px) 130px, 170px"
+                      className="object-cover object-center brightness-[1.12] saturate-[1.08] transition-transform duration-700 group-hover:scale-105"
+                    />
+
+                    <div
+                      className={`absolute inset-0 transition-all duration-300 ${isActive
+                          ? "bg-[#4A5568]/85"
+                          : "bg-transparent group-hover:bg-[#4A5568]/85"
+                        }`}
+                    />
+
+                    <div
+                      className={`absolute inset-0 flex items-center justify-center px-1 sm:px-2 transition-all duration-300 ${isActive
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
+                        }`}
+                    >
+                      <span className="text-center text-[7px] font-medium leading-[1.2] text-white drop-shadow-lg min-[480px]:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[12px] xl:text-[13px] max-w-full break-words">
+                        {slide.title}
+                      </span>
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
           </div>
 
           {/* RIGHT ARROW */}
