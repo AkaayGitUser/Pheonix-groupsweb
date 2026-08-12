@@ -81,8 +81,8 @@ export default function Header() {
                     <Image
                         src="/images/Logo.png"
                         alt="Phoenix Foundation"
-                        width={175}
-                        height={55}
+                        width={125}
+                        height={35}
                         priority
                     />
                 </Link>
