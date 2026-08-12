@@ -56,32 +56,13 @@ export default function Hero() {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
       setProgressKey((prev) => (prev + 1))
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
   const handleSlideChange = (index: number) => {
     setCurrentSlide(index);
     setProgressKey((prev) => prev + 1);
-  };
-  const typingText = (
-    text: string,
-    startTime: number,
-    duration: number
-  ) => {
-    const charDuration = duration / text.length;
-
-    return text.split("").map((char, index) => (
-      <span
-        key={`${currentSlide}-${index}`}
-        className="typing-char"
-        style={{
-          animationDelay: `${startTime + index * charDuration}s`,
-        }}
-      >
-        {char}
-      </span>
-    ));
   };
   return (
     <section className="relative w-full min-h-150 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
@@ -131,7 +112,7 @@ export default function Hero() {
             {/* Small Label */}
             <div
               key={currentSlide}
-              className="trans-stories inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl"
+              className="trans-up inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl"
             >
               <span className="text-xs sm:text-base italic">
                 Phoenix Stories
@@ -141,28 +122,39 @@ export default function Hero() {
             {/* Heading */}
             <h1
               key={`heading-${currentSlide}`}
-              className="typing-description text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+              className="trans-up text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
             >
-              {typingText(heroSlides[currentSlide].heading, 0, 2.5)}
+              {heroSlides[currentSlide].heading}
             </h1>
 
             {/* Description + Blue Line */}
-            <div className="mx-13 max-w-105 flex items-start gap-3"
+            <div className="trans-up mx-13 max-w-100 flex items-start gap-3"
               key={`line-${currentSlide}`}>
-              <div className="trans-up w-0.5 min-h-15 bg-blue-500 shrink-0"></div>
+              <div className=" w-0.5 min-h-15 bg-blue-500 shrink-0"></div>
 
               <p
                 key={`description-${currentSlide}`}
-                className="typing-description text-sm sm:text-md lg:text-lg"
+                className=" text-sm sm:text-md lg:text-lg"
               >
-                {typingText(heroSlides[currentSlide].description, 3, 5)}
+                {heroSlides[currentSlide].description}
               </p>
             </div>
           </div>
         </div>
         {/* Progress Bars */}
-        <div className="absolute sm:-bottom-10  sm:left-130 -translate-x-1/2 w-[70%] sm:max-w-300 z-30">
-          <div className="flex gap-6">
+        <div
+          className="
+            absolute
+            sm:-bottom-10 sm:left-130
+            -bottom-15 right-3
+            -translate-x-1/2
+            w-[70%]
+            sm:max-w-300
+            max-sm:w-[60%]
+            z-30
+          "
+        >
+          <div className="flex gap-6 max-sm:gap-2">
 
             {heroSlides.map((slide, index) => {
               const isHovered = hoverSlide === index;
@@ -170,7 +162,10 @@ export default function Hero() {
               return (
                 <div
                   key={slide.image}
-                  className="relative flex-1 h-40 flex items-end cursor-pointer pointer-events-auto"
+                  className="
+                  relative flex-1 h-40 flex items-end cursor-pointer pointer-events-auto
+                  max-sm:h-10
+                  "
                   onMouseEnter={() => setHoverSlide(index)}
                   onMouseLeave={() => setHoverSlide(null)}
                 >
@@ -178,11 +173,12 @@ export default function Hero() {
                   {/* Hover Preview */}
                   <div
                     className={`
-                        absolute bottom-4.5 left-6 -translate-x-1/2
-                        w-[30%]
-                        transition-all duration-300
-                        pointer-events-auto
-              ${isHovered
+                      absolute bottom-4.5 left-6 -translate-x-1/2
+                      w-[30%]
+                      transition-all duration-300
+                      pointer-events-auto
+                      max-sm:hidden
+                      ${isHovered
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-3"
                       }
@@ -194,8 +190,10 @@ export default function Hero() {
                     </div>
 
                     {/* Thumbnail */}
-                    <div className="relative  w-46 h-30 object-cover cursor-pointer"
-                      onClick={() => handleSlideChange(index)}>
+                    <div
+                      className="relative w-46 h-30 object-cover cursor-pointer"
+                      onClick={() => handleSlideChange(index)}
+                    >
                       <Image
                         src={slide.image}
                         alt={slide.alt}
@@ -204,23 +202,31 @@ export default function Hero() {
                       />
                     </div>
                   </div>
+
                   {/* Progress Bar */}
                   <button
                     type="button"
                     onClick={() => handleSlideChange(index)}
-                    className="relative block min-w-45 w-full h-0.75 overflow-hidden bg-white/40"
+                    className={`
+                    relative block min-w-45 w-full h-0.75
+                    overflow-hidden
+                    ${index===currentSlide ? "bg-white":"bg-white/40"}
+                    max-sm:min-w-0
+                    max-sm:h-0.5
+                  `}
                   >
 
                     {/* Current */}
                     {index === currentSlide && (
                       <span
                         key={progressKey}
-                        className="hero-progress absolute left-0 top-0 h-full bg-blue-500" />
+                        className="hero-progress absolute left-0 top-0 h-full bg-blue-500"
+                      />
                     )}
 
                     {/* Hover */}
                     {isHovered && index !== currentSlide && (
-                      <span className="absolute inset-0 bg-blue-500/70" />
+                      <span className="absolute inset-0 bg-blue-500/70 max-sm:hidden" />
                     )}
                   </button>
                 </div>
