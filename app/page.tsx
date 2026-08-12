@@ -1,6 +1,7 @@
 import InnovationSection from "./components/innovationsection/page";
 // import InteractiveMap from '/components/innovationsection/InteractiveMap';
 import InteractiveMap from "./components/InteractiveMap";
+import Careers from "./components/Carrers/page";
 
 import React from "react";
 import Footer from "./layout/footer";
@@ -13,12 +14,13 @@ export default function Home() {
       <Header />
       <Hero />
       <ProductShowcase />
-    <section >
-      <InnovationSection />
+      <section >
+        <InnovationSection />
       </section>
       <section className="w-full">
         <InteractiveMap />
       </section>
+      <Careers />
       <Footer />
     </main>
   );
