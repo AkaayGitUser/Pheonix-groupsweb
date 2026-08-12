@@ -65,7 +65,7 @@ export default function Hero() {
     setProgressKey((prev) => prev + 1);
   };
   return (
-    <section className="relative w-full min-h-150 lg:max-h-1000 z-10 overflow-hidden">
+    <section className="relative w-full min-h-150 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
 
       {/* Background Images */}
       <div className="absolute inset-0 overflow-hidden">
