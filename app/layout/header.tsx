@@ -153,9 +153,10 @@ export default function Header() {
                                 About Us
                             </button>
                         </div>
+                        <div className="mb-2">
                         <button className="bg-[#085CB5] px-5 py-1.5">
                             Explore More
-                        </button>
+                        </button></div>
 
                     </nav>
                     {/* Mobile Menu Button */}
