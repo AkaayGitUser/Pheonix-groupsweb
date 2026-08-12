@@ -2,8 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Lato } from "next/font/google";
+
+/* =========================================================
+   LATO FONT
+========================================================= */
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  display: "swap",
+});
+
+/* =========================================================
+   SLIDES DATA
+========================================================= */
 
 const slides = [
   {
@@ -17,7 +31,6 @@ const slides = [
     image: "/images/foundation-img.png",
     title: "Phoenix Foundation",
     label: "Community",
-
   },
   {
     id: 3,
@@ -39,13 +52,20 @@ const slides = [
   },
 ];
 
+/* =========================================================
+   MAIN COMPONENT
+========================================================= */
+
 export default function TimelinesHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [contentVisible, setContentVisible] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
 
-  const targetIndex = currentSlide;
   const activeSlide = slides[currentSlide] ?? slides[0];
+
+  /* =========================================================
+     CHANGE SLIDE
+  ========================================================= */
 
   const changeSlide = (index: number) => {
     if (isSliding || index === currentSlide) return;
@@ -53,53 +73,104 @@ export default function TimelinesHero() {
     setIsSliding(true);
     setContentVisible(false);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       setCurrentSlide(index);
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         setContentVisible(true);
         setIsSliding(false);
       }, 300);
     }, 200);
   };
 
+  /* =========================================================
+     NEXT
+  ========================================================= */
+
   const goNext = () => {
     if (isSliding) return;
+
     const next = (currentSlide + 1) % slides.length;
+
     changeSlide(next);
   };
 
+  /* =========================================================
+     PREVIOUS
+  ========================================================= */
+
   const goPrevious = () => {
     if (isSliding) return;
-    const previous = (currentSlide - 1 + slides.length) % slides.length;
+
+    const previous =
+      (currentSlide - 1 + slides.length) % slides.length;
+
     changeSlide(previous);
   };
+
+  /* =========================================================
+     GO TO SLIDE
+  ========================================================= */
 
   const goToSlide = (index: number) => {
     changeSlide(index);
   };
 
+  /* =========================================================
+     AUTO SLIDER
+  ========================================================= */
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       setContentVisible(false);
 
-      setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      window.setTimeout(() => {
+        setCurrentSlide(
+          (prev) => (prev + 1) % slides.length
+        );
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           setContentVisible(true);
         }, 300);
       }, 200);
-    }, 3000);
+    }, 5000);
 
-    return () => clearInterval(interval);
+    return () => window.clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden text-white font-sans flex flex-col justify-end pb-8 sm:pb-12 md:pb-14 snap-start snap-always">
-      {/* ===================================================
-          MAIN DISPLAY BACKGROUND IMAGE
-      =================================================== */}
+    <section
+      className={`
+        ${lato.className}
+
+        relative
+        isolate
+
+        flex
+
+        h-[100svh]
+        min-h-[560px]
+        w-full
+        max-w-full
+
+        flex-col
+
+        overflow-hidden
+
+        bg-black
+        text-white
+
+        md:min-h-[620px]
+
+        lg:min-h-[650px]
+
+        xl:min-h-[680px]
+      `}
+    >
+      {/* =====================================================
+          MAIN BACKGROUND IMAGE
+      ===================================================== */}
+
       <div className="absolute inset-0 z-0">
         <Image
           key={activeSlide.id}
@@ -107,47 +178,255 @@ export default function TimelinesHero() {
           alt={activeSlide.title}
           fill
           priority
-          unoptimized
-          className="object-cover object-center transition-opacity duration-700 ease-in-out"
+          quality={90}
+          sizes="100vw"
+          className="
+            object-cover
+            object-center
+
+            transition-opacity
+            duration-700
+            ease-in-out
+          "
         />
       </div>
 
-      {/* Light Black Tint for Legibility */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-black/20" />
+      {/* =====================================================
+          BLACK TINT
+      ===================================================== */}
 
-      {/* LEFT GRADIENT */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[90%] bg-gradient-to-r from-black/60 via-black/20 to-transparent sm:w-[70%] md:w-[60%] lg:w-[48%]" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-10
 
-      {/* BOTTOM GRADIENT */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[40%] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          bg-black/20
+        "
+      />
 
-      {/* ===================================================
+      {/* =====================================================
+          LEFT GRADIENT
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-y-0
+          left-0
+          z-10
+
+          w-full
+
+          bg-gradient-to-r
+          from-black/65
+          via-black/25
+          to-transparent
+
+          sm:w-[85%]
+
+          md:w-[70%]
+
+          lg:w-[58%]
+
+          xl:w-[50%]
+        "
+      />
+
+      {/* =====================================================
+          BOTTOM GRADIENT
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-x-0
+          bottom-0
+          z-10
+
+          h-[55%]
+
+          bg-gradient-to-t
+          from-black/90
+          via-black/30
+          to-transparent
+
+          sm:h-[50%]
+
+          lg:h-[45%]
+        "
+      />
+
+      {/* =====================================================
           HERO CONTENT
-      =================================================== */}
-      <div className="pointer-events-none absolute inset-x-0 z-20 bottom-[90px] min-[480px]:bottom-[105px] sm:bottom-[120px] md:bottom-[140px] lg:bottom-[155px] xl:bottom-[160px]">
-        <div className="mx-auto w-full max-w-[1180px] px-4 min-[480px]:px-5 sm:px-6 md:px-8 lg:px-10 xl:px-0">
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+
+          absolute
+          inset-x-0
+
+          bottom-[88px]
+
+          z-20
+
+          min-[400px]:bottom-[92px]
+
+          sm:bottom-[112px]
+
+          md:bottom-[130px]
+
+          lg:bottom-[145px]
+
+          xl:bottom-[150px]
+        "
+      >
+        <div
+          className="
+            mx-auto
+
+            w-full
+            max-w-[1180px]
+
+            px-4
+
+            min-[400px]:px-5
+
+            sm:px-6
+
+            md:px-8
+
+            lg:px-10
+
+            xl:px-6
+
+            2xl:px-0
+          "
+        >
           <div
-            className={`pointer-events-auto max-w-[500px] transition-all ease-out ${contentVisible
-                ? "translate-y-0 opacity-100 duration-[1000ms]"
-                : "translate-y-[25px] opacity-0 duration-150"
-              }`}
+            className={`
+              pointer-events-auto
+
+              min-w-0
+
+              w-full
+              max-w-[520px]
+
+              transition-all
+              ease-out
+
+              ${
+                contentVisible
+                  ? "translate-y-0 opacity-100 duration-[800ms]"
+                  : "translate-y-[20px] opacity-0 duration-150"
+              }
+            `}
           >
-            {/* LABEL */}
-            <span className="inline-flex items-center bg-[#073B56] px-[9px] py-[5px] text-[9px] font-medium italic text-white min-[480px]:text-[10px] sm:px-3 sm:py-[7px] sm:text-[11px] md:text-[12px]">
+            {/* =================================================
+                LABEL
+            ================================================= */}
+
+            <span
+              className="
+                inline-flex
+                max-w-full
+
+                items-center
+
+                bg-[#073B56]
+
+                px-2.5
+                py-1.5
+
+                text-[9px]
+                font-normal
+                italic
+                leading-none
+                text-white
+
+                min-[400px]:text-[10px]
+
+                sm:px-3
+                sm:py-[7px]
+                sm:text-[11px]
+
+                md:text-[12px]
+              "
+            >
               {activeSlide.label}
             </span>
 
-            {/* TITLE */}
-            <div className="mt-3 flex items-center gap-2 sm:mt-4 sm:gap-3">
-              <h2 className="max-w-[450px] text-[22px] font-light leading-[1.08] text-white min-[480px]:text-[26px] sm:text-[30px] md:text-[34px] lg:text-[38px] xl:text-[40px]">
+            {/* =================================================
+                TITLE
+            ================================================= */}
+
+            <div
+              className="
+                mt-3
+
+                flex
+                min-w-0
+
+                items-center
+
+                gap-2
+
+                sm:mt-4
+                sm:gap-3
+              "
+            >
+              <h2
+                className="
+                  min-w-0
+                  max-w-[470px]
+
+                  break-words
+
+                  text-[22px]
+                  font-light
+                  leading-[1.08]
+                  text-white
+
+                  min-[400px]:text-[25px]
+
+                  min-[480px]:text-[27px]
+
+                  sm:text-[30px]
+
+                  md:text-[34px]
+
+                  lg:text-[38px]
+
+                  xl:text-[40px]
+                "
+              >
                 {activeSlide.title}
               </h2>
 
               {/* EXTERNAL LINK ICON */}
+
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-[17px] w-[17px] shrink-0 text-white sm:h-[20px] sm:w-[20px] md:h-[22px] md:w-[22px]"
+                className="
+                  h-[17px]
+                  w-[17px]
+
+                  shrink-0
+
+                  text-white
+
+                  sm:h-[20px]
+                  sm:w-[20px]
+
+                  md:h-[22px]
+                  md:w-[22px]
+                "
               >
                 <path
                   d="M14 4H20V10"
@@ -156,12 +435,14 @@ export default function TimelinesHero() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
+
                 <path
                   d="M20 4L11 13"
                   stroke="currentColor"
                   strokeWidth="1.3"
                   strokeLinecap="round"
                 />
+
                 <path
                   d="M18 13V19H5V6H11"
                   stroke="currentColor"
@@ -172,61 +453,263 @@ export default function TimelinesHero() {
               </svg>
             </div>
 
-            {/* DESCRIPTION */}
-            {/* <p className="mt-2 max-w-[420px] text-[10px] leading-[1.65] text-white min-[480px]:text-[11px] sm:mt-3 sm:text-[12px] md:text-[13px] lg:text-[14px]">
-              {activeSlide.description}
-            </p> */}
+            {/* =================================================
+                VIEW ALL
+            ================================================= */}
 
-            {/* VIEW ALL BUTTON */}
             <button
               type="button"
-              className="group mt-3 flex h-[34px] items-center gap-2 bg-[#F6A51C] px-3 text-[10px] font-medium text-white transition-all duration-300 hover:bg-[#E9970F] min-[480px]:h-[36px] min-[480px]:px-4 min-[480px]:text-[11px] sm:mt-5 sm:h-[40px] sm:gap-3 sm:px-5 sm:text-[12px] md:h-[44px] md:px-6 md:text-[13px]"
+              className="
+                group
+
+                mt-3
+
+                flex
+
+                h-[34px]
+
+                max-w-full
+
+                items-center
+
+                gap-2
+
+                bg-[#F6A51C]
+
+                px-3
+
+                text-[10px]
+                font-bold
+                text-white
+
+                transition-all
+                duration-300
+
+                hover:bg-[#E9970F]
+
+                min-[400px]:h-[36px]
+                min-[400px]:px-4
+                min-[400px]:text-[11px]
+
+                sm:mt-5
+                sm:h-[40px]
+                sm:gap-3
+                sm:px-5
+                sm:text-[12px]
+
+                md:h-[44px]
+                md:px-6
+                md:text-[13px]
+              "
             >
               View All
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+
+              <ArrowRight
+                className="
+                  h-4
+                  w-4
+                  shrink-0
+
+                  transition-transform
+                  duration-300
+
+                  group-hover:translate-x-1
+                "
+              />
             </button>
           </div>
         </div>
       </div>
 
-      {/* ===================================================
+      {/* =====================================================
           RIGHT SIDE INDICATORS
-      =================================================== */}
-      <div className="absolute right-3 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-[3px] sm:flex md:right-5 lg:right-8">
-        {slides.map((slide, index) => (
-          <button
-            key={slide.id}
-            type="button"
-            disabled={isSliding}
-            onClick={() => goToSlide(index)}
-            aria-label={`Go to ${slide.title}`}
-            className={`w-[2px] transition-all duration-500 ${targetIndex === index
-                ? "h-[38px] bg-[#F6A51C] md:h-[42px]"
-                : "h-[22px] bg-white/80 md:h-[28px]"
-              }`}
-          />
-        ))}
+
+          Hidden on mobile because horizontal thumbnail
+          navigation is already available.
+      ===================================================== */}
+
+      <div
+        className="
+          absolute
+
+          right-4
+          top-1/2
+
+          z-30
+
+          hidden
+
+          -translate-y-1/2
+
+          flex-col
+
+          gap-[4px]
+
+          md:flex
+
+          lg:right-8
+
+          xl:right-10
+        "
+      >
+        {slides.map((slide, index) => {
+          const isActive = currentSlide === index;
+
+          return (
+            <button
+              key={slide.id}
+              type="button"
+              disabled={isSliding}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to ${slide.title}`}
+              className={`
+                w-[2px]
+
+                transition-all
+                duration-500
+
+                disabled:cursor-default
+
+                ${
+                  isActive
+                    ? "h-[38px] bg-[#F6A51C] md:h-[42px]"
+                    : "h-[22px] bg-white/75 md:h-[28px]"
+                }
+              `}
+            />
+          );
+        })}
       </div>
 
-      {/* ===================================================
-          BOTTOM THUMBNAIL STRIP
-      =================================================== */}
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-black/60 backdrop-blur-[1px]">
-        <div className="mx-auto flex w-full max-w-[1150px] items-center justify-center gap-[6px] px-2 py-2 sm:gap-2 sm:px-4 sm:py-3 md:gap-3 md:px-5 lg:px-0 lg:py-4">
-          {/* LEFT ARROW */}
+      {/* =====================================================
+          BOTTOM THUMBNAIL AREA
+      ===================================================== */}
+
+      <div
+        className="
+          absolute
+
+          inset-x-0
+          bottom-0
+
+          z-30
+
+          w-full
+
+          bg-black/60
+
+          backdrop-blur-[2px]
+        "
+      >
+        <div
+          className="
+            mx-auto
+
+            flex
+
+            w-full
+            max-w-[1180px]
+
+            items-center
+
+            gap-1.5
+
+            px-2
+            py-1.5
+
+            min-[400px]:gap-2
+            min-[400px]:px-3
+            min-[400px]:py-2
+
+            sm:gap-2.5
+            sm:px-4
+            sm:py-2.5
+
+            md:gap-3
+            md:px-5
+            md:py-3
+
+            lg:px-8
+
+            xl:px-6
+
+            2xl:px-0
+          "
+        >
+          {/* =================================================
+              LEFT ARROW
+          ================================================= */}
+
           <button
             type="button"
             onClick={goPrevious}
             disabled={isSliding}
             aria-label="Previous slide"
-            className="group mr-[2px] flex h-[30px] w-[30px] shrink-0 items-center justify-center bg-[#F6A51C] text-white transition-all duration-300 hover:bg-[#E9970F] disabled:cursor-default disabled:opacity-60 min-[480px]:h-[34px] min-[480px]:w-[34px] sm:mr-1 sm:h-[38px] sm:w-[38px] md:h-[42px] md:w-[42px] lg:mr-2 lg:h-[44px] lg:w-[44px]"
+            className="
+              group
+
+              flex
+
+              h-[30px]
+              w-[30px]
+
+              shrink-0
+
+              items-center
+              justify-center
+
+              bg-[#F6A51C]
+              text-white
+
+              transition-all
+              duration-300
+
+              hover:bg-[#E9970F]
+
+              disabled:cursor-default
+              disabled:opacity-60
+
+              min-[400px]:h-[32px]
+              min-[400px]:w-[32px]
+
+              min-[480px]:h-[34px]
+              min-[480px]:w-[34px]
+
+              sm:h-[38px]
+              sm:w-[38px]
+
+              md:h-[42px]
+              md:w-[42px]
+
+              lg:h-[44px]
+              lg:w-[44px]
+            "
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              className="h-[16px] w-[16px] transition-transform duration-300 group-hover:-translate-x-1 sm:h-[19px] sm:w-[19px] md:h-[22px] md:w-[22px]"
+              className="
+                h-[15px]
+                w-[15px]
+
+                transition-transform
+                duration-300
+
+                group-hover:-translate-x-1
+
+                sm:h-[19px]
+                sm:w-[19px]
+
+                md:h-[22px]
+                md:w-[22px]
+              "
             >
-              <path d="M19 12H5" stroke="currentColor" strokeWidth="1.4" />
+              <path
+                d="M19 12H5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              />
+
               <path
                 d="M10 7L5 12L10 17"
                 stroke="currentColor"
@@ -237,58 +720,264 @@ export default function TimelinesHero() {
             </svg>
           </button>
 
-          {/* THUMBNAIL SCROLLER */}
-          <div className="flex min-w-0 items-center gap-[5px] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden min-[480px]:gap-[6px] sm:gap-2 md:gap-3">
+          {/* =================================================
+              THUMBNAIL SCROLLER
+
+              IMPORTANT:
+              flex-1 + min-w-0 prevents overflow.
+              overflow-x-auto allows small screens to scroll.
+          ================================================= */}
+
+          <div
+            className="
+              flex
+
+              min-w-0
+              flex-1
+
+              items-center
+
+              gap-[5px]
+
+              overflow-x-auto
+              overscroll-x-contain
+
+              scroll-smooth
+
+              [scrollbar-width:none]
+
+              [&::-webkit-scrollbar]:hidden
+
+              min-[400px]:gap-[6px]
+
+              sm:gap-2
+
+              md:gap-3
+
+              lg:justify-center
+            "
+          >
             {slides.map((slide, index) => {
-              const isActive = targetIndex === index;
+              const isActive =
+                currentSlide === index;
+
               return (
                 <div
                   key={slide.id}
-                  className="relative group shrink-0 pt-2 pb-2"
+                  className="
+                    group
+
+                    relative
+
+                    shrink-0
+
+                    pb-1
+                    pt-2
+
+                    sm:pb-2
+                  "
                 >
-                  {/* Upward pointing indicator tip */}
+                  {/* ==========================================
+                      TOP INDICATOR
+                  ========================================== */}
+
                   <div
-                    className={`absolute top-[3px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 
-                      bg-[#4A5568] rotate-45 transition-all duration-300 pointer-events-none z-10
-                      border-l border-t
-                      ${isActive
-                        ? "opacity-100 scale-100 border-white"
-                        : "opacity-0 scale-50 border-transparent group-hover:opacity-100 group-hover:scale-100 group-hover:border-white/50"
+                    className={`
+                      pointer-events-none
+
+                      absolute
+
+                      left-1/2
+                      top-[4px]
+
+                      z-10
+
+                      h-2
+                      w-2
+
+                      -translate-x-1/2
+                      rotate-45
+
+                      border-l
+                      border-t
+
+                      bg-[#4A5568]
+
+                      transition-all
+                      duration-300
+
+                      sm:h-2.5
+                      sm:w-2.5
+
+                      ${
+                        isActive
+                          ? "scale-100 border-white opacity-100"
+                          : "scale-50 border-transparent opacity-0 group-hover:scale-100 group-hover:border-white/50 group-hover:opacity-100"
                       }
                     `}
                   />
 
+                  {/* ==========================================
+                      THUMBNAIL
+                  ========================================== */}
+
                   <button
                     type="button"
                     disabled={isSliding}
-                    onClick={() => goToSlide(index)}
+                    onClick={() =>
+                      goToSlide(index)
+                    }
                     aria-label={`Show ${slide.title}`}
-                    className={`relative h-[48px] w-[68px] shrink-0 overflow-hidden border transition-all duration-500 disabled:cursor-default min-[430px]:h-[52px] min-[430px]:w-[78px] min-[480px]:h-[55px] min-[480px]:w-[88px] sm:h-[62px] sm:w-[105px] md:h-[72px] md:w-[130px] lg:h-[84px] lg:w-[165px] xl:h-[88px] xl:w-[170px] ${isActive ? "border-white" : "border-transparent group-hover:border-white/50"
-                      }`}
+                    className={`
+                      relative
+
+                      h-[44px]
+                      w-[60px]
+
+                      shrink-0
+
+                      overflow-hidden
+
+                      border
+
+                      transition-all
+                      duration-500
+
+                      disabled:cursor-default
+
+                      min-[360px]:h-[46px]
+                      min-[360px]:w-[64px]
+
+                      min-[400px]:h-[48px]
+                      min-[400px]:w-[70px]
+
+                      min-[430px]:h-[50px]
+                      min-[430px]:w-[76px]
+
+                      min-[480px]:h-[54px]
+                      min-[480px]:w-[86px]
+
+                      sm:h-[62px]
+                      sm:w-[104px]
+
+                      md:h-[72px]
+                      md:w-[128px]
+
+                      lg:h-[82px]
+                      lg:w-[150px]
+
+                      xl:h-[88px]
+                      xl:w-[165px]
+
+                      ${
+                        isActive
+                          ? "border-white"
+                          : "border-transparent group-hover:border-white/50"
+                      }
+                    `}
                   >
                     <Image
                       src={slide.image}
                       alt={slide.title}
                       fill
-                      quality={90}
-                      sizes="(max-width:430px) 68px, (max-width:480px) 78px, (max-width:640px) 88px, (max-width:768px) 105px, (max-width:1024px) 130px, 170px"
-                      className="object-cover object-center brightness-[1.12] saturate-[1.08] transition-transform duration-700 group-hover:scale-105"
+                      quality={85}
+                      sizes="
+                        (max-width: 359px) 60px,
+                        (max-width: 399px) 64px,
+                        (max-width: 429px) 70px,
+                        (max-width: 479px) 76px,
+                        (max-width: 639px) 86px,
+                        (max-width: 767px) 104px,
+                        (max-width: 1023px) 128px,
+                        (max-width: 1279px) 150px,
+                        165px
+                      "
+                      className="
+                        object-cover
+                        object-center
+
+                        brightness-[1.12]
+                        saturate-[1.08]
+
+                        transition-transform
+                        duration-700
+
+                        group-hover:scale-105
+                      "
                     />
 
-                    <div
-                      className={`absolute inset-0 transition-all duration-300 ${isActive
-                          ? "bg-[#4A5568]/85"
-                          : "bg-transparent group-hover:bg-[#4A5568]/85"
-                        }`}
-                    />
+                    {/* DARK OVERLAY */}
 
                     <div
-                      className={`absolute inset-0 flex items-center justify-center px-1 sm:px-2 transition-all duration-300 ${isActive
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
-                        }`}
+                      className={`
+                        absolute
+                        inset-0
+
+                        transition-all
+                        duration-300
+
+                        ${
+                          isActive
+                            ? "bg-[#4A5568]/85"
+                            : "bg-transparent group-hover:bg-[#4A5568]/85"
+                        }
+                      `}
+                    />
+
+                    {/* THUMBNAIL TITLE */}
+
+                    <div
+                      className={`
+                        absolute
+                        inset-0
+
+                        flex
+
+                        items-center
+                        justify-center
+
+                        px-1
+
+                        transition-all
+                        duration-300
+
+                        sm:px-2
+
+                        ${
+                          isActive
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+                        }
+                      `}
                     >
-                      <span className="text-center text-[7px] font-medium leading-[1.2] text-white drop-shadow-lg min-[480px]:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[12px] xl:text-[13px] max-w-full break-words">
+                      <span
+                        className="
+                          max-w-full
+
+                          break-words
+
+                          text-center
+
+                          text-[6px]
+                          font-bold
+                          leading-[1.15]
+                          text-white
+
+                          drop-shadow-lg
+
+                          min-[400px]:text-[7px]
+
+                          min-[480px]:text-[8px]
+
+                          sm:text-[9px]
+
+                          md:text-[10px]
+
+                          lg:text-[11px]
+
+                          xl:text-[12px]
+                        "
+                      >
                         {slide.title}
                       </span>
                     </div>
@@ -298,20 +987,80 @@ export default function TimelinesHero() {
             })}
           </div>
 
-          {/* RIGHT ARROW */}
+          {/* =================================================
+              RIGHT ARROW
+          ================================================= */}
+
           <button
             type="button"
             onClick={goNext}
             disabled={isSliding}
             aria-label="Next slide"
-            className="group ml-[2px] flex h-[30px] w-[30px] shrink-0 items-center justify-center bg-[#F6A51C] text-white transition-all duration-300 hover:bg-[#E9970F] disabled:cursor-default disabled:opacity-60 min-[480px]:h-[34px] min-[480px]:w-[34px] sm:ml-1 sm:h-[38px] sm:w-[38px] md:h-[42px] md:w-[42px] lg:ml-2 lg:h-[44px] lg:w-[44px]"
+            className="
+              group
+
+              flex
+
+              h-[30px]
+              w-[30px]
+
+              shrink-0
+
+              items-center
+              justify-center
+
+              bg-[#F6A51C]
+              text-white
+
+              transition-all
+              duration-300
+
+              hover:bg-[#E9970F]
+
+              disabled:cursor-default
+              disabled:opacity-60
+
+              min-[400px]:h-[32px]
+              min-[400px]:w-[32px]
+
+              min-[480px]:h-[34px]
+              min-[480px]:w-[34px]
+
+              sm:h-[38px]
+              sm:w-[38px]
+
+              md:h-[42px]
+              md:w-[42px]
+
+              lg:h-[44px]
+              lg:w-[44px]
+            "
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              className="h-[16px] w-[16px] transition-transform duration-300 group-hover:translate-x-1 sm:h-[19px] sm:w-[19px] md:h-[22px] md:w-[22px]"
+              className="
+                h-[15px]
+                w-[15px]
+
+                transition-transform
+                duration-300
+
+                group-hover:translate-x-1
+
+                sm:h-[19px]
+                sm:w-[19px]
+
+                md:h-[22px]
+                md:w-[22px]
+              "
             >
-              <path d="M5 12H19" stroke="currentColor" strokeWidth="1.4" />
+              <path
+                d="M5 12H19"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              />
+
               <path
                 d="M14 7L19 12L14 17"
                 stroke="currentColor"
