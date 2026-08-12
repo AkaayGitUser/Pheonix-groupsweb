@@ -68,11 +68,11 @@ export default function Careers() {
     return (
         <section
             id="careers"
-            className="relative w-full bg-[#f5f5f5] dark:bg-[#121212] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
+            className="relative w-full bg-[#efefef] dark:bg-[#363636] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
         >
             <div className="max-w-[1550px] mx-auto relative pt-12">
                 {/* Floating Careers Header Box */}
-                <div className="absolute top-0 -left-2 sm:-left-4 md:-left-6 lg:-left-8 z-20 bg-white/40 dark:bg-black/40 backdrop-blur-md px-8 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-white/20 dark:border-white/10 rounded-none">
+                <div className="absolute top-0 -left-2 sm:-left-4 md:-left-6 lg:-left-8 z-20 bg-white/40 dark:bg-[#363636]/40 backdrop-blur-md px-8 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-white/20 dark:border-white/10 rounded-none">
                     <h2 className="text-2xl font-medium tracking-tight text-[#3e3e3e] dark:text-white font-sans">
                         Careers
                     </h2>
@@ -82,7 +82,7 @@ export default function Careers() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
 
                     {/* Card 1: Beware of Job Scams (Spans 1 column, 2 rows on desktop) */}
-                    <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
+                    <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#454545] hover:bg-[#EAEFF5] dark:hover:bg-[#454545] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
                         <div>
                             {/* Wooden Image Container */}
                             <div className="relative w-full aspect-[1286/1223] overflow-hidden">
@@ -207,7 +207,7 @@ export default function Careers() {
                     </div>
 
                     {/* Card 3: In Numbers (Bottom Middle) */}
-                    <div className="lg:col-span-1 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center">
+                    <div className="lg:col-span-1 bg-white dark:bg-[#454545] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center">
                         <div>
                             <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
                                 In Numbers

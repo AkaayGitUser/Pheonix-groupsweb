@@ -179,13 +179,14 @@ export default function ProductShowcase() {
         transition-colors
         duration-500
 
-        ${isDark ? "bg-white" : "bg-[#eeeeee]"}
+        dark:bg-[#363636]
+        bg-[#efefef]
 
         py-10
         sm:py-12
         md:py-14
         lg:py-16
-        xl:py-[70px]
+        xl:py-17.5
       `}
     >
       {/* =====================================================
@@ -199,7 +200,7 @@ export default function ProductShowcase() {
 
           w-full
           min-w-0
-          max-w-[1140px]
+          max-w-285
 
           px-4
           sm:px-5
@@ -213,12 +214,12 @@ export default function ProductShowcase() {
         ===================================================== */}
 
         <div
-          className={`
+          className="
             absolute
             z-30
 
             left-4
-            top-[-24px]
+            -top-6
 
             px-4
             py-3
@@ -229,18 +230,19 @@ export default function ProductShowcase() {
             duration-500
 
             sm:left-5
-            sm:top-[-27px]
+            sm:-top-6.75
             sm:px-5
 
             md:left-6
 
             lg:left-8
 
-            xl:left-[-20px]
-            xl:top-[-30px]
+            xl:-left-5
+            xl:-top-7.5
 
-            ${isDark ? "bg-[#353535]/95" : "bg-white/95"}
-          `}
+           bg-white 
+              dark:bg-[#454545]
+          "
         >
           <h2
             className={`
@@ -256,8 +258,9 @@ export default function ProductShowcase() {
               sm:text-[20px]
               md:text-[21px]
               lg:text-[22px]
-
-              ${isDark ? "text-white" : "text-[#454545]"}
+              dark:text-white
+              text-[#454545]
+              
             `}
           >
             In the News
@@ -280,7 +283,7 @@ export default function ProductShowcase() {
             lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]
 
             xl:grid-cols-[minmax(0,750px)_360px]
-            xl:gap-[30px]
+            xl:gap-7.5
           "
         >
           {/* =====================================================
@@ -302,7 +305,7 @@ export default function ProductShowcase() {
 
               md:grid-cols-2
 
-              xl:h-[362px]
+              xl:h-90.5
               xl:grid-cols-[390px_minmax(0,360px)]
             "
           >
@@ -349,16 +352,14 @@ export default function ProductShowcase() {
                     duration-700
                     ease-in-out
 
-                    ${
-                      item.image === "/images/news-img.png"
-                        ? "object-contain object-center"
-                        : "object-cover object-center"
+                    ${item.image === "/images/news-img.png"
+                      ? "object-contain object-center"
+                      : "object-cover object-center"
                     }
 
-                    ${
-                      index === currentSlide
-                        ? "opacity-100"
-                        : "pointer-events-none opacity-0"
+                    ${index === currentSlide
+                      ? "opacity-100"
+                      : "pointer-events-none opacity-0"
                     }
                   `}
                 />
@@ -405,10 +406,9 @@ export default function ProductShowcase() {
                       transition-all
                       duration-300
 
-                      ${
-                        currentSlide === index
-                          ? "bg-white"
-                          : "border border-white bg-transparent"
+                      ${currentSlide === index
+                        ? "bg-white dark:bg-[#454545]"
+                        : "border border-white dark:bg-[#454545] bg-transparent"
                       }
                     `}
                   />
@@ -452,8 +452,11 @@ export default function ProductShowcase() {
                 xl:min-h-0
                 xl:px-[40px]
                 xl:py-[42px]
-
-                ${isDark ? "bg-[#353535]" : "bg-white"}
+                
+               dark:text-white
+               text-[#454545]
+              bg-white 
+              dark:bg-[#454545]
               `}
             >
               {/* =================================================
@@ -483,11 +486,9 @@ export default function ProductShowcase() {
 
                   md:block
 
-                  ${
-                    isDark
-                      ? "border-r-[#353535]"
-                      : "border-r-white"
-                  }
+                
+                  dark:border-r-[#353535]
+                  border-r-white
                 `}
               />
 
@@ -537,7 +538,8 @@ export default function ProductShowcase() {
 
                     xl:mt-[58px]
 
-                    ${isDark ? "text-white" : "text-[#4a4a4a]"}
+                    dark:text-white
+                    text-[#4a4a4a]
                   `}
                 >
                   {activeHero.title}
@@ -589,12 +591,8 @@ export default function ProductShowcase() {
 
                       sm:text-[13px]
                       sm:leading-[1.8]
-
-                      ${
-                        isDark
-                          ? "text-[#eeeeee]"
-                          : "text-[#555555]"
-                      }
+                      dark:text-[#eeeeee]
+                      text-[#555555]
                     `}
                   >
                     {activeHero.description}
@@ -647,11 +645,8 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              ${
-                isDark
-                  ? "bg-[#078AB8]"
-                  : "bg-[#0B86BE]"
-              }
+              dark:bg-[#078AB8]
+              bg-[#0B86BE]
             `}
           >
             <div key={currentCompany} className="min-w-0">
@@ -810,11 +805,8 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              ${
-                isDark
-                  ? "bg-[#003D4D]"
-                  : "bg-[#5F80AE]"
-              }
+              dark:bg-[#003D4D]
+              bg-[#5F80AE]
             `}
           >
             <div key={currentFact} className="min-w-0">
@@ -952,10 +944,8 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              ${
-                isDark
-                  ? "to-[#40233c]"
-                  : "to-[#dfbdd8]"
+              dark:to-[#40233c]
+              to-[#dfbdd8]
               }
             `}
           >

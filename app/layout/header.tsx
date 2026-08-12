@@ -10,7 +10,7 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(true); // Theme state
+  const [isDark, setIsDark] = useState(false); // Theme state
 
   const menuVariants: Variants = {
     closed: {
@@ -80,7 +80,7 @@ export default function Header() {
         ease: "easeInOut",
       }}
       className={`
-        absolute
+        fixed
         top-0
         left-0
         w-full
@@ -106,7 +106,7 @@ export default function Header() {
 
         {/* Navigation + Mega Menu */}
         <div className="relative">
-          <nav className="hidden lg:flex items-center gap-12 text-white">
+          <nav className="hidden lg:flex items-center gap-12 dark:text-white text-[#454545]">
             <button
               className="border-b border-b-transparent hover:border-white pb-1"
               onMouseEnter={() => setOpenMenu(null)}
@@ -165,9 +165,9 @@ export default function Header() {
               {/* Search */}
               <div className="relative group">
                 <button className="p-2.5 rounded-full hover:bg-white/10 transition-colors flex items-center justify-center mb-1">
-                  <Search size={20} strokeWidth={1.75} />
+                  <Search size={20} strokeWidth={1.75}/>
                 </button>
-                <div className=" absolute top-12 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-md">
+                <div className=" absolute top-12 left-1/2 -translate-x-1/2 bg-white  text-black px-3 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-md">
                   Search
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function Header() {
                   )}
                 </button>
                 <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-md  mb-1">
-                  {isDark ? "Light Mode" : "Dark Mode"}
+                  {isDark ? "Switch to Light Mode" : "Swtich to Dark Mode"}
                 </div>
               </div>
 
