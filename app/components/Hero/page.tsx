@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 
@@ -51,6 +51,16 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hoverSlide, setHoverSlide] = useState<number | null>(null);
   const [progressKey, setProgressKey] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const handleScrollDown = () => {
+    if (sectionRef.current) {
+      const nextElement = sectionRef.current.nextElementSibling;
+      if (nextElement) {
+        nextElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -65,7 +75,7 @@ export default function Hero() {
     setProgressKey((prev) => prev + 1);
   };
   return (
-    <section className="relative w-full min-h-145 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
+    <section ref={sectionRef} className="relative w-full min-h-145 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
 
       {/* Background Images */}
       <div className="absolute inset-0 overflow-hidden">
@@ -248,12 +258,16 @@ export default function Hero() {
         </div>
       </div>
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-10 right-10 z-40 flex flex-col items-center">
+      <button
+        onClick={handleScrollDown}
+        className="absolute bottom-10 right-10 z-40 flex flex-col items-center cursor-pointer border-none bg-transparent focus:outline-none"
+        aria-label="Scroll down to next section"
+      >
         <div className="scroll-chevron scroll-chevron-1"></div>
         <div className="scroll-chevron scroll-chevron-2"></div>
         <div className="scroll-chevron scroll-chevron-3"></div>
         <div className="scroll-chevron scroll-chevron-4"></div>
-      </div>
+      </button>
     </section>
   );
 }
