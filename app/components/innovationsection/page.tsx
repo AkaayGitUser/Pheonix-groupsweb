@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function TimelinesHero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden text-white font-sans flex flex-col justify-end pb-8 sm:pb-12 md:pb-14 snap-start snap-always">
+    <section id="heritage" className="relative h-screen w-full overflow-hidden text-white font-sans flex flex-col justify-end pb-8 sm:pb-12 md:pb-14 snap-start snap-always">
       {/* Background Graphic - With Light Black Tint for Legibility */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image

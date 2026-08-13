@@ -8,10 +8,12 @@ import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
 import Brand from "./components/brand/page";
+import PageScrollIndicator from "./components/PageScrollIndicator";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#363636] flex flex-col justify-between overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <Header />
+      <PageScrollIndicator />
       <Hero />
       <ProductShowcase />
       <section >
@@ -23,7 +25,9 @@ export default function Home() {
     
       <Careers />
       <Brand />
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
     </main>
   );
 }

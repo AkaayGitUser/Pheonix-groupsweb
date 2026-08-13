@@ -13,6 +13,8 @@ const heroSlides = [
     heading: "Phoenix Arena",
     description:
       "Phoenix Arena is a world-class destination where business, culture, entertainment and community come together.",
+    buttonText: "Explore Arena",
+    buttonLink: "#arena",
   },
   {
     image: "/images/Hero/Constructions.png",
@@ -21,6 +23,8 @@ const heroSlides = [
     heading: "Phoenix Construction",
     description:
       "Crafting spaces for modern living and lasting value.",
+    buttonText: "View Construction",
+    buttonLink: "#construction",
   },
   {
     image: "/images/Hero/Foundation.png",
@@ -29,6 +33,8 @@ const heroSlides = [
     heading: "Phoenix Foundation",
     description:
       "Nurturing little minds, building brighter tomorrows.",
+    buttonText: "Our Impact",
+    buttonLink: "#foundation",
   },
   {
     image: "/images/Hero/Mahaprastnam.png",
@@ -37,6 +43,8 @@ const heroSlides = [
     heading: "Phoenix Mahaprasthanam",
     description:
       "Honoring lives with peace, dignity and compassion.",
+    buttonText: "Learn More",
+    buttonLink: "#mahaprasthanam",
   },
   {
     image: "/images/Hero/Motors.png",
@@ -45,12 +53,15 @@ const heroSlides = [
     heading: "Phoenix Motors",
     description:
       "Ride with confidence. Ride with Phoenix Motors.",
+    buttonText: "Discover Bikes",
+    buttonLink: "#motors",
   },
 ];
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hoverSlide, setHoverSlide] = useState<number | null>(null);
   const [progressKey, setProgressKey] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const handleScrollDown = () => {
@@ -63,19 +74,20 @@ export default function Hero() {
   };
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
       setProgressKey((prev) => (prev + 1))
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
   const handleSlideChange = (index: number) => {
     setCurrentSlide(index);
     setProgressKey((prev) => prev + 1);
   };
   return (
-    <section ref={sectionRef} className="relative w-full min-h-145 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
+    <section id="home" ref={sectionRef} className="relative w-full min-h-145 lg:max-h-1000 z-10 overflow-hidden snap-start snap-always">
 
       {/* Background Images */}
       <div className="absolute inset-0 overflow-hidden">
@@ -117,14 +129,14 @@ export default function Hero() {
       {/* Hero Content */}
       <div className="absolute inset-0 z-20 flex items-center mb-20 sm:mb-15">
         <div className="w-full px-4 sm:px-3.75 md:px-7.75 lg:px-15.5">
-          <div className="max-w-150 text-white">
+          <div className="max-w-160 text-white flex flex-col items-start gap-4">
 
             {/* Small Label */}
             <div
               key={currentSlide}
-              className="trans-up inline-block py-1 px-3 mb-1 bg-blue-900/40 backdrop-blur-lg border border-blue-900/20 rounded-xl"
+              className="trans-up inline-block bg-[#005a9c] text-white text-xs sm:text-sm font-medium tracking-wider px-3.5 py-1.5 uppercase mb-1"
             >
-              <span className="text-xs sm:text-base italic">
+              <span>
                 Phoenix Stories
               </span>
             </div>
@@ -132,22 +144,38 @@ export default function Hero() {
             {/* Heading */}
             <h1
               key={`heading-${currentSlide}`}
-              className="trans-up text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+              className="trans-up text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight select-none"
             >
               {heroSlides[currentSlide].heading}
             </h1>
 
-            {/* Description + Blue Line */}
-            <div className="trans-up mx-13 max-w-100 flex items-start gap-3"
+            {/* Description + Orange-Yellow Line */}
+            <div className="trans-up ml-13 max-w-120 flex items-start gap-3.5 mt-2"
               key={`line-${currentSlide}`}>
-              <div className=" w-0.5 min-h-15 bg-blue-500 shrink-0"></div>
+              <div className="w-[3px] min-h-[55px] bg-[#e1a91a] shrink-0"></div>
 
               <p
                 key={`description-${currentSlide}`}
-                className=" text-sm sm:text-md lg:text-lg"
+                className="text-sm sm:text-md lg:text-lg text-white/90 leading-relaxed"
               >
                 {heroSlides[currentSlide].description}
               </p>
+            </div>
+
+            {/* CTA Button */}
+            <div
+              key={`btn-${currentSlide}`}
+              className="trans-up ml-13 mt-4"
+            >
+              <a
+                href={heroSlides[currentSlide].buttonLink}
+                className="inline-flex items-center gap-3 bg-[#e1a91a] hover:bg-[#c99212] text-white text-sm sm:text-base font-semibold px-6 py-2.5 transition-colors duration-300 group"
+              >
+                <span>{heroSlides[currentSlide].buttonText}</span>
+                <span className="transform transition-transform duration-300 group-hover:translate-x-1.5 font-bold">
+                  →
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -231,32 +259,75 @@ export default function Hero() {
                       {index === currentSlide && (
                         <span
                           key={progressKey}
-                          className="hero-progress absolute left-0 top-0 h-full bg-blue-500"
+                          style={{ animationPlayState: isPaused ? "paused" : "running" }}
+                          className="hero-progress absolute left-0 top-0 h-full bg-[#e1a91a]"
                         />
                       )}
 
                       {/* Hover */}
                       {isHovered && index !== currentSlide && (
-                        <span className="absolute inset-0 bg-blue-500/70 max-sm:hidden" />
+                        <span className="absolute inset-0 bg-[#e1a91a]/70 max-sm:hidden" />
                       )}
                     </button>
                   </div>
                 );
               })}
             </div>
-            {/* Slide Number - BELOW PROGRESS BARS */}
-            <div className="mt-3 flex justify-start items-end-safe">
-              <div className="text-white text-md">
-                <span className="mr-2">||</span>
-                <span>
-                  {String(currentSlide + 1)}/
-                  {String(heroSlides.length)}
+            {/* Slide Number & Interactive Pause - BELOW PROGRESS BARS */}
+            <div className="mt-3 flex justify-start items-center">
+              <div className="text-white text-md flex items-center select-none">
+                <button
+                  type="button"
+                  onClick={() => setIsPaused(!isPaused)}
+                  className="mr-3 text-white hover:text-[#e1a91a] transition-colors cursor-pointer flex items-center justify-center focus:outline-none"
+                  aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
+                >
+                  {isPaused ? (
+                    <span className="text-sm font-semibold">▶</span>
+                  ) : (
+                    <span className="text-sm font-semibold">||</span>
+                  )}
+                </button>
+                <span className="font-semibold text-sm sm:text-base">
+                  {currentSlide + 1} / {heroSlides.length}
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Vertical Capsule Indicators (Right Side) */}
+      <div className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 flex flex-col gap-3.5 z-40 max-md:hidden">
+        {heroSlides.map((slide, index) => {
+          const isActive = index === currentSlide;
+          return (
+            <div
+              key={`vertical-indicator-wrapper-${index}`}
+              className="relative flex items-center justify-center w-6 h-7 group cursor-pointer"
+              onClick={() => handleSlideChange(index)}
+            >
+              {/* Heading name tooltip on hover */}
+              <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap bg-[#005a9c]/30 backdrop-blur-xs border border-white/20 text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 shadow-lg select-none">
+                {slide.heading}
+              </div>
+
+              {/* Capsule Indicator */}
+              <button
+                className={`
+                  w-1 h-7 rounded-full border transition-all duration-300 pointer-events-none focus:outline-none
+                  ${isActive
+                    ? "border-[#e1a91a] bg-[#e1a91a]/30 shadow-[0_0_8px_#e1a91a]"
+                    : "border-white/40 bg-transparent"
+                  }
+                `}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            </div>
+          );
+        })}
+      </div>
+
       {/* Scroll Down Indicator */}
       <button
         onClick={handleScrollDown}

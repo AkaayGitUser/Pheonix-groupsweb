@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Lato } from "next/font/google";
 import { useTheme } from "@/app/context/ThemeContext";
+import { motion } from "framer-motion";
 
 /* =========================================================
    LATO FONT
@@ -168,6 +169,7 @@ export default function ProductShowcase() {
 
   return (
     <section
+      id="social-media"
       className={`
         ${lato.className}
 
@@ -175,6 +177,9 @@ export default function ProductShowcase() {
         w-full
         max-w-full
         overflow-x-hidden
+
+        snap-start
+        snap-always
 
         transition-colors
         duration-500
@@ -290,7 +295,11 @@ export default function ProductShowcase() {
               HERO NEWS CARD
           ===================================================== */}
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="
               grid
 
@@ -501,14 +510,14 @@ export default function ProductShowcase() {
 
                 <p
                   className="
-                    text-[10px]
-                    font-normal
+                    text-[28px]
+                    font-medium
                     uppercase
                     tracking-[0.02em]
 
                     text-[#0089cf]
 
-                    sm:text-[11px]
+                    sm:text-[14px]
                   "
                 >
                   {activeHero.category}
@@ -602,13 +611,17 @@ export default function ProductShowcase() {
 
               {/* HERO ARROW REMOVED */}
             </div>
-          </div>
+          </motion.div>
 
           {/* =====================================================
               COMPANY NEWS
           ===================================================== */}
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className={`
               flex
 
@@ -654,13 +667,13 @@ export default function ProductShowcase() {
 
               <p
                 className="
-                  text-[10px]
-                  font-normal
+                  text-[12px]
+                  font-medium
                   uppercase
-                  tracking-[0.02em]
+                  tracking-[0.05em]
                   text-white
 
-                  sm:text-[11px]
+                  sm:text-[13px]
                 "
               >
                 COMPANY NEWS
@@ -674,13 +687,13 @@ export default function ProductShowcase() {
 
                   break-words
 
-                  text-[18px]
+                  text-[22px]
                   font-bold
                   leading-[1.25]
                   text-white
 
                   sm:mt-6
-                  sm:text-[20px]
+                  sm:text-[26px]
                 "
               >
                 {activeCompany.title}
@@ -740,7 +753,7 @@ export default function ProductShowcase() {
               onClick={handleCompanyRefresh}
               label="Show next company"
             />
-          </div>
+          </motion.div>
         </div>
 
         {/* =====================================================
@@ -770,7 +783,11 @@ export default function ProductShowcase() {
               FACTS CARD
           ===================================================== */}
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className={`
               flex
 
@@ -814,13 +831,13 @@ export default function ProductShowcase() {
 
               <p
                 className="
-                  text-[10px]
-                  font-normal
+                  text-[12px]
+                  font-medium
                   uppercase
-                  tracking-[0.02em]
+                  tracking-[0.05em]
                   text-white
 
-                  sm:text-[11px]
+                  sm:text-[16px]
                 "
               >
                 FACTS
@@ -832,13 +849,13 @@ export default function ProductShowcase() {
                 className="
                   mt-5
 
-                  text-[18px]
+                  text-[22px]
                   font-bold
                   leading-[1.25]
                   text-white
 
                   sm:mt-6
-                  sm:text-[20px]
+                  sm:text-[26px]
                 "
               >
                 Did you know
@@ -901,13 +918,17 @@ export default function ProductShowcase() {
               onClick={handleFactRefresh}
               label="Show next fact"
             />
-          </div>
+          </motion.div>
 
           {/* =====================================================
               INSTAGRAM CARD
           ===================================================== */}
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className={`
               relative
 
@@ -1119,7 +1140,7 @@ export default function ProductShowcase() {
                 />
               </svg>
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

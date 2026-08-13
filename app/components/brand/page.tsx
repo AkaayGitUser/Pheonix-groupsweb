@@ -140,8 +140,12 @@ export default function TimelinesHero() {
 
   return (
     <section
+      id="brands"
       className={`
         ${lato.className}
+
+        snap-start
+        snap-always
 
         relative
         isolate

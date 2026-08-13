@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 // Slide data for "In Numbers" carousel
 const statsData = [
@@ -82,7 +83,13 @@ export default function Careers() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
 
                     {/* Card 1: Beware of Job Scams (Spans 1 column, 2 rows on desktop) */}
-                    <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#454545] hover:bg-[#EAEFF5] dark:hover:bg-[#454545] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#25282a] hover:bg-[#EAEFF5] dark:hover:bg-[#2d3033] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300"
+                    >
                         <div>
                             {/* Wooden Image Container */}
                             <div className="relative w-full aspect-[1286/1223] overflow-hidden">
@@ -94,16 +101,16 @@ export default function Careers() {
                                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-102"
                                     priority
                                 />
-                                {/* Triangular cut-out arrow pointing upward */}
-                                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white dark:border-b-[#1E2022] z-10" />
+                                {/* Triangular cut-out arrow pointing upward into image */}
+                                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white dark:border-b-[#25282a] group-hover:border-b-[#EAEFF5] dark:group-hover:border-b-[#2d3033] transition-all duration-300 z-10" />
                             </div>
 
                             {/* Card Content */}
-                            <div className="px-6 sm:px-8 py-10">
-                                <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-14">
+                            <div className="px-6 sm:px-8 py-8">
+                                <p className="text-base font-medium text-[#0079F3] uppercase tracking-wider mb-2">
                                     Careers
                                 </p>
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-8 font-sans tracking-tight">
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-6 font-sans tracking-tight">
                                     Beware of Job Scams
                                 </h3>
 
@@ -132,10 +139,16 @@ export default function Careers() {
                                 </svg>
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Card 2: Early Career Phoenix Employee? (Spans 2 columns on desktop) */}
-                    <div className="lg:col-span-2 relative min-h-[350px] sm:min-h-[380px] bg-gradient-to-br from-[#126870] to-[#0A294A] shadow-md overflow-hidden border border-gray-100 flex flex-col justify-center px-8 md:px-12 py-10 group">
+                    {/* Card 2: Early Career Phoenix Employee? (Top Right, Spans 2 columns on desktop) */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                        className="lg:col-span-2 relative h-[300px] sm:h-[320px] bg-gradient-to-br from-[#126870] to-[#0A294A] shadow-md overflow-hidden border border-gray-100 flex flex-col justify-center px-8 md:px-12 py-10 group"
+                    >
                         {/* Background Mountain Path Illustration */}
                         <Image
                             src="/images/carrers-img.png"
@@ -147,7 +160,7 @@ export default function Careers() {
                         {/* Dark gradient overlay for text readability */}
                         <div className="absolute inset-0 bg-gradient-to-r from-[#000]/30 to-transparent pointer-events-none" />
 
-                        {/* IAS Tag at top-left */}
+                        {/* TAS Tag at top-left */}
                         <span className="absolute top-6 left-8 text-xs font-semibold text-white/70 tracking-widest font-sans uppercase">
                             TAS
                         </span>
@@ -204,12 +217,18 @@ export default function Careers() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </span>
-                    </div>
+                    </motion.div>
 
-                    {/* Card 3: In Numbers (Bottom Middle) */}
-                    <div className="lg:col-span-1 bg-white dark:bg-[#454545] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center">
+                    {/* Card 4: In Numbers (Bottom Middle) */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                        className="lg:col-span-1 bg-white dark:bg-[#25282a] hover:bg-[#EAEFF5] dark:hover:bg-[#2d3033] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center"
+                    >
                         <div>
-                            <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
+                            <p className="text-base font-medium text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
                                 In Numbers
                             </p>
 
@@ -222,7 +241,7 @@ export default function Careers() {
                                         alt="Phoenix Careers Icon"
                                         width={54}
                                         height={30}
-                                        className="h-[30px]"
+                                        className="h-[30px] dark:invert"
                                     />
                                 </div>
 
@@ -241,73 +260,51 @@ export default function Careers() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </span>
-                    </div>
+                    </motion.div>
 
-                    {/* Card 4: Clients & Portfolio Carousel (Bottom Right) */}
-                    <div className="lg:col-span-1 bg-[#1F74DB] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] text-white border border-transparent hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
-                        {/* Sliding Container Wrapper */}
-                        <div className="w-full overflow-hidden flex-1 relative mb-6">
-                            <div
-                                className="flex w-[300%] h-full transition-transform duration-300 ease-in-out"
-                                style={{ transform: `translateX(-${activeSlideIndex * (100 / 3)}%)` }}
-                            >
-                                {carouselData.map((slide, slideIdx) => (
-                                    <div key={slideIdx} className="w-1/3 shrink-0 h-full flex flex-col justify-between pr-4">
-                                        <div>
-                                            <p className="text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                                                {slide.tag}
-                                            </p>
-                                            <h3 className="text-2xl font-regular text-white mb-4 font-sans tracking-tight">
-                                                {slide.title}
-                                            </h3>
+                    {/* Card 5: Featured Jobs (Bottom Right) */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                        className="lg:col-span-1 bg-[#1F4172] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] text-white border border-transparent hover:shadow-lg transition-shadow duration-300 relative justify-center"
+                    >
+                        <p className="text-base font-medium text-white/70 uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
+                            Careers
+                        </p>
 
-                                            {/* Grid side-by-side */}
-                                            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                                {slide.items.map((item, idx) => (
-                                                    <div key={idx} className="border-l border-white/20 pl-4 py-0.5">
-                                                        <h4 className="font-regular text-white text-[15px] font-sans leading-snug">
-                                                            {item.title}
-                                                        </h4>
-                                                        <p className="text-xs text-white/60 italic mt-0.5 font-sans">
-                                                            {item.subtitle}
-                                                        </p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                        <h3 className="text-xl font-medium text-white mb-6 font-sans tracking-tight mt-6">
+                            Featured Jobs
+                        </h3>
+
+                        {/* Vertical list of jobs */}
+                        <div className="flex flex-col gap-5">
+                          <div className="border-l-[1.5px] border-white/30 pl-4 py-0.5">
+                            <h4 className="font-regular text-white text-[16px] font-sans leading-snug">
+                              Generative AI Engineer
+                            </h4>
+                            <p className="text-white/60 text-xs font-sans mt-1">
+                              TCS, Duluth
+                            </p>
+                          </div>
+                          <div className="border-l-[1.5px] border-white/30 pl-4 py-0.5">
+                            <h4 className="font-regular text-white text-[16px] font-sans leading-snug">
+                              Corporate Director, Talent Management...
+                            </h4>
+                            <p className="text-white/60 text-xs font-sans mt-1">
+                              IHCL, Mumbai
+                            </p>
+                          </div>
                         </div>
 
-                        {/* Bottom Slider Navigation */}
-                        <div className="absolute bottom-8 left-8 sm:left-10 flex gap-2.5 items-center">
-                            {carouselData.map((_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setActiveSlideIndex(i)}
-                                    className={`transition-all duration-300 ${activeSlideIndex === i
-                                        ? "w-2.5 h-2.5 bg-white rounded-none scale-105"
-                                        : "w-2 h-2 rounded-full border border-white/40 bg-transparent hover:bg-white/10"
-                                        }`}
-                                    aria-label={`Go to slide ${i + 1}`}
-                                />
-                            ))}
-                        </div>
-
-                        {/* Right navigation arrow */}
-                        <div className="absolute bottom-6 right-8">
-                            <button
-                                onClick={handleNextSlide}
-                                className="hover:translate-x-1.5 transition-transform duration-200"
-                                aria-label="Next slide"
-                            >
-                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                        {/* Bottom Right Arrow Link */}
+                        <span className="absolute bottom-6 right-8 cursor-pointer hover:translate-x-1.5 transition-transform duration-200">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                        </span>
+                    </motion.div>
 
                 </div>
             </div>
