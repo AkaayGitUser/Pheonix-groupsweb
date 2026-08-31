@@ -63,7 +63,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/25 " />
 
       {/* Content */}
-      <div className="relative z-10 flex h-full items-center justify-center pb-24">
+      <div className="relative z-10 flex h-full items-center justify-center mb-25">
         <div className="max-w-4xl mx-auto px-6 md:px-12 w-full text-center flex flex-col items-center">
           <h1 className="text-white text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-wider leading-tight">
             • TOTAL CONTROL OF HIGH-RISK WORK
