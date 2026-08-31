@@ -3,13 +3,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { section } from 'framer-motion/client';
 
 interface AwardCardProps {
   category: string;
   cardImgSrc: string; 
   title: string;
-  
 }
 
 const awardsData: AwardCardProps[] = [
@@ -17,75 +15,62 @@ const awardsData: AwardCardProps[] = [
     category: 'Real-Estate',
     cardImgSrc: '/Awards/Award1.jpg',
     title: 'Iconic Real Estate Leader',
-    
   },
   {
     category: 'Real-Estate',
     cardImgSrc: '/Awards/Award2.jpg',
     title: 'CSR Leader of the Year',
-    
   },
   {
     category: 'Certificate',
     cardImgSrc: '/Awards/Certificate.png',
-    title: 'certificate',
-    
+    title: 'Certificate',
   },
   {
     category: 'Design',
     cardImgSrc: '/Awards/awardp6.jpg',
     title: 'Architectural Marvel',
-    
   },
   {
     category: 'Growth',
     cardImgSrc: '/Awards/Award5.jpg',
     title: 'Fastest Growing Group',
-   
   },
   {
     category: 'Global',
     cardImgSrc: '/Awards/Award6.jpg',
     title: 'International Brand Honor',
-   
   },
   {
     category: 'Real-Estate',
     cardImgSrc: '/Awards/1758609993291.jpg',
     title: 'Excellence Award',
-   
   },
   {
     category: 'Global',
     cardImgSrc: '/Awards/awardp2.jpg',
     title: 'Global Sustainability Award',
-    
   },
- {
+  {
     category: 'Certificate',
     cardImgSrc: '/Certificate/Certificate 3.png',
     title: 'Certificate',
-   
   },
-   {
+  {
     category: 'Real-Estate',
     cardImgSrc: '/Awards/Award3.jpg',
     title: 'Excellence award',
-   
   },
-   {
+  {
     category: 'Certificate',
     cardImgSrc: '/Certificate/Certificate4.png',
     title: 'Certificate',
-   
   },
   {
     category: 'Global',
     cardImgSrc: '/Awards/steel-award1.jpg',
     title: 'Steel Award',
-   
   },
-   
 ];
 
 export default function AwardsSection() {
@@ -113,8 +98,16 @@ export default function AwardsSection() {
           Awards & Certification
         </h2>
 
-        {/* Global Light Black Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Carousel Wrapper with Relative Positioning */}
+        <div className="relative">
+          {/* Left Arrow */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Slide"
+            className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-gray-100 text-gray-800 p-3 rounded-full shadow-lg border border-gray-200 transition-transform hover:scale-110 focus:outline-none"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -122,7 +115,7 @@ export default function AwardsSection() {
               <div key={index} className="flex flex-col">
                 {/* Card Container */}
                 <div className="relative min-h-[350px] transition-all duration-300 hover:-translate-y-1">
-                  {/* Background Image Container with rounded corners */}
+                  {/* Background Image Container */}
                   <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl">
                     <Image
                       src={award.cardImgSrc}
@@ -138,7 +131,7 @@ export default function AwardsSection() {
                     <div className="relative bg-black/30 backdrop-blur-md text-white font-semibold text-xs uppercase tracking-wider px-4 py-1.5 shadow-md">
                       {award.category}
 
-                      {/* 3D Dark Fold Shadow (Tapers back behind the card edge) */}
+                      {/* 3D Dark Fold Shadow */}
                       <span className="absolute right-0 top-full w-0 h-0 border-t-[10px] border-t-black/80 border-r-[10px] border-r-transparent" />
                     </div>
                   </div>
@@ -149,7 +142,6 @@ export default function AwardsSection() {
                   <h3 className="text-xl font-bold text-gray-900 mb-1 text-center">
                     {award.title}
                   </h3>
-                 
                 </div>
               </div>
             ))}
@@ -177,7 +169,7 @@ export default function AwardsSection() {
             />
           ))}
         </div>
-      
+      </div>
     </section>
   );
 }
