@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { section } from 'framer-motion/client';
 
 interface AwardCardProps {
   category: string;
@@ -112,15 +113,8 @@ export default function AwardsSection() {
           Awards & Certification
         </h2>
 
-        <div className="relative">
-          {/* Left Arrow */}
-          <button
-            onClick={handlePrev}
-            aria-label="Previous Slide"
-            className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-gray-100 text-gray-800 p-3 rounded-full shadow-lg border border-gray-200 transition-transform hover:scale-110 focus:outline-none"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+        {/* Global Light Black Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -183,7 +177,7 @@ export default function AwardsSection() {
             />
           ))}
         </div>
-      </div>
+      
     </section>
   );
 }
