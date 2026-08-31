@@ -1,315 +1,444 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
-// Slide data for "In Numbers" carousel
-const statsData = [
+interface ProjectItem {
+    id: string;
+    name: string;
+    location: string;
+    image: string;
+    type?: string;
+}
+
+const upcomingProjects: ProjectItem[] = [
     {
-        id: 1,
-        number: "650+",
-        text: "Employees at the Phoenix\ngroup",
+        id: "up-1",
+        name: "Phoenix Business Hub",
+        location: "Financial District",
+        image: "/upcoming projects/image-1.jpg",
+    },
+    {
+        id: "up-2",
+        name: "Phoenix H10 Campus",
+        location: "Hitech City",
+        image: "/upcoming projects/image-2 .jpg",
+    },
+    {
+        id: "up-3",
+        name: "Phoenix 14",
+        location: "Hitech City",
+        image: "/upcoming projects/image-3.png",
+    },
+    {
+        id: "up-4",
+        name: "Phoenix 285 FD",
+        location: "Financial District",
+        image: "/upcoming projects/image-4 .jpg",
     },
 ];
 
-// Slide data for "Clients", "Upcoming Projects", and "Completed Projects" unified carousel
-const carouselData = [
+const completedProjects: ProjectItem[] = [
     {
-        tag: "Clients",
-        title: "Our Clients",
-        items: [
-            { title: "IBM", subtitle: "IT & ITES" },
-            { title: "Optum", subtitle: "Health" },
-            { title: "Micron", subtitle: "Technology" },
-            { title: "HSBC", subtitle: "Finance" },
-        ],
+        id: "cp-1",
+        name: "Avance Business Hub",
+        location: "Hitech City",
+        image: "/completed projects/image-1.png",
     },
     {
-        tag: "Portfolio",
-        title: "Upcoming Projects",
-        items: [
-            { title: "Phoenix Business Hub", subtitle: "Financial District" },
-            { title: "Phoenix H10 campus", subtitle: "Hitech City" },
-            { title: "Phoenix 14", subtitle: "Hitech City" },
-            { title: "Phoenix 285 FD", subtitle: "Financial District" },
-        ],
+        id: "cp-2",
+        name: "Phoenix Golf Edge Commercial",
+        location: "Financial District",
+        image: "/completed projects/image-2.jpg",
     },
     {
-        tag: "Completed",
-        title: "Completed Projects",
-        items: [
-            { title: "Avance Business Hub", subtitle: "Hitech City" },
-            { title: "Phoenix Primea", subtitle: "Financial District" },
-            { title: "Phoenix Lithop", subtitle: "Jubilee Hills" },
-            { title: "Phoenix Trivium", subtitle: "Hafeezpet" },
-        ],
+        id: "cp-3",
+        name: "H-09, Avance Business Hub",
+        location: "Hitech City",
+        image: "/completed projects/image-3.jpg",
+    },
+    {
+        id: "cp-4",
+        name: "Phoenix Trivium",
+        location: "Hafeezpet",
+        image: "/completed projects/image-4.jpg",
+    },
+    {
+        id: "cp-5",
+        name: "Phoenix Ivy",
+        location: "Jubilee Hills",
+        image: "/completed projects/image-5.jpg",
+    },
+    {
+        id: "cp-6",
+        name: "Phoenix Sanjeevani",
+        location: "Hitech City",
+        image: "/completed projects/image-6.jpg",
+    },
+    {
+        id: "cp-7",
+        name: "Phoenix BHub Tower A",
+        location: "Financial District",
+        image: "/completed projects/image-7.jpg",
+    },
+    {
+        id: "cp-8",
+        name: "The Village",
+        location: "Financial District",
+        image: "/completed projects/image-8.jpg",
+    },
+    {
+        id: "cp-9",
+        name: "Phoenix One West",
+        location: "Nanakramguda",
+        image: "/completed projects/image-9.jpg",
+    },
+    {
+        id: "cp-10",
+        name: "Phoenix Avance Business Hub",
+        location: "Hitech City",
+        image: "/completed projects/image-10.jpg",
+    },
+    {
+        id: "cp-11",
+        name: "Phoenix Centaurus",
+        location: "Financial District",
+        image: "/completed projects/image-11.jpg",
+    },
+    {
+        id: "cp-12",
+        name: "Phoenix Equinox",
+        location: "Hitech City",
+        image: "/completed projects/image-12.jpg",
+    },
+    {
+        id: "cp-13",
+        name: "Phoenix Trivium",
+        location: "Hafeezpet",
+        image: "/completed projects/image-13.jpg",
+    },
+    {
+        id: "cp-14",
+        name: "Phoenix Primea",
+        location: "Financial District",
+        image: "/completed projects/image-14.jpg",
+    },
+    
+];
+
+const businessProjects: ProjectItem[] = [
+    {
+        id: "biz-1",
+        name: "Phoenix Arena",
+        location: "Hitech City",
+        image: "/images/Hero/Arena.png",
+    },
+    {
+        id: "biz-2",
+        name: "Phoenix Constructions",
+        location: "Financial District",
+        image: "/images/business-construction .jpg",
+    },
+    {
+        id: "biz-3",
+        name: "Phoenix Foundation",
+        location: "Hyderabad",
+        image: "/images/business-foundation .webp",
+    },
+    {
+        id: "biz-4",
+        name: "Phoenix Mahaprasthanam",
+        location: "Jubilee Hills",
+        image: "/images/business-mahaprastanam.jpg",
+    },
+    {
+        id: "biz-5",
+        name: "Phoenix Motors",
+        location: "Gachibowli",
+        image: "/images/business-motors.png",
     },
 ];
+
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.08,
+            delayChildren: 0.05,
+        },
+    },
+    exit: {
+        opacity: 0,
+        transition: {
+            staggerChildren: 0.03,
+            staggerDirection: -1,
+        },
+    },
+};
+
+const cardVariants: Variants = {
+    hidden: {
+        opacity: 0,
+        y: 45,
+        scale: 0.94,
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1] as const,
+        },
+    },
+    exit: {
+        opacity: 0,
+        y: 20,
+        scale: 0.95,
+        transition: {
+            duration: 0.25,
+            ease: "easeInOut",
+        },
+    },
+};
 
 export default function Careers() {
-    const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+    const [activeTab, setActiveTab] = useState<"businesses" | "upcoming" | "completed">("businesses");
+    const [showAllCompleted, setShowAllCompleted] = useState<boolean>(false);
 
-    // Auto-play timers for carousels
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setActiveSlideIndex((prev) => (prev + 1) % carouselData.length);
-        }, 4000);
+    const displayedCompletedProjects = showAllCompleted
+        ? completedProjects
+        : completedProjects.slice(0, 8);
 
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-    const handleNextSlide = () => {
-        setActiveSlideIndex((prev) => (prev + 1) % carouselData.length);
-    };
-
+    const currentItems =
+        activeTab === "businesses"
+            ? businessProjects
+            : activeTab === "upcoming"
+            ? upcomingProjects
+            : displayedCompletedProjects;
 
     return (
         <section
             id="careers"
-            className="relative w-full bg-[#f5f5f5] dark:bg-[#121212] py-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden snap-start snap-always"
+            className="w-full bg-[#f8f9fa] dark:bg-[#1f2123] py-14 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 transition-colors duration-300 snap-start snap-always"
         >
-            <div className="max-w-[1550px] mx-auto relative pt-12">
-                {/* Floating Careers Header Box */}
-                <div className="absolute top-0 -left-2 sm:-left-4 md:-left-6 lg:-left-8 z-20 bg-white/40 dark:bg-black/40 backdrop-blur-md px-8 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-white/20 dark:border-white/10 rounded-none">
-                    <h2 className="text-2xl font-medium tracking-tight text-[#3e3e3e] dark:text-white font-sans">
-                        Careers
+            <div className="max-w-[1440px] mx-auto">
+                {/* Header with Title and Tabs */}
+                <motion.div
+                    initial={{ opacity: 0, y: -25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+                    className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-0 mb-8 sm:mb-10 gap-4 sm:gap-0"
+                >
+                    {/* Main Title */}
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans">
+                        OUR PORTFOLIO
                     </h2>
-                </div>
 
-                {/* 3-Column Grid Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-
-                    {/* Card 1: Beware of Job Scams (Spans 1 column, 2 rows on desktop) */}
-                    <div className="lg:col-span-1 lg:row-span-2 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md flex flex-col justify-between group overflow-hidden border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300">
-                        <div>
-                            {/* Wooden Image Container */}
-                            <div className="relative w-full aspect-[1286/1223] overflow-hidden">
-                                <Image
-                                    src="/images/carrers.png"
-                                    alt="Scams disclaimer wood and crumbs backdrop"
-                                    fill
-                                    unoptimized
-                                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-102"
-                                    priority
-                                />
-                                {/* Triangular cut-out arrow pointing upward */}
-                                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white dark:border-b-[#1E2022] z-10" />
-                            </div>
-
-                            {/* Card Content */}
-                            <div className="px-6 sm:px-8 py-10">
-                                <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-14">
-                                    Careers
-                                </p>
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-8 font-sans tracking-tight">
-                                    Beware of Job Scams
-                                </h3>
-
-                                {/* Quote details block */}
-                                <div className="border-l-[3px] border-[#D4AF37] pl-5 py-0.5 ml-2">
-                                    <p className="text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed font-sans font-medium">
-                                        We do not charge/accept any amount <br />
-                                        or security deposit from job seekers. <br />
-                                        Read disclaimer.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Bottom Arrow Indicator */}
-                        <div className="px-8 sm:px-10 pb-8 flex justify-end">
-                            <button
-                                onClick={() => {
-                                    document.getElementById("disclaimer")?.scrollIntoView({ behavior: "smooth" });
-                                }}
-                                className="hover:translate-x-1.5 transition-transform duration-200"
-                                aria-label="Read job scams disclaimer"
-                            >
-                                <svg className="w-6 h-6 text-[#d19b34]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Card 2: Early Career Phoenix Employee? (Spans 2 columns on desktop) */}
-                    <div className="lg:col-span-2 relative min-h-[350px] sm:min-h-[380px] bg-gradient-to-br from-[#126870] to-[#0A294A] shadow-md overflow-hidden border border-gray-100 flex flex-col justify-center px-8 md:px-12 py-10 group">
-                        {/* Background Mountain Path Illustration */}
-                        <Image
-                            src="/images/carrers-img.png"
-                            alt="Mountain peak pathway illustration"
-                            fill
-                            unoptimized
-                            className="object-cover object-right-top mix-blend-lighten pointer-events-none transition-transform duration-700 ease-out group-hover:scale-101"
-                        />
-                        {/* Dark gradient overlay for text readability */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#000]/30 to-transparent pointer-events-none" />
-
-                        {/* IAS Tag at top-left */}
-                        <span className="absolute top-6 left-8 text-xs font-semibold text-white/70 tracking-widest font-sans uppercase">
-                            TAS
-                        </span>
-
-                        {/* Central Dark Blue Message Box */}
-                        <div
-                            className="relative z-10 flex flex-col justify-center shadow-2xl"
-                            style={{
-                                width: "320px",
-                                height: "150px",
-                                backgroundColor: "rgba(4, 58, 91, 0.8)",
-                                marginLeft: "0px",
-                                paddingLeft: "20px",
-                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                    {/* Right Tabs */}
+                    <div className="flex items-center space-x-1 sm:space-x-2 relative self-end sm:self-auto overflow-x-auto sm:overflow-visible max-w-full pb-1 sm:pb-0 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                        {/* Business Tab */}
+                        <button
+                            onClick={() => {
+                                setActiveTab("businesses");
+                                setShowAllCompleted(false);
                             }}
+                            className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "businesses"
+                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
+                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                }`}
                         >
-                            <h3
-                                style={{
-                                    color: "#ffffff",
-                                    fontSize: "24px",
-                                    lineHeight: "1.2",
-                                    fontWeight: "normal",
-                                    marginTop: "-10px",
-                                    marginBottom: "10px",
-                                    paddingTop: "25px",
-                                    paddingLeft: "38px",
-                                }}
-                            >
-                                Early Career Phoenix Employee?
-                            </h3>
+                            Business
+                            {activeTab === "businesses" && (
+                                <motion.div
+                                    layoutId="projectsTabUnderline"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                        </button>
 
-                            {/* Vertical line and details next to it */}
-                            <div
-                                style={{
-                                    fontSize: "12px",
-                                    color: "#ffffff",
-                                    marginLeft: "58px",
-                                    paddingLeft: "20px",
-                                    borderLeft: "1.5px solid #ffffff",
-                                }}
-                            >
-                                <p style={{ fontStyle: "italic", margin: 0, paddingBottom: "2px", whiteSpace: "nowrap" }}>
-                                    Make #TheBestMoveForward.
-                                </p>
-                                <p style={{ fontStyle: "italic", margin: 0, whiteSpace: "nowrap" }}>
-                                    Registrations for 2026 are closed.
-                                </p>
-                            </div>
-                        </div>
+                        {/* Upcoming Projects Tab */}
+                        <button
+                            onClick={() => {
+                                setActiveTab("upcoming");
+                                setShowAllCompleted(false);
+                            }}
+                            className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "upcoming"
+                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
+                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                }`}
+                        >
+                            Upcoming Projects
+                            {activeTab === "upcoming" && (
+                                <motion.div
+                                    layoutId="projectsTabUnderline"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                        </button>
 
-                        {/* Bottom Right Arrow Link */}
-                        <span className="absolute bottom-6 right-8 cursor-pointer hover:translate-x-1.5 transition-transform duration-200">
-                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </span>
+                        {/* Completed Projects Tab */}
+                        <button
+                            onClick={() => {
+                                setActiveTab("completed");
+                                setShowAllCompleted(false);
+                            }}
+                            className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "completed"
+                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
+                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                }`}
+                        >
+                            Completed Projects
+                            {activeTab === "completed" && (
+                                <motion.div
+                                    layoutId="projectsTabUnderline"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                        </button>
                     </div>
+                </motion.div>
 
-                    {/* Card 3: In Numbers (Bottom Middle) */}
-                    <div className="lg:col-span-1 bg-white dark:bg-[#1E2022] hover:bg-[#EAEFF5] dark:hover:bg-[#25282A] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] border border-gray-100 dark:border-transparent hover:shadow-lg transition-all duration-300 relative justify-center">
-                        <div>
-                            <p className="text-xs font-medium text-[#0079F3] uppercase tracking-wider mb-2 absolute top-8 left-8 sm:left-10">
-                                In Numbers
-                            </p>
+                {/* Projects Cards Grid with Staggered Scroll-in Entrance */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.1 }}
+                    className="w-full"
+                >
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={`${activeTab}-${showAllCompleted}`}
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+                        >
+                            {currentItems.map((item) => (
+                                <motion.div
+                                    key={item.id}
+                                    variants={cardVariants}
+                                    whileHover={{
+                                        y: -6,
+                                        scale: 1.015,
+                                    }}
+                                    className="group cursor-pointer"
+                                >
+                                    <div className="relative aspect-[328.29/196.97] w-full overflow-hidden rounded-none bg-gray-100 dark:bg-gray-800 shadow-sm">
+                                        {/* IMAGE */}
+                                        <img
+                                             src={item.image}
+                                            alt={item.name}
+                                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        />
 
-                            {/* Stats static layout */}
-                            <div className="flex flex-col items-center justify-center text-center mt-3">
-                                {/* Outlined Stats Icon */}
-                                <div className="mb-4">
-                                    <Image
-                                        src="/images/careers_icon.svg"
-                                        alt="Phoenix Careers Icon"
-                                        width={54}
-                                        height={30}
-                                        className="h-[30px]"
-                                    />
-                                </div>
+                                        {/* GRADIENT OVERLAY */}
+                                        <div
+                                            className="
+                                                absolute inset-0
+                                                bg-gradient-to-t from-black/85 via-black/25 to-transparent
+                                                opacity-80 transition-opacity duration-300 group-hover:opacity-95
+                                            "
+                                        />
 
-                                <p className="text-4xl sm:text-[44px] font-regular text-[#0079F3] leading-none mb-3 font-sans tracking-tight">
-                                    {statsData[0].number}
-                                </p>
-                                <p className="text-base font-medium text-gray-700 dark:text-gray-300 font-sans leading-snug whitespace-pre-line">
-                                    {statsData[0].text}
-                                </p>
-                            </div>
-                        </div>
+                                        {/* CINEMATIC LIGHT SWEEP */}
+                                        <div
+                                            className="
+                                                pointer-events-none
+                                                absolute
+                                                -left-[120%]
+                                                top-0
+                                                h-full
+                                                w-[60%]
+                                                rotate-[15deg]
+                                                bg-gradient-to-r
+                                                from-transparent
+                                                via-white/20
+                                                to-transparent
+                                                transition-all
+                                                duration-1000
+                                                group-hover:left-[130%]
+                                            "
+                                        />
 
-                        {/* Bottom Right Golden Arrow */}
-                        <span className="absolute bottom-6 right-8 cursor-pointer hover:translate-x-1.5 transition-transform duration-200">
-                            <svg className="w-6 h-6 text-[#d19b34]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </span>
-                    </div>
-
-                    {/* Card 4: Clients & Portfolio Carousel (Bottom Right) */}
-                    <div className="lg:col-span-1 bg-[#1F74DB] shadow-md p-8 sm:p-10 flex flex-col h-[300px] sm:h-[320px] text-white border border-transparent hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
-                        {/* Sliding Container Wrapper */}
-                        <div className="w-full overflow-hidden flex-1 relative mb-6">
-                            <div
-                                className="flex w-[300%] h-full transition-transform duration-300 ease-in-out"
-                                style={{ transform: `translateX(-${activeSlideIndex * (100 / 3)}%)` }}
-                            >
-                                {carouselData.map((slide, slideIdx) => (
-                                    <div key={slideIdx} className="w-1/3 shrink-0 h-full flex flex-col justify-between pr-4">
-                                        <div>
-                                            <p className="text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                                                {slide.tag}
-                                            </p>
-                                            <h3 className="text-2xl font-regular text-white mb-4 font-sans tracking-tight">
-                                                {slide.title}
-                                            </h3>
-
-                                            {/* Grid side-by-side */}
-                                            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                                                {slide.items.map((item, idx) => (
-                                                    <div key={idx} className="border-l border-white/20 pl-4 py-0.5">
-                                                        <h4 className="font-regular text-white text-[15px] font-sans leading-snug">
-                                                            {item.title}
-                                                        </h4>
-                                                        <p className="text-xs text-white/60 italic mt-0.5 font-sans">
-                                                            {item.subtitle}
+                                        {/* BOTTOM CONTENT: TEXT, ARROW & LOADING BAR */}
+                                        <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4 xl:p-5 flex flex-col justify-end">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <div className="min-w-0 flex-1">
+                                                    <h3 className="text-[12.5px] xs:text-[13px] sm:text-[14px] md:text-[13px] lg:text-[12px] xl:text-[14px] 2xl:text-[15px] font-semibold text-white font-sans drop-shadow-sm whitespace-nowrap tracking-tight">
+                                                        {item.name}
+                                                    </h3>
+                                                    {item.location && (
+                                                        <p className="text-[11px] sm:text-xs text-white/80 font-sans mt-0.5 drop-shadow-sm whitespace-nowrap">
+                                                            {item.location}
                                                         </p>
-                                                    </div>
-                                                ))}
+                                                    )}
+                                                </div>
+
+                                                {/* RIGHT ARROW BUTTON */}
+                                                <div className="shrink-0 text-white transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0">
+                                                    <svg
+                                                        className="w-4 h-4 sm:w-5 sm:h-5"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                        strokeWidth={2.4}
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                            {/* LOADING PROGRESS LINE ON HOVER ONLY */}
+                                            <div className="mt-2.5 w-full h-[2px] sm:h-[2.5px] overflow-hidden">
+                                                <div className="h-full w-full bg-white transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
                                             </div>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Bottom Slider Navigation */}
-                        <div className="absolute bottom-8 left-8 sm:left-10 flex gap-2.5 items-center">
-                            {carouselData.map((_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setActiveSlideIndex(i)}
-                                    className={`transition-all duration-300 ${activeSlideIndex === i
-                                        ? "w-2.5 h-2.5 bg-white rounded-none scale-105"
-                                        : "w-2 h-2 rounded-full border border-white/40 bg-transparent hover:bg-white/10"
-                                        }`}
-                                    aria-label={`Go to slide ${i + 1}`}
-                                />
+                                </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
+                    </AnimatePresence>
 
-                        {/* Right navigation arrow */}
-                        <div className="absolute bottom-6 right-8">
+                    {/* View More Button for Completed Projects */}
+                    {activeTab === "completed" && completedProjects.length > 8 && (
+                        <div className="mt-8 sm:mt-10 md:mt-12 flex justify-center">
                             <button
-                                onClick={handleNextSlide}
-                                className="hover:translate-x-1.5 transition-transform duration-200"
-                                aria-label="Next slide"
+                                onClick={() => setShowAllCompleted((prev) => !prev)}
+                                className="group inline-flex items-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#055A9C] border border-[#055A9C] text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-[#055A9C] hover:brightness-110 hover:border-[#055A9C] hover:shadow-md transition-all duration-300 active:scale-95 cursor-pointer"
                             >
-                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                <span>{showAllCompleted ? "View Less" : "View More"}</span>
+                                <svg
+                                    className={`w-4 h-4 transition-transform duration-300 ${
+                                        showAllCompleted
+                                            ? "-rotate-90"
+                                            : "group-hover:translate-x-1"
+                                    }`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2.2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                                    />
                                 </svg>
                             </button>
                         </div>
-                    </div>
-
-                </div>
+                    )}
+                </motion.div>
             </div>
         </section>
     );
