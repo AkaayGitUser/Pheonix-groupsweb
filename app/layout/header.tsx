@@ -114,11 +114,11 @@ export default function Header() {
         `}
       >
       <div
-        className="max-w-7xl mx-auto h-16 sm:h-20 md:h-24 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10"
+        className="max-w-7xl mt-2 mx-auto h-16 sm:h-20 md:h-24 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 "
       >
         {/* Logo */}
         <Link href="/">
-          <Image
+          <Image className="sm:mb-6 md:mb-7"
             src="/images/Logo.png"
             alt="Phoenix Foundation"
             width={125}

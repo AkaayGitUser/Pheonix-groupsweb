@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Lato } from "next/font/google";
 import { useTheme } from "@/app/context/ThemeContext";
-import { motion } from "framer-motion";
 
 /* =========================================================
    LATO FONT
@@ -169,7 +168,6 @@ export default function ProductShowcase() {
 
   return (
     <section
-      id="social-media"
       className={`
         ${lato.className}
 
@@ -178,20 +176,16 @@ export default function ProductShowcase() {
         max-w-full
         overflow-x-hidden
 
-        snap-start
-        snap-always
-
         transition-colors
         duration-500
 
-        dark:bg-[#363636]
-        bg-[#efefef]
+        ${isDark ? "bg-white" : "bg-[#eeeeee]"}
 
         py-10
         sm:py-12
         md:py-14
         lg:py-16
-        xl:py-17.5
+        xl:py-[70px]
       `}
     >
       {/* =====================================================
@@ -205,7 +199,7 @@ export default function ProductShowcase() {
 
           w-full
           min-w-0
-          max-w-285
+          max-w-[1140px]
 
           px-4
           sm:px-5
@@ -219,12 +213,12 @@ export default function ProductShowcase() {
         ===================================================== */}
 
         <div
-          className="
+          className={`
             absolute
             z-30
 
             left-4
-            -top-6
+            top-[-24px]
 
             px-4
             py-3
@@ -235,19 +229,18 @@ export default function ProductShowcase() {
             duration-500
 
             sm:left-5
-            sm:-top-6.75
+            sm:top-[-27px]
             sm:px-5
 
             md:left-6
 
             lg:left-8
 
-            xl:-left-5
-            xl:-top-7.5
+            xl:left-[-20px]
+            xl:top-[-30px]
 
-           bg-white 
-              dark:bg-[#454545]
-          "
+            ${isDark ? "bg-[#353535]/95" : "bg-white/95"}
+          `}
         >
           <h2
             className={`
@@ -263,9 +256,8 @@ export default function ProductShowcase() {
               sm:text-[20px]
               md:text-[21px]
               lg:text-[22px]
-              dark:text-white
-              text-[#454545]
-              
+
+              ${isDark ? "text-white" : "text-[#454545]"}
             `}
           >
             In the News
@@ -288,18 +280,14 @@ export default function ProductShowcase() {
             lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]
 
             xl:grid-cols-[minmax(0,750px)_360px]
-            xl:gap-7.5
+            xl:gap-[30px]
           "
         >
           {/* =====================================================
               HERO NEWS CARD
           ===================================================== */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+          <div
             className="
               grid
 
@@ -314,7 +302,7 @@ export default function ProductShowcase() {
 
               md:grid-cols-2
 
-              xl:h-90.5
+              xl:h-[362px]
               xl:grid-cols-[390px_minmax(0,360px)]
             "
           >
@@ -361,14 +349,16 @@ export default function ProductShowcase() {
                     duration-700
                     ease-in-out
 
-                    ${item.image === "/images/news-img.png"
-                      ? "object-contain object-center"
-                      : "object-cover object-center"
+                    ${
+                      item.image === "/images/news-img.png"
+                        ? "object-contain object-center"
+                        : "object-cover object-center"
                     }
 
-                    ${index === currentSlide
-                      ? "opacity-100"
-                      : "pointer-events-none opacity-0"
+                    ${
+                      index === currentSlide
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0"
                     }
                   `}
                 />
@@ -415,9 +405,10 @@ export default function ProductShowcase() {
                       transition-all
                       duration-300
 
-                      ${currentSlide === index
-                        ? "bg-white dark:bg-[#454545]"
-                        : "border border-white dark:bg-[#454545] bg-transparent"
+                      ${
+                        currentSlide === index
+                          ? "bg-white"
+                          : "border border-white bg-transparent"
                       }
                     `}
                   />
@@ -461,11 +452,8 @@ export default function ProductShowcase() {
                 xl:min-h-0
                 xl:px-[40px]
                 xl:py-[42px]
-                
-               dark:text-white
-               text-[#454545]
-              bg-white 
-              dark:bg-[#454545]
+
+                ${isDark ? "bg-[#353535]" : "bg-white"}
               `}
             >
               {/* =================================================
@@ -495,9 +483,11 @@ export default function ProductShowcase() {
 
                   md:block
 
-                
-                  dark:border-r-[#353535]
-                  border-r-white
+                  ${
+                    isDark
+                      ? "border-r-[#353535]"
+                      : "border-r-white"
+                  }
                 `}
               />
 
@@ -510,14 +500,14 @@ export default function ProductShowcase() {
 
                 <p
                   className="
-                    text-[28px]
-                    font-medium
+                    text-[10px]
+                    font-normal
                     uppercase
                     tracking-[0.02em]
 
                     text-[#0089cf]
 
-                    sm:text-[14px]
+                    sm:text-[11px]
                   "
                 >
                   {activeHero.category}
@@ -547,8 +537,7 @@ export default function ProductShowcase() {
 
                     xl:mt-[58px]
 
-                    dark:text-white
-                    text-[#4a4a4a]
+                    ${isDark ? "text-white" : "text-[#4a4a4a]"}
                   `}
                 >
                   {activeHero.title}
@@ -600,8 +589,12 @@ export default function ProductShowcase() {
 
                       sm:text-[13px]
                       sm:leading-[1.8]
-                      dark:text-[#eeeeee]
-                      text-[#555555]
+
+                      ${
+                        isDark
+                          ? "text-[#eeeeee]"
+                          : "text-[#555555]"
+                      }
                     `}
                   >
                     {activeHero.description}
@@ -611,17 +604,13 @@ export default function ProductShowcase() {
 
               {/* HERO ARROW REMOVED */}
             </div>
-          </motion.div>
+          </div>
 
           {/* =====================================================
               COMPANY NEWS
           ===================================================== */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+          <div
             className={`
               flex
 
@@ -658,8 +647,11 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              dark:bg-[#078AB8]
-              bg-[#0B86BE]
+              ${
+                isDark
+                  ? "bg-[#078AB8]"
+                  : "bg-[#0B86BE]"
+              }
             `}
           >
             <div key={currentCompany} className="min-w-0">
@@ -667,13 +659,13 @@ export default function ProductShowcase() {
 
               <p
                 className="
-                  text-[12px]
-                  font-medium
+                  text-[10px]
+                  font-normal
                   uppercase
-                  tracking-[0.05em]
+                  tracking-[0.02em]
                   text-white
 
-                  sm:text-[13px]
+                  sm:text-[11px]
                 "
               >
                 COMPANY NEWS
@@ -687,13 +679,13 @@ export default function ProductShowcase() {
 
                   break-words
 
-                  text-[22px]
+                  text-[18px]
                   font-bold
                   leading-[1.25]
                   text-white
 
                   sm:mt-6
-                  sm:text-[26px]
+                  sm:text-[20px]
                 "
               >
                 {activeCompany.title}
@@ -753,7 +745,7 @@ export default function ProductShowcase() {
               onClick={handleCompanyRefresh}
               label="Show next company"
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* =====================================================
@@ -783,11 +775,7 @@ export default function ProductShowcase() {
               FACTS CARD
           ===================================================== */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+          <div
             className={`
               flex
 
@@ -822,8 +810,11 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              dark:bg-[#003D4D]
-              bg-[#5F80AE]
+              ${
+                isDark
+                  ? "bg-[#003D4D]"
+                  : "bg-[#5F80AE]"
+              }
             `}
           >
             <div key={currentFact} className="min-w-0">
@@ -831,13 +822,13 @@ export default function ProductShowcase() {
 
               <p
                 className="
-                  text-[12px]
-                  font-medium
+                  text-[10px]
+                  font-normal
                   uppercase
-                  tracking-[0.05em]
+                  tracking-[0.02em]
                   text-white
 
-                  sm:text-[16px]
+                  sm:text-[11px]
                 "
               >
                 FACTS
@@ -849,13 +840,13 @@ export default function ProductShowcase() {
                 className="
                   mt-5
 
-                  text-[22px]
+                  text-[18px]
                   font-bold
                   leading-[1.25]
                   text-white
 
                   sm:mt-6
-                  sm:text-[26px]
+                  sm:text-[20px]
                 "
               >
                 Did you know
@@ -918,17 +909,13 @@ export default function ProductShowcase() {
               onClick={handleFactRefresh}
               label="Show next fact"
             />
-          </motion.div>
+          </div>
 
           {/* =====================================================
               INSTAGRAM CARD
           ===================================================== */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+          <div
             className={`
               relative
 
@@ -965,8 +952,10 @@ export default function ProductShowcase() {
               xl:px-[40px]
               xl:py-[42px]
 
-              dark:to-[#40233c]
-              to-[#dfbdd8]
+              ${
+                isDark
+                  ? "to-[#40233c]"
+                  : "to-[#dfbdd8]"
               }
             `}
           >
@@ -1140,7 +1129,7 @@ export default function ProductShowcase() {
                 />
               </svg>
             </button>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

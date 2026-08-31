@@ -104,9 +104,7 @@ export default function FooterPage() {
           background: #084d8d;
           color: #ffffff;
         }
-        :global(.dark) .footer {
-        background: #454545;
-        }
+
         .footerContent {
           width: 100%;
           min-height: 318px;
@@ -143,9 +141,7 @@ export default function FooterPage() {
           padding-left: 34px;
           border-left: 1px solid rgba(255, 255, 255, 0.09);
         }
-        :global(.dark) .footerColumn {
-        border-left-color: rgba(255, 255, 255, 0.15);
-        }
+
         .footerColumn h2 {
           margin: 0 0 25px;
           color: #ffffff;
@@ -154,9 +150,7 @@ export default function FooterPage() {
           line-height: 1;
           letter-spacing: 0.1px;
         }
-        :global(.dark) .footerColumn h2{
-        border-left-color: rgba(255, 255, 255, 0.15);
-        }
+
         /* Quick Links */
 
         .quickLinks {
