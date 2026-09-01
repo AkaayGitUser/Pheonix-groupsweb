@@ -66,16 +66,15 @@ export default function Hero() {
       <div className="relative z-10 flex h-full items-center justify-center mb-25">
         <div className="max-w-4xl mx-auto px-6 md:px-12 w-full text-center flex flex-col items-center">
           <h1 className="text-white text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-wider leading-tight">
-            • TOTAL CONTROL OF HIGH-RISK WORK
+            • ONE GROUP. A WORLD OF IMPACT.
           </h1>
 
           <div className="w-full h-px bg-white/40 my-6" />
 
           <div className="flex flex-col items-center gap-4">
             <p className="text-white/90 text-sm md:text-base max-w-xl mx-auto">
-              SiteAssist is a Control of Works platform for high-risk
-              industries digitising, standardising, and enforcing
-              safety-critical processes.
+              From building vital infrastructure to enriching communities and creating world class experiences,
+Phoenix Group advances progress through a legacy defined by excellence, scale and purpose
             </p>
 
             <span className="text-white/80 text-xs md:text-sm whitespace-nowrap">

@@ -94,7 +94,7 @@ export default function AwardsSection() {
   return (
     <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans mb-10">
+        <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans mb-10">
           Awards & Certification
         </h2>
 

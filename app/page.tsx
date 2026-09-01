@@ -15,11 +15,12 @@ export default function Home() {
       <Header />
       {/* <PageScrollIndicator /> */}
       <Hero />
-
+ <Careers />
       {/* OUR STORY / INNOVATION / IMPACT */}
       <ProductShowcase />
 
-      <Careers />
+     
+      <InnovationSection />
       <Brand />
       <div id="footer">
         <Footer />
