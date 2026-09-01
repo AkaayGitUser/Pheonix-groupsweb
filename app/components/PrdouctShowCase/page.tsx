@@ -1,198 +1,516 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+ 
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-
+import { AnimatePresence, motion } from "framer-motion";
+ 
+/* =========================================================
+   TYPES
+========================================================= */
+ 
+type TabId = "our-story" | "innovation" | "impact";
+ 
 type ShowcaseTab = {
-  id: string;
+  id: TabId;
   title: string;
   heading: string;
   paragraphs: string[];
-  image: string;
 };
-
+ 
+type CardItem = {
+  id: number;
+  src: string;
+  alt: string;
+  translate: boolean;
+};
+ 
+/* =========================================================
+   SETTINGS
+========================================================= */
+ 
 const SLIDE_TIME = 5000;
-
-const aboutImages = ["/images/ourstory/img.jpg"];
-
+ 
+/* =========================================================
+   DIFFERENT BACKGROUND FOR EACH TAB
+========================================================= */
+ 
+const BACKGROUND_IMAGES: Record<TabId, string> = {
+  "our-story": "/images/Bg/image.png",
+  innovation: "/images/Bg/drone.png",
+  impact: "/images/Bg/leaf.png",
+};
+ 
+/* =========================================================
+   IMAGES INSIDE 25 (CAROUSEL)
+========================================================= */
+ 
+const OUR_STORY_IMAGES = [
+  "/images/25/image-1.png",
+  "/images/25/image2.png",
+  "/images/25/image-3.png",
+];
+ 
+/* =========================================================
+   INNOVATION CARDS
+========================================================= */
+ 
+const INNOVATION_CARDS: CardItem[] = [
+  {
+    id: 1,
+    src: "/images/innovation/pic1.png",
+    alt: "Innovation card 1",
+    translate: false,
+  },
+  {
+    id: 2,
+    src: "/images/innovation/pic2.png",
+    alt: "Innovation card 2",
+    translate: true,
+  },
+  {
+    id: 3,
+    src: "/images/innovation/pic3.png",
+    alt: "Innovation card 3",
+    translate: false,
+  },
+  {
+    id: 4,
+    src: "/images/innovation/pic4.png",
+    alt: "Innovation card 4",
+    translate: true,
+  },
+];
+ 
+/* =========================================================
+   IMPACT CARDS
+========================================================= */
+ 
+const IMPACT_CARDS: CardItem[] = [
+  {
+    id: 1,
+    src: "/images/impact/people.png",
+    alt: "Impact card 1",
+    translate: false,
+  },
+  {
+    id: 2,
+    src: "/images/impact/card2.png",
+    alt: "Impact card 2",
+    translate: true,
+  },
+  {
+    id: 3,
+    src: "/images/impact/card3.png",
+    alt: "Impact card 3",
+    translate: false,
+  },
+  {
+    id: 4,
+    src: "/images/impact/card4.png",
+    alt: "Impact card 4",
+    translate: true,
+  },
+];
+ 
+/* =========================================================
+   TAB CONTENT
+========================================================= */
+ 
 const tabs: ShowcaseTab[] = [
   {
     id: "our-story",
     title: "Our Story",
     heading: "Our Story",
-    image: "/images/ourstory/img.jpg",
     paragraphs: [
-      "We are committed to building a sustainable future by accelerating the transition toward clean energy, circular business models, and net-zero carbon operations across all key sectors.",
-      "By leveraging next-generation materials and renewable energy technologies, we strive to harmonize industrial growth with environmental stewardship.",
+      "Phoenix Group’s journey is deeply connected to the growth and evolution of Hyderabad. With a vision to create spaces that inspire and endure, we have built a legacy shaped by ambition, innovation and a commitment to excellence.",
+      "Over the years, our journey has grown beyond creating developments to shaping destinations, workplaces, experiences and communities. As Hyderabad continues to move forward, we remain driven by the same belief: to create a meaningful and lasting impact on the way people live, work, connect and experience the city.",
     ],
   },
   {
     id: "innovation",
-    title: "Innovation",
-    heading: "Innovation",
-    image: "/images/product/img1.jpg",
+    title: "Our Innovation",
+    heading: "Our Innovation",
     paragraphs: [
-      "Innovation is a way of life at Reliance. Our spectacular growth story is engineered by innovation and the new paradigms we set every single day to create a better future for all.",
-      "Our innovations touch many facets of life in India – be it digital services, transportation, retail, or healthcare. Our bold ambitions for Reliance and for India push us to create an innovation agenda that is even bolder, ensuring that the next wave of growth will remain innovation-led.",
+      "Innovation is at the heart of how Phoenix Group shapes the future. We embrace forward-thinking ideas, evolving technologies and sustainable practices to create spaces and experiences that respond to changing needs.",
+      "From smarter developments and modern infrastructure to new possibilities across our businesses, we continuously challenge convention and look ahead, creating lasting value for people, communities and the city.",
     ],
   },
   {
     id: "impact",
-    title: "Impact",
-    heading: "Impact",
-    image: "/images/impact/image.jpg",
+    title: "Our Impact",
+    heading: "Our Impact",
     paragraphs: [
-      "At Reliance, we are constantly aligning our ambitions with India's dreams. We have generated employment and immense societal value, committed resources and ideas to a digital revolution, built world-class manufacturing assets, and created an integrated retail ecosystem.",
-      "We have also joined forces with the best in the world to bring the best of the world to India, stepping up to the challenge of making the future our own.",
+      "Our impact extends beyond the spaces and businesses we create. Through every development, initiative and partnership, we strive to contribute meaningfully to the growth of Hyderabad and the communities around us.",
+      "By creating opportunities, supporting communities and embracing responsible growth, Phoenix Group is committed to building a positive and lasting impact for people, the city and generations to come.",
     ],
   },
 ];
 
-export default function Home() {
+/* =========================================================
+   COMPONENT
+========================================================= */
+ 
+export default function ProductShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [progressKey, setProgressKey] = useState(0);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    tabs.forEach((tab) => {
-      const img = new window.Image();
-      img.src = tab.image;
-    });
-
-    aboutImages.forEach((src) => {
-      const img = new window.Image();
-      img.src = src;
-    });
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setActiveTab((prev) => (prev + 1) % tabs.length);
-      setProgressKey((prev) => prev + 1);
-    }, SLIDE_TIME);
-
-    return () => clearTimeout(timer);
-  }, [activeTab, progressKey]);
-
-  useEffect(() => {
-    if (aboutImages.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % aboutImages.length);
-    }, 3500);
-
-    return () => clearInterval(timer);
-  }, []);
-
+  const [progress, setProgress] = useState(0);
+  const [restartKey, setRestartKey] = useState(0);
+  const [storyImageIndex, setStoryImageIndex] = useState(0);
+ 
+  const animationRef = useRef<number | null>(null);
   const current = tabs[activeTab];
-
-  const backgroundImage =
-    current.id === "our-story"
-      ? aboutImages[currentImageIndex]
-      : current.image;
-
+ 
+  /* =========================================================
+     PRELOAD ALL IMAGES
+  ========================================================= */
+ 
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      const image = new window.Image();
+      image.src = src;
+    };
+ 
+    Object.values(BACKGROUND_IMAGES).forEach((src) => {
+      preloadImage(src);
+    });
+ 
+    OUR_STORY_IMAGES.forEach((src) => {
+      preloadImage(src);
+    });
+ 
+    INNOVATION_CARDS.forEach((card) => {
+      preloadImage(card.src);
+    });
+ 
+    IMPACT_CARDS.forEach((card) => {
+      preloadImage(card.src);
+    });
+  }, []);
+ 
+  /* =========================================================
+     ROTATE OUR STORY IMAGES EVERY 3.5 SECONDS
+  ========================================================= */
+ 
+  useEffect(() => {
+    if (tabs[activeTab].id !== "our-story") return;
+ 
+    const interval = setInterval(() => {
+      setStoryImageIndex((prev) => (prev + 1) % OUR_STORY_IMAGES.length);
+    }, 1500);
+ 
+    return () => clearInterval(interval);
+  }, [activeTab]);
+ 
+  /* =========================================================
+     5 SECOND LOADING + AUTO CHANGE TABS
+  ========================================================= */
+ 
+  useEffect(() => {
+    setProgress(0);
+    const startTime = performance.now();
+ 
+    const animateProgress = (currentTime: number) => {
+      const elapsedTime = currentTime - startTime;
+      const percentage = Math.min((elapsedTime / SLIDE_TIME) * 100, 100);
+ 
+      setProgress(percentage);
+ 
+      if (percentage < 100) {
+        animationRef.current = requestAnimationFrame(animateProgress);
+      } else {
+        setActiveTab((previous) => (previous + 1) % tabs.length);
+      }
+    };
+ 
+    animationRef.current = requestAnimationFrame(animateProgress);
+ 
+    return () => {
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [activeTab, restartKey]);
+ 
+  /* =========================================================
+     CLICK TAB
+  ========================================================= */
+ 
   const handleTabClick = (index: number) => {
+    setProgress(0);
+ 
+    if (index === activeTab) {
+      setRestartKey((previous) => previous + 1);
+      return;
+    }
+ 
     setActiveTab(index);
-    setProgressKey((prev) => prev + 1);
   };
-
-  return (
-<<<<<<< HEAD
-    <main className="relative w-full min-h-[700px] overflow-hidden bg-[#111] text-white font-sans">
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-[#111]">
-        <div
-          key={`${current.id}-${currentImageIndex}`}
-          className="absolute -top-[50px] -right-[50px] -bottom-[50px] -left-[50px] bg-cover bg-center bg-no-repeat blur-[18px] opacity-[0.92] animate-[backgroundChange_1s_ease_forwards]"
-          style={{
-            backgroundImage: `url("${backgroundImage}")`,
-          }}
-        />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/15 via-black/5 to-black/14" />
+ 
+  /* =========================================================
+     REUSABLE CARD GRID
+  ========================================================= */
+ 
+  const renderCardGrid = (cards: CardItem[]) => {
+    return (
+      <div
+        className="
+          grid
+          w-full
+          grid-cols-2
+          gap-x-3
+          gap-y-4
+          sm:gap-x-4
+          sm:gap-y-5
+          md:gap-x-5
+          md:gap-y-6
+        "
+      >
+        {cards.map((card, index) => (
+          <div
+            key={card.id}
+            className={`
+              relative
+              w-full
+              ${
+                card.translate
+                  ? "-translate-y-4 sm:-translate-y-6 md:-translate-y-8 lg:-translate-y-10"
+                  : ""
+              }
+            `}
+          >
+            <motion.div
+              initial={{
+                x: index % 2 === 0 ? -40 : 40,
+                y: index % 2 === 0 ? 25 : -25,
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                y: 0,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              whileHover={{
+                scale: 1.025,
+              }}
+              className="
+                group
+                relative
+                h-[145px]
+                w-full
+                overflow-hidden
+                bg-white/10
+                sm:h-[190px]
+                md:h-[225px]
+                lg:h-[245px]
+                xl:h-[255px]
+              "
+            >
+              <Image
+                src={card.src}
+                alt={card.alt}
+                fill
+                unoptimized
+                sizes="
+                  (max-width: 640px) 50vw,
+                  (max-width: 1024px) 45vw,
+                  350px
+                "
+                className="
+                  object-cover
+                  object-center
+                  transition-transform
+                  duration-500
+                  ease-out
+                  group-hover:scale-105
+                "
+              />
+ 
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  border
+                  border-white/10
+                "
+              />
+            </motion.div>
+          </div>
+        ))}
       </div>
-
-      {/* CONTENT */}
-      <div className="relative z-10 w-full max-w-[1450px] min-h-[700px] mx-auto px-5 sm:px-10 lg:px-[60px] py-[22px] sm:py-[30px] lg:py-[38px] flex flex-col">
-        {/* TABS */}
-        <div className="w-full grid grid-cols-3 gap-3 sm:gap-6 lg:gap-[60px]">
-          {tabs.map((tab, index) => {
-            const active = activeTab === index;
-=======
-    <section
-      className={`
-        ${lato.className}
-
+    );
+  };
+ 
+  return (
+    <motion.section
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="
         relative
         w-full
-        max-w-full
-        overflow-x-hidden
-
-        transition-colors
-        duration-500
-
-        ${isDark ? "bg-white" : "bg-[#eeeeee]"}
-
-        py-10
-        sm:py-12
-        md:py-14
-        lg:py-16
-        xl:py-[70px]
-      `}
+        min-h-[700px]
+        overflow-hidden
+        bg-[#111]
+        text-white
+        font-['General_Sans',Arial,sans-serif]
+        max-lg:min-h-0
+      "
     >
       {/* =====================================================
-          MAIN CONTAINER
+          BACKGROUND
       ===================================================== */}
-
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={`background-${current.id}`}
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.04 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="
+              absolute
+              -inset-[20px]
+              bg-cover
+              bg-center
+              bg-no-repeat
+              blur-[5px]
+              max-sm:blur-[3px]
+            "
+            style={{
+              backgroundImage: `url("${BACKGROUND_IMAGES[current.id]}")`,
+            }}
+          />
+        </AnimatePresence>
+ 
+        <div
+          className="
+            absolute
+            inset-0
+            z-[1]
+            bg-gradient-to-r
+            from-black/55
+            via-black/30
+            to-black/35
+          "
+        />
+      </div>
+ 
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
       <div
         className="
           relative
+          z-10
           mx-auto
-
+          flex
+          min-h-[700px]
           w-full
-          min-w-0
-          max-w-[1140px]
-
+          max-w-[1450px]
+          flex-col
           px-4
-          sm:px-5
-          md:px-6
-          lg:px-8
-          xl:px-0
+          py-5
+          sm:px-7
+          sm:py-6
+          md:px-10
+          md:py-8
+          lg:px-[60px]
+          lg:py-[38px]
+          max-lg:min-h-0
         "
       >
-        {/* =====================================================
-            IN THE NEWS TITLE
-        ===================================================== */}
-
+        {/* ===================================================
+            TABS
+        =================================================== */}
         <div
-          className={`
-            absolute
-            z-30
-
-            left-4
-            top-[-24px]
->>>>>>> 56d635b0161fcccdc90b37f3757f28c5c484f7ee
-
+          className="
+            grid
+            w-full
+            grid-cols-3
+            gap-3
+            sm:gap-5
+            md:gap-8
+            lg:gap-[60px]
+          "
+        >
+          {tabs.map((tab, index) => {
+            const active = index === activeTab;
+            const completed = index < activeTab;
+ 
             return (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => handleTabClick(index)}
-                className="w-full p-0 border-none outline-none bg-transparent cursor-pointer flex flex-col items-start text-left font-inherit"
+                className="
+                  group
+                  flex
+                  w-full
+                  flex-col
+                  items-start
+                  border-0
+                  bg-transparent
+                  p-0
+                  text-left
+                  outline-none
+                  cursor-pointer
+                "
               >
-                <div className="relative w-full h-[3px] overflow-hidden bg-white/35">
+                {/* PROGRESS LINE */}
+                <div
+                  className="
+                    relative
+                    h-[2px]
+                    w-full
+                    overflow-hidden
+                    bg-white/30
+                    sm:h-[3px]
+                  "
+                >
+                  {completed && (
+                    <span className="absolute inset-0 bg-white/80" />
+                  )}
+ 
                   {active && (
                     <span
-                      key={`${progressKey}-${tab.id}`}
-                      className="absolute top-0 left-0 h-full bg-[#e9a536] animate-[progressLoading_5s_linear_forwards]"
+                      className="
+                        absolute
+                        bottom-0
+                        left-0
+                        top-0
+                        bg-[#e9a536]
+                        will-change-[width]
+                      "
+                      style={{
+                        width: `${progress}%`,
+                      }}
                     />
                   )}
                 </div>
-
-<<<<<<< HEAD
+ 
+                {/* TITLE */}
                 <span
-                  className={`mt-2 sm:mt-3 text-[12px] sm:text-[14px] lg:text-[20px] font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] ${
-                    active ? "text-white" : "text-white/60"
-                  }`}
+                  className={`
+                    mt-2
+                    text-[11px]
+                    font-semibold
+                    transition-colors
+                    duration-300
+                    sm:mt-3
+                    sm:text-[14px]
+                    md:text-[16px]
+                    lg:text-[20px]
+                    ${
+                      active || completed
+                        ? "text-white"
+                        : "text-white/60 group-hover:text-white"
+                    }
+                  `}
                 >
                   {tab.title}
                 </span>
@@ -200,989 +518,413 @@ export default function Home() {
             );
           })}
         </div>
-
-        {/* MAIN GRID */}
-        <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] items-center gap-[28px] sm:gap-[35px] lg:gap-[65px] pt-[28px] sm:pt-[35px] lg:pt-[55px] pb-[15px]">
-          {/* LEFT CONTENT */}
-          <div
-            key={`content-${current.id}`}
-            className="w-full max-w-full lg:max-w-[680px] animate-[contentEnter_0.7s_ease_forwards]"
-=======
-            shadow-[0_3px_12px_rgba(0,0,0,0.16)]
-
-            transition-colors
-            duration-500
-
-            sm:left-5
-            sm:top-[-27px]
-            sm:px-5
-
-            md:left-6
-
-            lg:left-8
-
-            xl:left-[-20px]
-            xl:top-[-30px]
-
-            ${isDark ? "bg-[#353535]/95" : "bg-white/95"}
-          `}
-        >
-          <h2
-            className={`
-              whitespace-nowrap
-
-              text-[18px]
-              font-bold
-              leading-none
-
-              transition-colors
-              duration-500
-
-              sm:text-[20px]
-              md:text-[21px]
-              lg:text-[22px]
-
-              ${isDark ? "text-white" : "text-[#454545]"}
-            `}
-          >
-            In the News
-          </h2>
-        </div>
-
-        {/* =====================================================
-            TOP SECTION
-        ===================================================== */}
-
+ 
+        {/* ===================================================
+            MAIN GRID
+        =================================================== */}
         <div
           className="
             grid
             w-full
-            min-w-0
-
+            flex-1
             grid-cols-1
-            gap-5
-
-            lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]
-
-            xl:grid-cols-[minmax(0,750px)_360px]
-            xl:gap-[30px]
+            items-center
+            gap-8
+            pb-5
+            pt-8
+            sm:gap-10
+            sm:pt-10
+            lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]
+            lg:gap-[55px]
+            lg:pt-[45px]
           "
         >
-          {/* =====================================================
-              HERO NEWS CARD
-          ===================================================== */}
-
-          <div
-            className="
-              grid
-
-              w-full
-              min-w-0
-
-              grid-cols-1
-
-              overflow-hidden
-
-              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
-
-              md:grid-cols-2
-
-              xl:h-[362px]
-              xl:grid-cols-[390px_minmax(0,360px)]
-            "
->>>>>>> 56d635b0161fcccdc90b37f3757f28c5c484f7ee
-          >
-            <h1 className="m-0 mb-5 sm:mb-6 font-serif text-[36px] sm:text-[40px] md:text-[52px] lg:text-[74px] font-normal leading-[0.95] text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.55)]">
-              {current.heading}
-            </h1>
-
-<<<<<<< HEAD
-            <div className="max-w-[660px] text-[14px] lg:text-[17px] leading-[1.55] sm:leading-[1.65] text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]">
-              {current.paragraphs.map((paragraph, index) => (
-                <p key={index} className="mb-3 sm:mb-4 last:mb-0">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-=======
-            <div
-              className="
-                relative
-
-                h-[240px]
-
-                w-full
-                min-w-0
-
-                overflow-hidden
-                bg-black
-
-                min-[380px]:h-[270px]
-
-                sm:h-[320px]
-
-                md:h-full
-                md:min-h-[360px]
-
-                xl:h-[362px]
-                xl:min-h-0
-              "
+          {/* =================================================
+              LEFT
+          ================================================= */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`left-${current.id}`}
+              initial={{ x: -80, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -40, opacity: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="w-full max-w-[620px]"
             >
-              {heroNewsItems.map((item, index) => (
-                <img
-                  key={item.id}
-                  src={item.image}
-                  alt={item.title}
-                  className={`
-                    absolute
-                    inset-0
-
-                    h-full
-                    w-full
-
-                    transition-opacity
-                    duration-700
-                    ease-in-out
-
-                    ${
-                      item.image === "/images/news-img.png"
-                        ? "object-contain object-center"
-                        : "object-cover object-center"
-                    }
-
-                    ${
-                      index === currentSlide
-                        ? "opacity-100"
-                        : "pointer-events-none opacity-0"
-                    }
-                  `}
-                />
-              ))}
-
-              {/* IMAGE OVERLAY */}
-
-              <div className="absolute inset-0 bg-black/[0.02]" />
-
-              {/* =================================================
-                  SLIDER DOTS
-              ================================================= */}
-
-              <div
+              <h1
                 className="
-                  absolute
-
-                  bottom-5
-                  left-1/2
-                  z-20
-
-                  flex
-
-                  -translate-x-1/2
-
-                  items-center
-                  gap-3
-
-                  sm:bottom-6
+                  mb-5
+                  font-sans
+                  text-[36px]
+                  font-normal
+                  leading-[1]
+                  sm:text-[42px]
+                  md:text-[52px]
+                  lg:text-[62px]
+                  xl:text-[68px]
                 "
               >
-                {heroNewsItems.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setCurrentSlide(index)}
-                    aria-label={`Go to slide ${index + 1}`}
-                    className={`
-                      h-[6px]
-                      w-[6px]
-
-                      shrink-0
-
-                      transition-all
-                      duration-300
-
-                      ${
-                        currentSlide === index
-                          ? "bg-white"
-                          : "border border-white bg-transparent"
-                      }
-                    `}
-                  />
+                {current.heading}
+              </h1>
+ 
+              <div
+                className="
+                  max-w-[600px]
+                  text-[14px]
+                  leading-[1.55]
+                  text-white/95
+                  sm:text-[15px]
+                  sm:leading-[1.65]
+                  lg:text-[16px]
+                "
+              >
+                {current.paragraphs.map((paragraph, index) => (
+                  <p key={index} className="mb-4 last:mb-0">
+                    {paragraph}
+                  </p>
                 ))}
               </div>
-            </div>
-
-            {/* =================================================
-                HERO CONTENT
-            ================================================= */}
-
-            <div
-              className={`
-                relative
-
-                flex
-                w-full
-                min-w-0
-
-                min-h-[280px]
-
-                flex-col
-
-                px-5
-                py-7
-
-                transition-colors
-                duration-500
-
-                sm:min-h-[310px]
-                sm:px-7
-                sm:py-8
-
-                md:min-h-[360px]
-                md:px-8
-                md:py-9
-
-                lg:px-7
-
-                xl:h-[362px]
-                xl:min-h-0
-                xl:px-[40px]
-                xl:py-[42px]
-
-                ${isDark ? "bg-[#353535]" : "bg-white"}
-              `}
-            >
-              {/* =================================================
-                  TRIANGLE
-              ================================================= */}
-
-              <div
-                className={`
-                  absolute
-
-                  -left-[15px]
-                  top-[25px]
-
-                  z-20
-
-                  hidden
-
-                  h-0
-                  w-0
-
-                  border-b-[15px]
-                  border-r-[15px]
-                  border-t-[15px]
-
-                  border-b-transparent
-                  border-t-transparent
-
-                  md:block
-
-                  ${
-                    isDark
-                      ? "border-r-[#353535]"
-                      : "border-r-white"
-                  }
-                `}
-              />
-
-              {/* =================================================
-                  HERO TEXT
-              ================================================= */}
-
-              <div className="min-w-0">
-                {/* CATEGORY */}
-
-                <p
-                  className="
-                    text-[10px]
-                    font-normal
-                    uppercase
-                    tracking-[0.02em]
-
-                    text-[#0089cf]
-
-                    sm:text-[11px]
-                  "
-                >
-                  {activeHero.category}
-                </p>
-
-                {/* TITLE */}
-
-                <h3
-                  className={`
-                    mt-8
-
-                    max-w-[320px]
-
-                    break-words
-
-                    text-[18px]
-                    font-bold
-                    leading-[1.25]
-
-                    transition-colors
-                    duration-500
-
-                    sm:mt-10
-                    sm:text-[19px]
-
-                    md:text-[20px]
-
-                    xl:mt-[58px]
-
-                    ${isDark ? "text-white" : "text-[#4a4a4a]"}
-                  `}
-                >
-                  {activeHero.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-
+ 
+              <button
+                type="button"
+                className="
+                  mt-6
+                  inline-flex
+                  h-[42px]
+                  min-w-[145px]
+                  items-center
+                  justify-center
+                  gap-4
+                  rounded-full
+                  border
+                  border-white/80
+                  bg-transparent
+                  px-6
+                  text-[13px]
+                  font-medium
+                  text-white
+                  transition-all
+                  duration-300
+                  hover:bg-white
+                  hover:text-black
+                  sm:h-[44px]
+                  sm:min-w-[155px]
+                  sm:text-[14px]
+                "
+              >
+                <span>read more</span>
+                <span className="text-[17px]">→</span>
+              </button>
+            </motion.div>
+          </AnimatePresence>
+ 
+          {/* =================================================
+              RIGHT
+          ================================================= */}
+          <AnimatePresence mode="wait">
+            {current.id === "our-story" ? (
+              <motion.div
+                key="right-story"
+                initial={{ x: 80, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 40, opacity: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="
+                  flex
+                  w-full
+                  max-w-[720px]
+                  flex-col
+                  items-center
+                  justify-self-center
+                  lg:justify-self-end
+                "
+              >
+                {/* ===============================================
+                    BIG 25 WITH MULTIPLE IMAGE MASK ROTATION
+                =============================================== */}
                 <div
                   className="
-                    mt-5
-
                     flex
-                    min-w-0
-                    items-stretch
-
-                    sm:mt-[22px]
+                    h-[250px]
+                    w-full
+                    items-center
+                    justify-center
+                    sm:h-[320px]
+                    md:h-[390px]
+                    lg:h-[450px]
                   "
                 >
-                  {/* YELLOW LINE */}
-
+                  <svg
+                    className="
+                      block
+                      h-auto
+                      w-full
+                      max-w-[520px]
+                      overflow-visible
+                      sm:max-w-[620px]
+                      md:max-w-[700px]
+                      lg:max-w-[720px]
+                    "
+                    viewBox="0 0 760 470"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="25 Years"
+                  >
+                    <defs>
+                      {OUR_STORY_IMAGES.map((src, idx) => (
+                        <pattern
+                          key={idx}
+                          id={`imagePattern25-${idx}`}
+                          patternUnits="userSpaceOnUse"
+                          width="760"
+                          height="470"
+                        >
+                          <image
+                            href={src}
+                            x="0"
+                            y="0"
+                            width="760"
+                            height="470"
+                            preserveAspectRatio="xMidYMid slice"
+                          />
+                        </pattern>
+                      ))}
+                    </defs>
+ 
+                    {OUR_STORY_IMAGES.map((_, idx) => (
+                      <motion.text
+                        key={idx}
+                        x="50%"
+                        y="86%"
+                        textAnchor="middle"
+                        fontFamily="General Sans, Arial, sans-serif"
+                        fontWeight="700"
+                        fontSize="560"
+                        fill={`url(#imagePattern25-${idx})`}
+                        initial={false}
+                        animate={{
+                          opacity: idx === storyImageIndex ? 1 : 0,
+                        }}
+                        transition={{
+                          duration: 1,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        25
+                      </motion.text>
+                    ))}
+                  </svg>
+                </div>
+ 
+                {/* ===============================================
+                    YEARS OF EXPERIENCE
+                =============================================== */}
+                <motion.p
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                  className="
+                    -mt-2
+                    mb-5
+                    text-center
+                    font-sans
+                    text-[15px]
+                    font-medium
+                    tracking-[0.05em]
+                    text-white
+                    sm:-mt-4
+                    sm:text-[18px]
+                    md:-mt-6
+                    md:text-[21px]
+                    lg:-mt-8
+                    lg:text-[24px]
+                  "
+                >
+                  Years of Experience
+                </motion.p>
+ 
+                <div
+                  className="
+                    mx-auto
+                    grid
+                    w-[84%]
+                    max-w-[320px]
+                    grid-cols-3
+                    items-start
+                    gap-[5px]
+                    sm:w-[82%]
+                    sm:max-w-[400px]
+                    sm:gap-2
+                    md:max-w-[500px]
+                    md:gap-5
+                    lg:max-w-[540px]
+                    lg:gap-[26px]
+                  "
+                >
+                  {/* STAT 1 */}
                   <div
                     className="
-                      mr-3
-
-                      w-[2px]
-
-                      shrink-0
-
-                      bg-[#f5a000]
-
-                      sm:mr-[14px]
-                    "
-                  />
-
-                  <p
-                    className={`
-                      min-w-0
-
-                      max-w-[280px]
-
-                      break-words
-
-                      text-[12px]
-                      font-normal
-                      leading-[1.7]
-
-                      transition-colors
-                      duration-500
-
-                      sm:text-[13px]
-                      sm:leading-[1.8]
-
-                      ${
-                        isDark
-                          ? "text-[#eeeeee]"
-                          : "text-[#555555]"
-                      }
-                    `}
-                  >
-                    {activeHero.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* HERO ARROW REMOVED */}
-            </div>
-          </div>
-
-          {/* =====================================================
-              COMPANY NEWS
-          ===================================================== */}
-
-          <div
-            className={`
-              flex
-
-              w-full
-              min-w-0
-
-              min-h-[300px]
-
-              flex-col
-              justify-between
-
-              overflow-hidden
-
-              px-5
-              py-7
-
-              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
-
-              transition-colors
-              duration-500
-
-              sm:min-h-[330px]
-              sm:px-7
-              sm:py-8
-
-              md:px-8
-              md:py-9
-
-              lg:min-h-full
-              lg:px-7
-
-              xl:h-[362px]
-              xl:min-h-0
-              xl:px-[40px]
-              xl:py-[42px]
-
-              ${
-                isDark
-                  ? "bg-[#078AB8]"
-                  : "bg-[#0B86BE]"
-              }
-            `}
-          >
-            <div key={currentCompany} className="min-w-0">
-              {/* LABEL */}
-
-              <p
-                className="
-                  text-[10px]
-                  font-normal
-                  uppercase
-                  tracking-[0.02em]
-                  text-white
-
-                  sm:text-[11px]
-                "
-              >
-                COMPANY NEWS
-              </p>
-
-              {/* TITLE */}
-
-              <h3
-                className="
-                  mt-5
-
-                  break-words
-
-                  text-[18px]
-                  font-bold
-                  leading-[1.25]
-                  text-white
-
-                  sm:mt-6
-                  sm:text-[20px]
-                "
-              >
-                {activeCompany.title}
-              </h3>
-
-              {/* DESCRIPTION */}
-
-              <div
-                className="
-                  mt-5
-
-                  flex
-                  min-w-0
-                  items-stretch
-
-                  sm:mt-6
-                "
-              >
-                <div
-                  className="
-                    mr-3
-                    w-[2px]
-                    shrink-0
-
-                    bg-[#ffb400]
-
-                    sm:mr-[14px]
-                  "
-                />
-
-                <p
-                  className="
-                    min-w-0
-                    max-w-[290px]
-
-                    break-words
-
-                    text-[12px]
-                    font-normal
-                    leading-[1.7]
-                    text-white
-
-                    sm:text-[13px]
-                    sm:leading-[1.8]
-
-                    lg:max-w-[250px]
-                  "
-                >
-                  {activeCompany.description}
-                </p>
-              </div>
-            </div>
-
-            {/* REFRESH */}
-
-            <RefreshButton
-              onClick={handleCompanyRefresh}
-              label="Show next company"
-            />
-          </div>
-        </div>
-
-        {/* =====================================================
-            BOTTOM SECTION
-        ===================================================== */}
-
-        <div
-          className="
-            mt-5
-
-            grid
-
-            w-full
-            min-w-0
-
-            grid-cols-1
-            gap-5
-
-            md:grid-cols-[minmax(250px,360px)_minmax(0,1fr)]
-
-            xl:mt-[30px]
-            xl:grid-cols-[360px_minmax(0,750px)]
-            xl:gap-[30px]
-          "
-        >
-          {/* =====================================================
-              FACTS CARD
-          ===================================================== */}
-
-          <div
-            className={`
-              flex
-
-              w-full
-              min-w-0
-
-              min-h-[300px]
-
-              flex-col
-              justify-between
-
-              overflow-hidden
-
-              px-5
-              py-7
-
-              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
-
-              transition-colors
-              duration-500
-
-              sm:min-h-[330px]
-              sm:px-7
-              sm:py-8
-
-              md:min-h-[360px]
-              md:px-8
-              md:py-9
-
-              xl:h-[362px]
-              xl:min-h-0
-              xl:px-[40px]
-              xl:py-[42px]
-
-              ${
-                isDark
-                  ? "bg-[#003D4D]"
-                  : "bg-[#5F80AE]"
-              }
-            `}
-          >
-            <div key={currentFact} className="min-w-0">
-              {/* LABEL */}
-
-              <p
-                className="
-                  text-[10px]
-                  font-normal
-                  uppercase
-                  tracking-[0.02em]
-                  text-white
-
-                  sm:text-[11px]
-                "
-              >
-                FACTS
-              </p>
-
-              {/* TITLE */}
-
-              <h3
-                className="
-                  mt-5
-
-                  text-[18px]
-                  font-bold
-                  leading-[1.25]
-                  text-white
-
-                  sm:mt-6
-                  sm:text-[20px]
-                "
-              >
-                Did you know
-              </h3>
-
-              {/* FACT CONTENT */}
-
-              <div
-                className="
-                  mt-5
-
-                  flex
-                  min-w-0
-                  items-stretch
-
-                  sm:mt-6
-                "
-              >
-                <div
-                  className="
-                    mr-3
-
-                    w-[2px]
-
-                    shrink-0
-
-                    bg-[#ffb000]
-
-                    sm:mr-[14px]
-                  "
-                />
-
-                <div className="min-w-0">
-                  <p
-                    className="
-                      min-w-0
-
-                      max-w-[270px]
-
-                      break-words
-
-                      text-[12px]
-                      font-normal
-                      leading-[1.7]
-                      text-white
-
-                      sm:text-[13px]
-                      sm:leading-[1.8]
+                      grid
+                      w-full
+                      grid-rows-[12px_22px]
+                      items-center
+                      justify-items-center
+                      text-center
+                      md:grid-rows-[14px_28px]
                     "
                   >
-                    {activeFact.text}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* REFRESH */}
-
-            <RefreshButton
-              onClick={handleFactRefresh}
-              label="Show next fact"
-            />
-          </div>
-
-          {/* =====================================================
-              INSTAGRAM CARD
-          ===================================================== */}
-
-          <div
-            className={`
-              relative
-
-              w-full
-              min-w-0
-
-              min-h-[300px]
-
-              overflow-hidden
-
-              bg-gradient-to-r
-
-              from-[#ff7900]
-              via-[#ef4c68]
-
-              px-5
-              py-7
-
-              shadow-[0_2px_9px_rgba(0,0,0,0.08)]
-
-              transition-all
-              duration-500
-
-              sm:min-h-[330px]
-              sm:px-7
-              sm:py-8
-
-              md:min-h-[360px]
-              md:px-8
-              md:py-9
-
-              xl:h-[362px]
-              xl:min-h-0
-              xl:px-[40px]
-              xl:py-[42px]
-
-              ${
-                isDark
-                  ? "to-[#40233c]"
-                  : "to-[#dfbdd8]"
-              }
-            `}
-          >
-            {/* =================================================
-                INSTAGRAM ICON
-            ================================================= */}
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              className="
-                h-[22px]
-                w-[22px]
-
-                sm:h-[24px]
-                sm:w-[24px]
-              "
-            >
-              <rect
-                x="3"
-                y="3"
-                width="18"
-                height="18"
-                rx="5"
-                stroke="white"
-                strokeWidth="1.4"
-              />
-
-              <circle
-                cx="12"
-                cy="12"
-                r="4"
-                stroke="white"
-                strokeWidth="1.4"
-              />
-
-              <circle
-                cx="17.5"
-                cy="6.5"
-                r="1"
-                fill="white"
-              />
-            </svg>
-
-            {/* =================================================
-                INSTAGRAM CONTENT
-            ================================================= */}
-
-            <div
-              className="
-                mt-8
-
-                flex
-
-                min-w-0
-
-                items-stretch
-
-                sm:mt-10
-
-                xl:mt-[42px]
-              "
-            >
-              <div
-                className="
-                  mr-3
-
-                  w-[1px]
-
-                  shrink-0
-
-                  bg-white
-
-                  sm:mr-[14px]
-                "
-              />
-
-              <div className="min-w-0 max-w-[470px]">
-                <p
-                  className="
-                    break-words
-
-                    text-[12px]
-                    font-normal
-                    leading-[1.7]
-                    text-white
-
-                    sm:text-[13px]
-                    sm:leading-[1.8]
-                  "
-                >
-                  Building experiences that bring people together.
-                  <br className="hidden sm:block" />
-                  Creating spaces that inspire communities.
-                  <br className="hidden sm:block" />
-                  Discover more from Phoenix.
-                  <br className="hidden sm:block" />
-                  #Phoenix #Community #Experiences
-                </p>
-
-                <p
-                  className="
-                    mt-2
-
-                    text-[11px]
-                    font-normal
-                    italic
-                    text-white
-                  "
-                >
-                  Explore Phoenix
-                </p>
-              </div>
-            </div>
-
-            {/* =================================================
-                EXTERNAL LINK ICON
-            ================================================= */}
-
->>>>>>> 56d635b0161fcccdc90b37f3757f28c5c484f7ee
-            <button
-              type="button"
-              className="mt-[10px] sm:mt-[14px] h-[40px] sm:h-[44px] px-6 border border-white/85 rounded-full bg-transparent text-white text-[14px] cursor-pointer inline-flex items-center justify-center gap-[14px] transition-all duration-300 hover:bg-white hover:text-[#111] font-inherit"
-            >
-              <span>read more</span>
-              <span className="text-[17px]">→</span>
-            </button>
-          </div>
-
-          {/* RIGHT CONTENT */}
-          {current.id === "our-story" ? (
-            <div className="w-full max-w-full sm:max-w-[720px] lg:max-w-[650px] justify-self-center lg:justify-self-end flex flex-col items-center animate-[yearsEnter_0.9s_ease_forwards]">
-              {/* BIG 25 */}
-              <div className="w-full h-[245px] sm:h-[285px] md:h-[350px] lg:h-[390px] flex items-center justify-center">
-                <svg
-                  className="block w-full max-w-[470px] sm:max-w-[680px] lg:max-w-[650px] h-auto overflow-visible"
-                  viewBox="0 0 760 470"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="25 Years"
-                >
-                  <defs>
-                    <pattern
-                      id="imagePattern25"
-                      patternUnits="userSpaceOnUse"
-                      width="760"
-                      height="470"
+                    <span
+                      className="
+                        whitespace-nowrap
+                        text-[6px]
+                        font-medium
+                        leading-none
+                        text-white/90
+                        sm:text-[7px]
+                        md:text-[9px]
+                        lg:text-[10px]
+                      "
                     >
-                      <image
-                        href={aboutImages[currentImageIndex]}
-                        x="0"
-                        y="0"
-                        width="760"
-                        height="470"
-                        preserveAspectRatio="xMidYMid slice"
-                      />
-                    </pattern>
-                  </defs>
-
-                  <text
-                    x="50%"
-                    y="83%"
-                    textAnchor="middle"
-                    fontFamily="Arial Black, Arial, sans-serif"
-                    fontWeight="900"
-                    fontSize="445"
-                    fill="url(#imagePattern25)"
-                  >
-                    25
-                  </text>
-                </svg>
-              </div>
-
-              {/* STATS BELOW 25 */}
-              <div className="w-[84%] sm:w-[82%] max-w-[300px] sm:max-w-[360px] md:max-w-[460px] lg:max-w-[500px] -mt-9 sm:-mt-[42px] md:-mt-[52px] lg:-mt-[58px] mx-auto p-0 grid grid-cols-3 items-start justify-center gap-[5px] sm:gap-[8px] md:gap-[20px] lg:gap-[26px]">
-                {/* STAT 1 */}
-                <div className="w-full min-w-0 grid grid-rows-[11px_21px] sm:grid-rows-[12px_23px] md:grid-rows-[14px_28px] items-center justify-items-center text-center text-white">
-                  <span className="w-full flex items-center justify-center text-[6px] sm:text-[7px] md:text-[9px] lg:text-[10px] leading-none font-medium text-white/90 whitespace-nowrap text-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)]">
-                    Established in
-                  </span>
-
-                  <strong className="m-0 text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] leading-none font-bold text-white whitespace-nowrap text-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]">
-                    2001
-                  </strong>
-                </div>
-
-                {/* STAT 2 */}
-                <div className="w-full min-w-0 grid grid-rows-[11px_21px] sm:grid-rows-[12px_23px] md:grid-rows-[14px_28px] items-center justify-items-center text-center text-white">
-                  <span className="w-full flex items-center justify-center text-[6px] sm:text-[7px] md:text-[9px] lg:text-[10px] leading-none font-medium text-white/90 whitespace-nowrap text-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)] invisible">
-                    &nbsp;
-                  </span>
-
-                  <div className="w-full flex items-baseline justify-center gap-0.5 sm:gap-[3px] min-w-0 whitespace-nowrap">
-                    <strong className="m-0 text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] leading-none font-bold text-white whitespace-nowrap text-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]">
-                      40 mil.
-                    </strong>
-
-                    <span className="text-[5px] sm:text-[6px] md:text-[7px] lg:text-[8px] leading-none font-semibold text-white/88 whitespace-nowrap">
-                      sq ft.
+                      Established in
                     </span>
+ 
+                    <strong
+                      className="
+                        whitespace-nowrap
+                        text-[14px]
+                        font-bold
+                        leading-none
+                        sm:text-[16px]
+                        md:text-[20px]
+                        lg:text-[24px]
+                      "
+                    >
+                      2001
+                    </strong>
+                  </div>
+ 
+                  {/* STAT 2 */}
+                  <div
+                    className="
+                      grid
+                      w-full
+                      grid-rows-[12px_22px]
+                      items-center
+                      justify-items-center
+                      md:grid-rows-[14px_28px]
+                    "
+                  >
+                    <span className="invisible">x</span>
+ 
+                    <div
+                      className="
+                        flex
+                        items-baseline
+                        justify-center
+                        gap-0.5
+                        whitespace-nowrap
+                      "
+                    >
+                      <strong
+                        className="
+                          text-[14px]
+                          font-bold
+                          leading-none
+                          sm:text-[16px]
+                          md:text-[20px]
+                          lg:text-[24px]
+                        "
+                      >
+                        40 mil.
+                      </strong>
+ 
+                      <span
+                        className="
+                          text-[5px]
+                          font-semibold
+                          sm:text-[6px]
+                          md:text-[7px]
+                          lg:text-[8px]
+                        "
+                      >
+                        sq ft.
+                      </span>
+                    </div>
+                  </div>
+ 
+                  {/* STAT 3 */}
+                  <div
+                    className="
+                      grid
+                      w-full
+                      grid-rows-[12px_22px]
+                      items-center
+                      justify-items-center
+                      md:grid-rows-[14px_28px]
+                    "
+                  >
+                    <span className="invisible">x</span>
+ 
+                    <strong
+                      className="
+                        whitespace-nowrap
+                        text-[14px]
+                        font-bold
+                        leading-none
+                        sm:text-[16px]
+                        md:text-[20px]
+                        lg:text-[24px]
+                      "
+                    >
+                      40%
+                    </strong>
                   </div>
                 </div>
-
-                {/* STAT 3 */}
-                <div className="w-full min-w-0 grid grid-rows-[11px_21px] sm:grid-rows-[12px_23px] md:grid-rows-[14px_28px] items-center justify-items-center text-center text-white">
-                  <span className="w-full flex items-center justify-center text-[6px] sm:text-[7px] md:text-[9px] lg:text-[10px] leading-none font-medium text-white/90 whitespace-nowrap text-center drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)] invisible">
-                    &nbsp;
-                  </span>
-
-                  <strong className="m-0 text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] leading-none font-bold text-white whitespace-nowrap text-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.55)]">
-                    40%
-                  </strong>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div
-              key={`image-${current.id}`}
-              className="relative w-full max-w-[520px] h-[360px] md:h-[420px] lg:h-[500px] justify-self-center lg:justify-self-end overflow-hidden rounded-none animate-[imageContainerEnter_1s_ease_forwards]"
-            >
-              <Image
-                src={current.image}
-                alt={current.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-center rounded-none"
-              />
-            </div>
-          )}
+              </motion.div>
+            ) : current.id === "innovation" ? (
+              /* =================================================
+                 OUR INNOVATION
+              ================================================= */
+              <motion.div
+                key="right-innovation"
+                initial={{ x: 80, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 40, opacity: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="
+                  mx-auto
+                  w-full
+                  max-w-[700px]
+                  lg:mx-0
+                  lg:justify-self-end
+                "
+              >
+                {renderCardGrid(INNOVATION_CARDS)}
+              </motion.div>
+            ) : (
+              /* =================================================
+                 OUR IMPACT
+              ================================================= */
+              <motion.div
+                key="right-impact"
+                initial={{ x: 80, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 40, opacity: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="
+                  mx-auto
+                  w-full
+                  max-w-[700px]
+                  lg:mx-0
+                  lg:justify-self-end
+                "
+              >
+                {renderCardGrid(IMPACT_CARDS)}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-    </main>
+    </motion.section>
   );
 }

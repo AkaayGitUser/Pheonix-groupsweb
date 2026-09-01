@@ -5,7 +5,6 @@ import Footer from "./layout/footer";
 
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
-import InnovationSection from "./components/innovationsection/page";
 import Careers from "./components/Carrers/page";
 import Brand from "./components/brand/page";
 
@@ -16,11 +15,8 @@ export default function Home() {
 
       <Hero />
 
+      {/* OUR STORY / INNOVATION / IMPACT */}
       <ProductShowcase />
-
-      <section className="w-full">
-        <InnovationSection />
-      </section>
 
       <Careers />
 
