@@ -19,7 +19,7 @@ const awardsData: AwardCardProps[] = [
   {
     category: 'Real-Estate',
     cardImgSrc: '/Awards/Award2.jpg',
-    title: 'CSR Leader of the Year',
+    title: 'Iconic Real Estate Leader of the Year 2026',
   },
   {
     category: 'Certificate',
@@ -29,12 +29,12 @@ const awardsData: AwardCardProps[] = [
   {
     category: 'Design',
     cardImgSrc: '/Awards/awardp6.jpg',
-    title: 'Architectural Marvel',
+    title: 'Best CSR Practices in real estate sector ',
   },
   {
     category: 'Growth',
     cardImgSrc: '/Awards/Award5.jpg',
-    title: 'Fastest Growing Group',
+    title: 'Category Commercial Space-2025',
   },
   {
     category: 'Global',
@@ -49,7 +49,7 @@ const awardsData: AwardCardProps[] = [
   {
     category: 'Global',
     cardImgSrc: '/Awards/awardp2.jpg',
-    title: 'Global Sustainability Award',
+    title: 'CSR Initiative of the Year – Real Estate Firm',
   },
   {
     category: 'Certificate',
@@ -59,7 +59,7 @@ const awardsData: AwardCardProps[] = [
   {
     category: 'Real-Estate',
     cardImgSrc: '/Awards/Award3.jpg',
-    title: 'Excellence award',
+    title: 'Grohe Hurun Excellence In Real Estate',
   },
   {
     category: 'Certificate',
@@ -69,7 +69,7 @@ const awardsData: AwardCardProps[] = [
   {
     category: 'Global',
     cardImgSrc: '/Awards/steel-award1.jpg',
-    title: 'Steel Award',
+    title: 'Legend of Steel Construction @ Steel Day 2026 ',
   },
 ];
 
