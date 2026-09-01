@@ -16,7 +16,7 @@ export default function FooterPage() {
           {/* Phoenix Logo & Send Message Box */}
           <div className="logoSection">
             <Image
-              src="LOGOP.png"
+              src="/LOGOP.png"
               alt="Phoenix Logo"
               width={130}
               height={55}
@@ -352,26 +352,38 @@ export default function FooterPage() {
           }
         }
 
-        /* Mobile View */
+        /* Mobile View (Side-by-Side Grid Layout) */
 
         @media (max-width: 768px) {
           .footerContent {
             grid-template-columns: 1fr 1fr;
-            gap: 16px 10px;
-            padding: 18px 14px;
+            gap: 16px 12px;
+            padding: 20px 14px;
             align-items: start;
           }
 
           .logoSection {
             grid-column: span 2;
-            min-height: auto;
-            padding: 0 0 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 0 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            align-items: center;
           }
 
           .logoImage {
-            width: 110px;
+            width: 95px;
             height: auto;
+          }
+
+          .newsletterBox {
+            max-width: 100%;
+          }
+
+          .newsletterTitle {
+            font-size: 8.5px;
+            white-space: normal;
           }
 
           .footerColumn,
@@ -379,7 +391,7 @@ export default function FooterPage() {
           .socialColumn {
             min-height: auto;
             padding-left: 0;
-            padding-top: 2px;
+            padding-top: 0;
             border-left: none;
             border-top: none;
           }
@@ -393,7 +405,6 @@ export default function FooterPage() {
             border-left: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             flex-direction: column;
-            gap: 0;
           }
 
           .addressItem {
@@ -416,19 +427,26 @@ export default function FooterPage() {
             word-break: break-word;
           }
 
+          /* Side-by-side Follow US inside second column */
           .socialColumn {
-            grid-column: span 2;
-            padding-top: 10px;
+            grid-column: span 1;
+            padding-top: 8px;
+            margin-top: 8px;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
           }
 
           .socialColumn h2 {
-            font-size: 13px;
+            font-size: 11px;
             margin-bottom: 0;
+          }
+
+          .socialIcons {
+            margin-top: 0;
+            gap: 8px;
           }
 
           .quickLinks {
@@ -439,11 +457,6 @@ export default function FooterPage() {
             font-size: 10px;
             line-height: 1.2;
           }
-
-          .socialIcons {
-            margin-top: 0;
-            gap: 10px;
-          }
         }
 
         @media (max-width: 480px) {
@@ -453,11 +466,11 @@ export default function FooterPage() {
           }
 
           .logoImage {
-            width: 100px;
+            width: 85px;
           }
 
           .footerColumn h2 {
-            font-size: 13px;
+            font-size: 12px;
             margin-bottom: 6px;
           }
 
@@ -477,7 +490,7 @@ export default function FooterPage() {
           }
 
           .newsletterTitle {
-            font-size: 9px;
+            font-size: 8px;
           }
         }
       `}</style>
