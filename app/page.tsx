@@ -1,6 +1,5 @@
 import InnovationSection from "./components/innovationsection/page";
 // import InteractiveMap from '/components/innovationsection/InteractiveMap';
-import Careers from "./components/Carrers/page";
 
 import React from "react";
 import Footer from "./layout/footer";
