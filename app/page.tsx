@@ -1,28 +1,30 @@
+import InnovationSection from "./components/innovationsection/page";
+// import InteractiveMap from '/components/innovationsection/InteractiveMap';
+import Careers from "./components/Carrers/page";
+
 import React from "react";
-
-import Header from "./layout/header";
 import Footer from "./layout/footer";
-
+import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
 import Careers from "./components/Carrers/page";
 import Brand from "./components/brand/page";
-
+// import PageScrollIndicator from "./components/PageScrollIndicator";
 export default function Home() {
   return (
-    <main className="min-h-screen w-full bg-white flex flex-col overflow-x-hidden">
+    <main className="min-h-screen bg-white dark:bg-[#363636] flex flex-col justify-between overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <Header />
-
+      {/* <PageScrollIndicator /> */}
       <Hero />
 
       {/* OUR STORY / INNOVATION / IMPACT */}
       <ProductShowcase />
 
       <Careers />
-
       <Brand />
-
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
     </main>
   );
 }

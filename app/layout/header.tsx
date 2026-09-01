@@ -11,6 +11,8 @@ export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false); // Theme state
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const menuVariants: Variants = {
     closed: {
@@ -46,14 +48,23 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (e: Event) => {
+      const target = e.target;
+      let scrollTop = 0;
+      if (target instanceof HTMLElement) {
+        scrollTop = target.scrollTop;
+      } else if (target instanceof Document) {
+        scrollTop = target.documentElement.scrollTop || window.scrollY;
+      }
+      setIsScrolled(scrollTop > 100);
       setOpenMenu(null);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Use capture phase to intercept scroll events from nested scroll containers (like <main>)
+    window.addEventListener("scroll", handleScroll, { capture: true, passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll, { capture: true });
     };
   }, []);
 
@@ -70,32 +81,44 @@ export default function Header() {
     });
   };
 
+  const headerY = isScrolled ? (isHovered ? 0 : -120) : 0;
+
   return (
-    <motion.header
-      animate={{
-        height: openMenu ? "auto" : 96,
-      }}
-      transition={{
-        duration: 0.4,
-        ease: "easeInOut",
-      }}
-      className={`
-        fixed
-        top-0
-        left-0
-        w-full
-        z-1000
-        transition-all
-        duration-500
-        ${openMenu ? "bg-black/75 backdrop-blur-md" : "bg-transparent"}
-      `}
-    >
+    <>
+      {isScrolled && (
+        <div
+          className="fixed top-0 left-0 w-full h-5 z-[999] pointer-events-auto"
+          onMouseEnter={() => setIsHovered(true)}
+        />
+      )}
+      <motion.header
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        animate={{
+          height: openMenu ? "auto" : 96,
+          y: headerY,
+        }}
+        transition={{
+          duration: 0.4,
+          ease: "easeInOut",
+        }}
+        className={`
+          ${isScrolled ? "fixed" : "absolute"}
+          top-0
+          left-0
+          w-full
+          z-1000
+          transition-colors
+          duration-500
+          ${openMenu ? "bg-black/75 backdrop-blur-md" : "bg-transparent"}
+        `}
+      >
       <div
-        className="max-w-7xl mx-auto h-16 sm:h-20 md:h-24 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10"
+        className="max-w-7xl mt-2 mx-auto h-16 sm:h-20 md:h-24 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 "
       >
         {/* Logo */}
         <Link href="/">
-          <Image
+          <Image className="sm:mb-6 md:mb-7"
             src="/images/Logo.png"
             alt="Phoenix Foundation"
             width={125}
@@ -106,7 +129,7 @@ export default function Header() {
 
         {/* Navigation + Mega Menu */}
         <div className="relative">
-          <nav className="hidden lg:flex items-center gap-12 dark:text-white text-[#454545]">
+          <nav className="hidden lg:flex items-center gap-12 dark:text-white text-[#454545] text-white">
             <button
               className="border-b border-b-transparent hover:border-white pb-1"
               onMouseEnter={() => setOpenMenu(null)}
@@ -624,5 +647,6 @@ export default function Header() {
         )}
       </AnimatePresence>
     </motion.header>
+    </>
   );
 }
