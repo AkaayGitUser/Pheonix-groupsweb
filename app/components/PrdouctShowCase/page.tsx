@@ -28,7 +28,7 @@ type CardItem = {
    SETTINGS
 ========================================================= */
  
-const SLIDE_TIME = 5000;
+const SLIDE_TIME = 8000;
  
 /* =========================================================
    DIFFERENT BACKGROUND FOR EACH TAB
@@ -723,29 +723,50 @@ export default function ProductShowcase() {
                 {/* ===============================================
                     YEARS OF EXPERIENCE
                 =============================================== */}
-                <motion.p
+                <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                   className="
                     -mt-2
                     mb-5
-                    text-center
-                    font-sans
-                    text-[15px]
-                    font-medium
-                    tracking-[0.05em]
-                    text-white
+                    flex
+                    flex-col
+                    items-center
                     sm:-mt-4
-                    sm:text-[18px]
                     md:-mt-6
-                    md:text-[21px]
                     lg:-mt-8
-                    lg:text-[24px]
                   "
                 >
-                  Years of Experience
-                </motion.p>
+                  <p
+                    className="
+                      font-['General_Sans',Arial,sans-serif]
+                      text-[15px]
+                      font-bold
+                      leading-tight
+                      tracking-normal
+                      text-white
+                      sm:text-[18px]
+                      md:text-[21px]
+                      lg:text-[24px]
+                    "
+                  >
+                    Years of Experience
+                  </p>
+
+                  <span
+  className="
+    mt-2
+    block
+    h-px
+    w-[160px]
+    bg-white/70
+    sm:w-[190px]
+    md:w-[220px]
+    lg:w-[250px]
+  "
+/>
+                </motion.div>
  
                 <div
                   className="
@@ -897,9 +918,15 @@ export default function ProductShowcase() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="
                   mx-auto
+                  mt-5
                   w-full
                   max-w-[700px]
+
+                  sm:mt-6
+                  md:mt-8
+
                   lg:mx-0
+                  lg:mt-10
                   lg:justify-self-end
                 "
               >
@@ -909,22 +936,28 @@ export default function ProductShowcase() {
               /* =================================================
                  OUR IMPACT
               ================================================= */
-              <motion.div
-                key="right-impact"
-                initial={{ x: 80, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 40, opacity: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="
-                  mx-auto
-                  w-full
-                  max-w-[700px]
-                  lg:mx-0
-                  lg:justify-self-end
-                "
-              >
-                {renderCardGrid(IMPACT_CARDS)}
-              </motion.div>
+             <motion.div
+  key="right-impact"
+  initial={{ x: 80, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  exit={{ x: 40, opacity: 0 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  className="
+    mx-auto
+    mt-5
+    w-full
+    max-w-[700px]
+
+    sm:mt-6
+    md:mt-8
+
+    lg:mx-0
+    lg:mt-10
+    lg:justify-self-end
+  "
+>
+  {renderCardGrid(IMPACT_CARDS)}
+</motion.div>
             )}
           </AnimatePresence>
         </div>
