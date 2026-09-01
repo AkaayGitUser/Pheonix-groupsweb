@@ -13,15 +13,36 @@ export default function FooterPage() {
     <>
       <footer className="footer">
         <div className="footerContent">
-          {/* Phoenix Logo */}
+          {/* Phoenix Logo & Send Message Box */}
           <div className="logoSection">
-            <img
+            <Image
               src="LOGOP.png"
               alt="Phoenix Logo"
-              width={280}
-              height={125}
+              width={130}
+              height={55}
               className="logoImage"
             />
+
+            {/* Send Message / Newsletter Signup Box */}
+            <div className="newsletterBox">
+              <span className="newsletterTitle">
+                Sign Up to Get Latest News / Updates
+              </span>
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="newsletterForm"
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter email address"
+                  className="newsletterInput"
+                />
+                <button type="submit" className="newsletterButton">
+                  Send
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -42,7 +63,7 @@ export default function FooterPage() {
             <h2>Address</h2>
 
             <div className="addressItem">
-              <MapPin size={14} strokeWidth={1.5} className="mapIcon" />
+              <MapPin size={12} strokeWidth={1.5} className="mapIcon" />
 
               <p>
                 Nagarjuna Residency Driveway,
@@ -56,7 +77,7 @@ export default function FooterPage() {
             </div>
 
             <div className="addressItem">
-              <MapPin size={14} strokeWidth={1.5} className="mapIcon" />
+              <MapPin size={12} strokeWidth={1.5} className="mapIcon" />
 
               <p>
                 Plot No. 1335, Road No. 45 Jubilee
@@ -74,15 +95,15 @@ export default function FooterPage() {
 
             <div className="socialIcons">
               <span className="socialIconStatic">
-                <FaFacebookSquare size={20} />
+                <FaFacebookSquare size={18} />
               </span>
 
               <span className="socialIconStatic">
-                <FaInstagram size={20} />
+                <FaInstagram size={18} />
               </span>
 
               <span className="socialIconStatic">
-                <FaLinkedin size={20} />
+                <FaLinkedin size={18} />
               </span>
             </div>
           </div>
@@ -93,59 +114,124 @@ export default function FooterPage() {
         </div>
       </footer>
 
-      <style jsx>{`
+      <style jsx>
+        {`
         * {
           box-sizing: border-box;
         }
 
         .footer {
           width: 100%;
-          margin-top: 10px;
+          margin-top: 5px;
           background: #084d8d;
           color: #ffffff;
         }
 
         .footerContent {
           width: 100%;
-          min-height: 318px;
+          min-height: auto;
           display: grid;
-          grid-template-columns: 33% 18% 26% 23%;
+          grid-template-columns: 32% 20% 28% 20%;
           align-items: start;
-          padding: 55px 6.3% 52px;
+          padding: 28px 6.3% 24px;
         }
 
-        /* Logo */
+        /* Logo & Newsletter */
 
         .logoSection {
-          min-height: 205px;
+          min-height: auto;
           display: flex;
+          flex-direction: column;
           align-items: flex-start;
           justify-content: flex-start;
-          padding-top: 2px;
-          padding-right: 38px;
+          padding-top: 0;
+          padding-right: 24px;
+          gap: 10px;
         }
 
         .logoImage {
           display: block;
-          width: 280px;
-          height: 125px;
+          width: 130px;
+          height: auto;
           max-width: 100%;
           object-fit: contain;
           object-position: left center;
         }
 
+        .newsletterBox {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          width: 100%;
+          max-width: 200px;
+        }
+
+        .newsletterTitle {
+          font-size: 10px;
+          color: rgba(255, 255, 255, 0.82);
+          line-height: 1.1;
+          white-space: nowrap;
+        }
+
+        .newsletterForm {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          border-radius: 3px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          background: rgba(255, 255, 255, 0.08);
+          padding: 1.5px;
+          overflow: hidden;
+        }
+
+        .newsletterInput {
+          flex: 1;
+          width: 100%;
+          height: 24px;
+          border: none;
+          background: #e5e7eb;
+          color: #1f2937;
+          font-size: 10px;
+          padding: 0 6px;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+          outline: none;
+        }
+
+        .newsletterInput::placeholder {
+          color: #9ca3af;
+        }
+
+        .newsletterButton {
+          height: 24px;
+          padding: 0 10px;
+          background: #084d8d;
+          color: #ffffff;
+          font-size: 10px;
+          font-weight: 500;
+          border: none;
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+          cursor: pointer;
+          transition: background 0.2s ease;
+        }
+
+        .newsletterButton:hover {
+          background: #063a6b;
+        }
+
         /* Columns */
 
         .footerColumn {
-          min-height: 196px;
-          padding-left: 34px;
+          min-height: auto;
+          padding-left: 24px;
           border-left: 1px solid rgba(255, 255, 255, 0.09);
         }
 
         .footerColumn h2 {
-          margin: 0 0 25px;
+          margin: 0 0 12px;
           color: #ffffff;
-          font-size: 21px;
+          font-size: 16px;
           font-weight: 400;
           line-height: 1;
           letter-spacing: 0.1px;
@@ -157,12 +243,12 @@ export default function FooterPage() {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          gap: 18px;
+          gap: 10px;
         }
 
         .quickLinkText {
           color: rgba(255, 255, 255, 0.88);
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
           line-height: 1;
         }
@@ -170,15 +256,15 @@ export default function FooterPage() {
         /* Address */
 
         .addressColumn {
-          padding-left: 58px;
+          padding-left: 32px;
         }
 
         .addressItem {
           display: grid;
           grid-template-columns: auto 1fr;
-          column-gap: 7px;
+          column-gap: 6px;
           align-items: start;
-          margin-bottom: 25px;
+          margin-bottom: 14px;
           color: rgba(255, 255, 255, 0.82);
         }
 
@@ -188,23 +274,23 @@ export default function FooterPage() {
 
         .addressItem p {
           margin: 0;
-          font-size: 13.5px;
+          font-size: 11.5px;
           font-weight: 400;
-          line-height: 1.22;
+          line-height: 1.25;
           letter-spacing: 0.05px;
         }
 
         /* Social */
 
         .socialColumn {
-          padding-left: 57px;
+          padding-left: 32px;
         }
 
         .socialIcons {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-top: 37px;
+          gap: 12px;
+          margin-top: 14px;
         }
 
         .socialIconStatic {
@@ -217,14 +303,14 @@ export default function FooterPage() {
         /* Copyright */
 
         .copyright {
-          min-height: 76px;
+          min-height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 15px;
+          padding: 8px 15px;
           border-top: 1px solid rgba(255, 255, 255, 0.11);
-          color: rgba(255, 255, 255, 0.76);
-          font-size: 9px;
+          color: rgba(255, 255, 255, 0.72);
+          font-size: 8.5px;
           font-weight: 400;
           text-align: center;
         }
@@ -233,7 +319,7 @@ export default function FooterPage() {
 
         @media (min-width: 1500px) {
           .footerContent {
-            max-width: 1500px;
+            max-width: 1400px;
             margin: 0 auto;
           }
         }
@@ -243,21 +329,21 @@ export default function FooterPage() {
         @media (max-width: 1100px) {
           .footerContent {
             grid-template-columns: repeat(2, 1fr);
-            gap: 44px 0;
-            padding: 52px 44px;
+            gap: 24px 0;
+            padding: 28px 32px;
           }
 
           .logoSection {
-            min-height: 180px;
+            min-height: auto;
           }
 
           .logoImage {
-            width: 260px;
+            width: 120px;
             height: auto;
           }
 
           .footerColumn {
-            padding-left: 34px;
+            padding-left: 24px;
           }
 
           .addressColumn {
@@ -266,25 +352,25 @@ export default function FooterPage() {
           }
         }
 
-        /* Mobile View - Center Social Column Only */
+        /* Mobile View */
 
         @media (max-width: 768px) {
           .footerContent {
             grid-template-columns: 1fr 1fr;
-            gap: 20px 12px;
-            padding: 24px 16px;
+            gap: 16px 10px;
+            padding: 18px 14px;
             align-items: start;
           }
 
           .logoSection {
             grid-column: span 2;
             min-height: auto;
-            padding: 0 0 12px;
+            padding: 0 0 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           }
 
           .logoImage {
-            width: 190px;
+            width: 110px;
             height: auto;
           }
 
@@ -293,7 +379,7 @@ export default function FooterPage() {
           .socialColumn {
             min-height: auto;
             padding-left: 0;
-            padding-top: 4px;
+            padding-top: 2px;
             border-left: none;
             border-top: none;
           }
@@ -303,7 +389,7 @@ export default function FooterPage() {
           }
 
           .addressColumn {
-            padding-left: 10px;
+            padding-left: 8px;
             border-left: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             flex-direction: column;
@@ -315,79 +401,83 @@ export default function FooterPage() {
             grid-template-columns: auto 1fr;
             column-gap: 4px;
             align-items: start;
-            margin-bottom: 10px;
-          }
-
-          .addressItem :global(.mapIcon) {
-            margin-top: 2px;
-            width: 11px;
-            height: 11px;
-          }
-
-          .addressItem p {
-            font-size: 10px;
-            line-height: 1.25;
-            word-break: break-word;
-          }
-
-          .socialColumn {
-            grid-column: span 2;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-          }
-
-          .socialColumn h2 {
-            font-size: 15px;
-            margin-bottom: 0;
-          }
-
-          .quickLinks {
-            gap: 8px;
-          }
-
-          .quickLinkText {
-            font-size: 11px;
-            line-height: 1.2;
-          }
-
-          .socialIcons {
-            margin-top: 0;
-            gap: 14px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .footerContent {
-            padding: 20px 14px;
-            gap: 16px 10px;
-          }
-
-          .logoImage {
-            width: 170px;
-          }
-
-          .footerColumn h2 {
-            font-size: 14px;
             margin-bottom: 8px;
           }
 
-          .quickLinkText {
-            font-size: 10.5px;
+          .addressItem :global(.mapIcon) {
+            margin-top: 1px;
+            width: 10px;
+            height: 10px;
           }
 
           .addressItem p {
             font-size: 9.5px;
             line-height: 1.2;
+            word-break: break-word;
+          }
+
+          .socialColumn {
+            grid-column: span 2;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+          }
+
+          .socialColumn h2 {
+            font-size: 13px;
+            margin-bottom: 0;
+          }
+
+          .quickLinks {
+            gap: 6px;
+          }
+
+          .quickLinkText {
+            font-size: 10px;
+            line-height: 1.2;
+          }
+
+          .socialIcons {
+            margin-top: 0;
+            gap: 10px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .footerContent {
+            padding: 14px 10px;
+            gap: 12px 8px;
+          }
+
+          .logoImage {
+            width: 100px;
+          }
+
+          .footerColumn h2 {
+            font-size: 13px;
+            margin-bottom: 6px;
+          }
+
+          .quickLinkText {
+            font-size: 9.5px;
+          }
+
+          .addressItem p {
+            font-size: 9px;
+            line-height: 1.15;
           }
 
           .copyright {
-            min-height: 50px;
+            min-height: 35px;
+            font-size: 8px;
+            padding: 6px 8px;
+          }
+
+          .newsletterTitle {
             font-size: 9px;
-            padding: 10px 8px;
           }
         }
       `}</style>
