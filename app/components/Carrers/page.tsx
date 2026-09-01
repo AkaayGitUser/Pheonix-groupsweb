@@ -221,7 +221,7 @@ export default function Careers() {
     return (
         <section
             id="careers"
-            className="w-full bg-[#f8f9fa] dark:bg-[#1f2123] py-14 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 transition-colors duration-300 snap-start snap-always"
+            className="w-full bg-white dark:bg-[#1f2123] py-14 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-16 transition-colors duration-300 snap-start snap-always"
         >
             <div className="max-w-[1440px] mx-auto">
                 {/* Header with Title and Tabs */}
