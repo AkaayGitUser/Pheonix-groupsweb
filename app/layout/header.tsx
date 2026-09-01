@@ -538,7 +538,7 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6 ">
-                      <div className="border-b border-white pb-2 flex justify-between items-center">
+                      <div className="border-b border-white opacity-80 pb-2 flex justify-between items-center">
                         <h2 className="text-xl">Business Overview</h2>
                         <h2 className="text-xl mr-20">Our Brands</h2>
                       </div>
@@ -551,8 +551,8 @@ export default function Header() {
                         Browse Our Brands
                       </button>
                       </div>
-                      <div className="border-b border-white py-2 mt-6 ">
-                        <h2 className="text-xl">Business Verticals</h2>
+                      <div className="border-b border-white  opacity-80 py-2 mt-6 ">
+                        <h2 className="text-xl ">Business Verticals</h2>
                       </div>
                       <div className="grid grid-cols-3 gap-8 mt-3">
                         <div className="flex flex-col gap-2 items-start text-sm">
@@ -611,7 +611,7 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6">
-                      <div className="border-b border-white pb-2">
+                      <div className="border-b border-white opacity-80 pb-2">
                         <h2 className="text-xl">Overview</h2>
                       </div>
                       <button className=" mt-2 hover:text-amber-300 text-sm">
@@ -652,7 +652,7 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6 ">
-                      <div className="border-b border-white pb-2">
+                      <div className="border-b border-white opacity-80 pb-2">
                         <h2 className="text-xl">The Phoenix Group</h2>
                       </div>
                       <button className=" mt-2 hover:text-amber-300 text-sm">
@@ -688,7 +688,7 @@ export default function Header() {
                         </div>
                       </div>
 
-                      <div className="border-b border-white py-2 mt-10">
+                      <div className="border-b border-white opacity-80 py-2 mt-10">
                         <h2 className="text-xl">Investors</h2>
                       </div>
                       <button className=" mt-2 hover:text-amber-300 text-sm">
