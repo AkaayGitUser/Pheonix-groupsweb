@@ -94,67 +94,67 @@ export default function AwardsSection() {
   return (
     <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans mb-10">
-          Awards & Certification
-        </h2>
+        {/* Header Container with Title and Navigation Controls */}
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans">
+            Awards & Certification
+          </h2>
 
-        {/* Carousel Wrapper with Relative Positioning */}
-        <div className="relative">
-          {/* Left Arrow */}
-          <button
-            onClick={handlePrev}
-            aria-label="Previous Slide"
-            className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-gray-100 text-gray-800 p-3 rounded-full shadow-lg border border-gray-200 transition-transform hover:scale-110 focus:outline-none"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
+          {/* Navigation Arrows */}
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Slide"
+              className="bg-white hover:bg-gray-100 text-gray-800 p-2.5    transition-transform hover:scale-105 focus:outline-none"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next Slide"
+              className="bg-white hover:bg-gray-100 text-gray-800 p-2.5    transition-transform hover:scale-105 focus:outline-none"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentCards.map((award, index) => (
-              <div key={index} className="flex flex-col">
-                {/* Card Container */}
-                <div className="relative min-h-[350px] transition-all duration-300 hover:-translate-y-1">
-                  {/* Background Image Container */}
-                  <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl">
-                    <Image
-                      src={award.cardImgSrc}
-                      alt={award.category}
-                      fill
-                      className="object-cover"
-                      priority={index === 0}
-                    />
-                  </div>
-
-                  {/* Top-Right Folded Ribbon Tag */}
-                  <div className="absolute top-6 -right-2.5 z-20">
-                    <div className="relative bg-black/30 backdrop-blur-md text-white font-semibold text-xs uppercase tracking-wider px-4 py-1.5 shadow-md">
-                      {award.category}
-
-                      {/* 3D Dark Fold Shadow */}
-                      <span className="absolute right-0 top-full w-0 h-0 border-t-[10px] border-t-black/80 border-r-[10px] border-r-transparent" />
-                    </div>
-                  </div>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {currentCards.map((award, index) => (
+            <div key={index} className="flex flex-col">
+              {/* Card Container */}
+              <div className="relative min-h-[350px] transition-all duration-300 hover:-translate-y-1">
+                {/* Background Image Container */}
+                <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl">
+                  <Image
+                    src={award.cardImgSrc}
+                    alt={award.category}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                  />
                 </div>
 
-                {/* Content Under Card */}
-                <div className="mt-4 px-2">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1 text-center">
-                    {award.title}
-                  </h3>
+                {/* Top-Right Folded Ribbon Tag */}
+                <div className="absolute top-6 -right-2.5 z-20">
+                  <div className="relative bg-black/30 backdrop-blur-md text-white font-semibold text-xs uppercase tracking-wider px-4 py-1.5 shadow-md">
+                    {award.category}
+
+                    {/* 3D Dark Fold Shadow */}
+                    <span className="absolute right-0 top-full w-0 h-0 border-t-[10px] border-t-black/80 border-r-[10px] border-r-transparent" />
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Right Arrow */}
-          <button
-            onClick={handleNext}
-            aria-label="Next Slide"
-            className="absolute -right-5 sm:-right-6 top-1/2 -translate-y-1/2 z-30 bg-white hover:bg-gray-100 text-gray-800 p-3 rounded-full shadow-lg border border-gray-200 transition-transform hover:scale-110 focus:outline-none"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+              {/* Content Under Card */}
+              <div className="mt-4 px-2">
+                <h3 className="text-lg font-bold text-gray-900 mb-1 text-center">
+                  {award.title}
+                </h3>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Page Dots Indicator */}
@@ -163,8 +163,8 @@ export default function AwardsSection() {
             <button
               key={idx}
               onClick={() => setCurrentPage(idx)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                currentPage === idx ? 'bg-gray-900 w-6' : 'bg-gray-300'
+              className={`h-3 rounded-full transition-all ${
+                currentPage === idx ? 'bg-[#084d8d] w-6' : 'bg-[#084d8d] w-3'
               }`}
             />
           ))}
