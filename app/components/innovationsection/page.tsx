@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight ,ExternalLink} from 'lucide-react';
 
 interface AwardCardProps {
   category: string;
@@ -92,13 +92,15 @@ export default function AwardsSection() {
   );
 
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-15 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Container with Title and Navigation Controls */}
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans">
             Awards & Certification
           </h2>
+          <ExternalLink className="w-6 h-6 text-gray-800 dark:text-white cursor-pointer hover:opacity-80 transition-opacity mr-170" />
+          
 
           {/* Navigation Arrows */}
           <div className="flex items-center space-x-3">
@@ -164,7 +166,7 @@ export default function AwardsSection() {
               key={idx}
               onClick={() => setCurrentPage(idx)}
               className={`h-3 rounded-full transition-all ${
-                currentPage === idx ? 'bg-[#084d8d] w-6' : 'bg-[#084d8d] w-3'
+                currentPage === idx ? 'bg-[#084d8d] w-6' : 'bg-gray-300 w-3'
               }`}
             />
           ))}

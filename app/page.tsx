@@ -7,7 +7,7 @@ import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
 import Careers from "./components/Carrers/page";
-import Brand from "./components/brand/page";
+
 // import PageScrollIndicator from "./components/PageScrollIndicator";
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
 
      
       <InnovationSection />
-      <Brand />
+      
       <div id="footer">
         <Footer />
       </div>

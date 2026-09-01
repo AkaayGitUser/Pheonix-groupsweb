@@ -505,7 +505,7 @@ export default function Header() {
           )}
         </AnimatePresence>
 
-        {/* Mega Menu Overlay */}
+        {/* Desktop Mega Menu Overlay */}
         <AnimatePresence mode="wait">
           {openMenu && (
             <motion.div
@@ -515,66 +515,80 @@ export default function Header() {
               initial="closed"
               animate="open"
               exit="closed"
-              className="overflow-hidden w-full text-white"
+              className="hidden lg:block overflow-hidden w-full text-white"
               onMouseLeave={() => setOpenMenu(null)}
             >
               <motion.div
                 layout
                 variants={contentVariants}
-                className="pl-122 pr-16 max-w-7xl mx-auto"
+                className="px-8 py-6 max-w-7xl mx-auto"
               >
                 {/* BUSINESS */}
                 {openMenu === "business" && (
-                  <div className="pb-6">
-                    <div className="border-b border-[#085CB5] pb-2">
-                      <h2 className="text-xl">Business Overview</h2>
+                  <div className="grid grid-cols-10 gap-6 items-start">
+                    {/* Left Desktop Image */}
+                    <div className="col-span-4 relative h-64 w-full rounded-lg overflow-hidden shadow-lg">
+                      <Image
+                        src="/Headerimgs/AboutUs.jpeg"
+                        alt="Business Verticals"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <button className="font-semibold mt-3 hover:text-amber-300 text-sm">
-                      Learn More
-                    </button>
-                    <div className="border-b border-[#085CB5] py-2 mt-6">
-                      <h2 className="text-xl">Our Brands</h2>
-                    </div>
-                    <button className="font-semibold mt-3 hover:text-amber-300 text-sm">
-                      Browse Our Brands
-                    </button>
-                    <div className="border-b border-[#085CB5] py-2 mt-6">
-                      <h2 className="text-xl">Business Verticals</h2>
-                    </div>
-                    <div className="grid grid-cols-3 gap-8 mt-3">
-                      <div className="flex flex-col gap-2 items-start text-sm">
-                        <button className="hover:text-amber-300">
-                          Technology
-                        </button>
-                        <button className="hover:text-amber-300">Steel</button>
-                        <button className="hover:text-amber-300">
-                          Automotive
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Consumer & Retail
-                        </button>
+
+                    {/* Right Menu Content */}
+                    <div className="col-span-6 pb-6 ">
+                      <div className="border-b border-[#085CB5] pb-2 flex justify-between items-center">
+                        <h2 className="text-xl">Business Overview</h2>
+                        <h2 className="text-xl mr-20">Our Brands</h2>
                       </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Infrastructure
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Financial Services
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Aerospace & Defence
-                        </button>
+                      <div className=" pb-2 flex justify-between items-center">
+                      <button className="font-semibold mt-3 hover:text-amber-300 text-sm">
+                        Learn More
+                      </button>
+                      
+                      <button className="font-semibold mt-3 hover:text-amber-300 text-sm mr-16">
+                        Browse Our Brands
+                      </button>
                       </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Tourism & Travel
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Telecom & Media
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Trading & Investments
-                        </button>
+                      <div className="border-b border-[#085CB5] py-2 mt-6 ">
+                        <h2 className="text-xl">Business Verticals</h2>
+                      </div>
+                      <div className="grid grid-cols-3 gap-8 mt-3">
+                        <div className="flex flex-col gap-2 items-start text-sm">
+                          <button className="hover:text-amber-300">
+                            Technology
+                          </button>
+                          <button className="hover:text-amber-300">Steel</button>
+                          <button className="hover:text-amber-300">
+                            Automotive
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Consumer & Retail
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start  text-sm">
+                          <button className="hover:text-amber-300">
+                            Infrastructure
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Financial Services
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Aerospace & Defence
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start  text-sm">
+                          <button className="hover:text-amber-300">
+                            Tourism & Travel
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Telecom & Media
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Trading & Investments
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -582,27 +596,40 @@ export default function Header() {
 
                 {/* COMMUNITY */}
                 {openMenu === "community" && (
-                  <div className="pb-6">
-                    <div className="border-b border-[#085CB5] pb-2">
-                      <h2 className="text-xl">Overview</h2>
+                  <div className="grid grid-cols-10 gap-8 items-start">
+                    {/* Left Desktop Image */}
+                    <div className="col-span-4 relative h-64 w-full rounded-lg overflow-hidden shadow-lg">
+                      <Image
+                        src="/Headerimgs/committee.jpeg"
+                        alt="Community Work"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
-                      Areas of Work
-                    </button>
-                    <div className="grid grid-cols-2 mt-6">
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">Health</button>
-                        <button className="hover:text-amber-300">
-                          Education
-                        </button>
+
+                    {/* Right Menu Content */}
+                    <div className="col-span-6 pb-6">
+                      <div className="border-b border-[#085CB5] pb-2">
+                        <h2 className="text-xl">Overview</h2>
                       </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Empowerment
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Environment
-                        </button>
+                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                        Areas of Work
+                      </button>
+                      <div className="grid grid-cols-2 mt-6">
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">Health</button>
+                          <button className="hover:text-amber-300">
+                            Education
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">
+                            Empowerment
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Environment
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -610,62 +637,75 @@ export default function Header() {
 
                 {/* ABOUT */}
                 {openMenu === "about" && (
-                  <div className="pb-6">
-                    <div className="border-b border-[#085CB5] pb-2">
-                      <h2 className="text-xl">The Phoenix Group</h2>
-                    </div>
-                    <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
-                      About the Phoenix Group
-                    </button>
-                    <div className="grid grid-cols-3 gap-8 mt-6">
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">Phoenix</button>
-                        <button className="hover:text-amber-300">
-                          Values and Purpose
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Phoenix Code of Conduct
-                        </button>
-                      </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">Heritage</button>
-                        <button className="hover:text-amber-300">
-                          Leadership
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Sponsorships
-                        </button>
-                      </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Sustainability
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Innovation
-                        </button>
-                        <button className="hover:text-amber-300">Books</button>
-                      </div>
+                  <div className="grid grid-cols-10 gap-8 items-start">
+                    {/* Left Desktop Image */}
+                    <div className="col-span-4 relative h-80 w-full rounded-lg overflow-hidden shadow-lg">
+                      <Image
+                        src="/Headerimgs/Abouttt.png"
+                        alt="About Us"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
 
-                    <div className="border-b border-[#085CB5] py-2 mt-10">
-                      <h2 className="text-xl">Investors</h2>
-                    </div>
-                    <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
-                      Investor Section
-                    </button>
-                    <div className="grid grid-cols-2 gap-12 mt-6">
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Companies
-                        </button>
-                        <button className="hover:text-amber-300">
-                          Stock Data
-                        </button>
+                    {/* Right Menu Content */}
+                    <div className="col-span-6 pb-6 ">
+                      <div className="border-b border-[#085CB5] pb-2">
+                        <h2 className="text-xl">The Phoenix Group</h2>
                       </div>
-                      <div className="flex flex-col gap-2 items-start font-light text-sm">
-                        <button className="hover:text-amber-300">
-                          Business Verticals
-                        </button>
+                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                        About the Phoenix Group
+                      </button>
+                      <div className="grid grid-cols-3 gap-8 mt-6">
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">Phoenix</button>
+                          <button className="hover:text-amber-300">
+                            Values and Purpose
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Phoenix Code of Conduct
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">Heritage</button>
+                          <button className="hover:text-amber-300">
+                            Leadership
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Sponsorships
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">
+                            Sustainability
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Innovation
+                          </button>
+                          <button className="hover:text-amber-300">Books</button>
+                        </div>
+                      </div>
+
+                      <div className="border-b border-[#085CB5] py-2 mt-10">
+                        <h2 className="text-xl">Investors</h2>
+                      </div>
+                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                        Investor Section
+                      </button>
+                      <div className="grid grid-cols-2 gap-12 mt-6">
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">
+                            Companies
+                          </button>
+                          <button className="hover:text-amber-300">
+                            Stock Data
+                          </button>
+                        </div>
+                        <div className="flex flex-col gap-2 items-start font-light text-sm">
+                          <button className="hover:text-amber-300">
+                            Business Verticals
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -49,12 +49,12 @@ export default function FooterPage() {
           <div className="footerColumn quickLinksColumn">
             <h2>Quick Links</h2>
 
-            <div className="quickLinks">
+            <div className="quickLinks ">
               <span className="quickLinkText">Phoenix Arena</span>
-              <span className="quickLinkText">Phoenix Foundation</span>
-              <span className="quickLinkText">Phoenix Construction</span>
-              <span className="quickLinkText">Phoenix Motors</span>
-              <span className="quickLinkText">Vaikunta Mahaprasthana</span>
+              <span className="quickLinkText mt-1">Phoenix Foundation</span>
+              <span className="quickLinkText mt-1">Phoenix Construction</span>
+              <span className="quickLinkText mt-1">Phoenix Motors</span>
+              <span className="quickLinkText mt-1">Vaikunta Mahaprasthana</span>
             </div>
           </div>
 
