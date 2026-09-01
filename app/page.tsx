@@ -7,6 +7,7 @@ import Footer from "./layout/footer";
 import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
+import Careers from "./components/Carrers/page";
 import Brand from "./components/brand/page";
 // import PageScrollIndicator from "./components/PageScrollIndicator";
 export default function Home() {
@@ -15,14 +16,10 @@ export default function Home() {
       <Header />
       {/* <PageScrollIndicator /> */}
       <Hero />
+
+      {/* OUR STORY / INNOVATION / IMPACT */}
       <ProductShowcase />
-      <section >
-        <InnovationSection />
-      </section>
-      <section className="w-full">
-        {/* <InteractiveMap /> */}
-      </section>
-    
+
       <Careers />
       <Brand />
       <div id="footer">
