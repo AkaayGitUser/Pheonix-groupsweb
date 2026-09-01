@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-
+import { ExternalLink } from "lucide-react";
 interface ProjectItem {
     id: string;
     name: string;
@@ -236,6 +236,7 @@ export default function Careers() {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#222222] dark:text-white uppercase font-sans">
                         OUR PORTFOLIO
                     </h2>
+                    <ExternalLink className="w-6 h-6 text-gray-800 dark:text-white cursor-pointer hover:opacity-80 transition-opacity mr-60 mb-2" />
 
                     {/* Right Tabs */}
                     <div className="flex items-center space-x-1 sm:space-x-2 relative self-end sm:self-auto overflow-x-auto sm:overflow-visible max-w-full pb-1 sm:pb-0 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -246,15 +247,15 @@ export default function Careers() {
                                 setShowAllCompleted(false);
                             }}
                             className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "businesses"
-                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
-                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                ? "font-semibold text-[#084d8d] dark:text-[#084d8d]"
+                                : "font-normal text-gray-500 dark:text-gray-400 hover:text-[#084d8d] dark:hover:text-[#084d8d]"
                                 }`}
                         >
                             Business
                             {activeTab === "businesses" && (
                                 <motion.div
                                     layoutId="projectsTabUnderline"
-                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-[#084d8d]"
                                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                 />
                             )}
@@ -267,15 +268,15 @@ export default function Careers() {
                                 setShowAllCompleted(false);
                             }}
                             className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "upcoming"
-                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
-                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                ? "font-semibold text-[#084d8d] dark:text-[#084d8d]"
+                                : "font-normal text-gray-500 dark:text-gray-400 hover:text-[#084d8d] dark:hover:text-[#084d8d]"
                                 }`}
                         >
                             Upcoming Projects
                             {activeTab === "upcoming" && (
                                 <motion.div
                                     layoutId="projectsTabUnderline"
-                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-[#084d8d]"
                                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                 />
                             )}
@@ -288,15 +289,15 @@ export default function Careers() {
                                 setShowAllCompleted(false);
                             }}
                             className={`relative px-4 sm:px-6 py-3 text-base sm:text-lg tracking-wide whitespace-nowrap transition-all duration-200 hover:font-semibold ${activeTab === "completed"
-                                ? "font-semibold text-[#5e2786] dark:text-[#a855f7]"
-                                : "font-normal text-[#8e8e93] dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                ? "font-semibold text-[#084d8d] dark:text-[#084d8d]"
+                                : "font-normal text-gray-500 dark:text-gray-400 hover:text-[#084d8d] dark:hover:text-[#084d8d]"
                                 }`}
                         >
                             Completed Projects
                             {activeTab === "completed" && (
                                 <motion.div
                                     layoutId="projectsTabUnderline"
-                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#0099d8] via-[#5e2786] to-[#a855f7]"
+                                    className="absolute bottom-0 left-0 right-0 h-[4px] bg-[#084d8d]"
                                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                 />
                             )}

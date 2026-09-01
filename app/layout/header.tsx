@@ -217,7 +217,7 @@ export default function Header() {
                 </div>
 
                 {/* Theme Toggle */}
-                <div className="relative group">
+               {/* <div className="relative group">
                   <button
                     onClick={toggleTheme}
                     aria-label="Toggle Theme"
@@ -234,7 +234,7 @@ export default function Header() {
                   <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-white text-black px-3 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-md mb-1">
                     {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
                   </div>
-                </div>
+                </div>*/}
 
                 {/* Mail */}
                 <div className="relative group">
@@ -538,54 +538,56 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6 ">
-                      <div className="border-b border-[#085CB5] pb-2 flex justify-between items-center">
+                      <div className="border-b border-white pb-2 flex justify-between items-center">
                         <h2 className="text-xl">Business Overview</h2>
                         <h2 className="text-xl mr-20">Our Brands</h2>
                       </div>
                       <div className=" pb-2 flex justify-between items-center">
-                      <button className="font-semibold mt-3 hover:text-amber-300 text-sm">
+                      <button className=" mt-3 hover:text-amber-300 text-sm">
                         Learn More
                       </button>
                       
-                      <button className="font-semibold mt-3 hover:text-amber-300 text-sm mr-16">
+                      <button className=" mt-3 hover:text-amber-300 text-sm mr-16">
                         Browse Our Brands
                       </button>
                       </div>
-                      <div className="border-b border-[#085CB5] py-2 mt-6 ">
+                      <div className="border-b border-white py-2 mt-6 ">
                         <h2 className="text-xl">Business Verticals</h2>
                       </div>
                       <div className="grid grid-cols-3 gap-8 mt-3">
                         <div className="flex flex-col gap-2 items-start text-sm">
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Technology
                           </button>
-                          <button className="hover:text-amber-300">Steel</button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
+                            Steel
+                          </button>
+                          <button className="hover:text-amber-300 font-light">
                             Automotive
                           </button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Consumer & Retail
                           </button>
                         </div>
                         <div className="flex flex-col gap-2 items-start  text-sm">
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Infrastructure
                           </button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Financial Services
                           </button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Aerospace & Defence
                           </button>
                         </div>
                         <div className="flex flex-col gap-2 items-start  text-sm">
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Tourism & Travel
                           </button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Telecom & Media
                           </button>
-                          <button className="hover:text-amber-300">
+                          <button className="hover:text-amber-300 font-light">
                             Trading & Investments
                           </button>
                         </div>
@@ -609,10 +611,10 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6">
-                      <div className="border-b border-[#085CB5] pb-2">
+                      <div className="border-b border-white pb-2">
                         <h2 className="text-xl">Overview</h2>
                       </div>
-                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                      <button className=" mt-2 hover:text-amber-300 text-sm">
                         Areas of Work
                       </button>
                       <div className="grid grid-cols-2 mt-6">
@@ -650,10 +652,10 @@ export default function Header() {
 
                     {/* Right Menu Content */}
                     <div className="col-span-6 pb-6 ">
-                      <div className="border-b border-[#085CB5] pb-2">
+                      <div className="border-b border-white pb-2">
                         <h2 className="text-xl">The Phoenix Group</h2>
                       </div>
-                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                      <button className=" mt-2 hover:text-amber-300 text-sm">
                         About the Phoenix Group
                       </button>
                       <div className="grid grid-cols-3 gap-8 mt-6">
@@ -686,10 +688,10 @@ export default function Header() {
                         </div>
                       </div>
 
-                      <div className="border-b border-[#085CB5] py-2 mt-10">
+                      <div className="border-b border-white py-2 mt-10">
                         <h2 className="text-xl">Investors</h2>
                       </div>
-                      <button className="font-semibold mt-2 hover:text-amber-300 text-sm">
+                      <button className=" mt-2 hover:text-amber-300 text-sm">
                         Investor Section
                       </button>
                       <div className="grid grid-cols-2 gap-12 mt-6">

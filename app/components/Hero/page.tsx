@@ -65,7 +65,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex h-full items-center justify-center mb-25">
         <div className="max-w-4xl mx-auto px-6 md:px-12 w-full text-center flex flex-col items-center">
-          <h1 className="text-white text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-wider leading-tight">
+          <h1 className="text-white text-lg md:text-xl lg:text-3xl font-semibold uppercase tracking-wider leading-tight">
             • ONE GROUP. A WORLD OF IMPACT.
           </h1>
 
@@ -77,9 +77,7 @@ export default function Hero() {
 Phoenix Group advances progress through a legacy defined by excellence, scale and purpose
             </p>
 
-            <span className="text-white/80 text-xs md:text-sm whitespace-nowrap">
-              51.3476°N &nbsp; 0.4862°W
-            </span>
+            
           </div>
         </div>
       </div>

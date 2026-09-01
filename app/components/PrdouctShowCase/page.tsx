@@ -616,7 +616,7 @@ export default function ProductShowcase() {
                   sm:text-[14px]
                 "
               >
-                <span>read more</span>
+                <span>Read more</span>
                 <span className="text-[17px]">→</span>
               </button>
             </motion.div>

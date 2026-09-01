@@ -7,21 +7,21 @@ import Header from "./layout/header";
 import Hero from "./components/Hero/page";
 import ProductShowcase from "./components/PrdouctShowCase/page";
 import Careers from "./components/Carrers/page";
-
+import Brand from "./components/brand/page";
 // import PageScrollIndicator from "./components/PageScrollIndicator";
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#363636] flex flex-col justify-between overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    <main className="min-h-screen bg-white dark:bg-[#363636] flex flex-col justify-between   ">
       <Header />
-      {/* <PageScrollIndicator /> */}
+     
       <Hero />
  <Careers />
-      {/* OUR STORY / INNOVATION / IMPACT */}
+      
       <ProductShowcase />
 
      
       <InnovationSection />
-      
+      <Brand/>
       <div id="footer">
         <Footer />
       </div>
